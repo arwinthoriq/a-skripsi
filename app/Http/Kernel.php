@@ -60,6 +60,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'akses.sarpras' => \App\Http\Middleware\AksesSarpras::class,
+        'akses.keuangan' => \App\Http\Middleware\AksesKeuangan::class,
+        'akses.unitkerja' => \App\Http\Middleware\AksesUnitkerja::class,
     ];
 
     /**
