@@ -19,7 +19,20 @@ class Aset extends Model
     public function user(){
         return $this->belongsTo('App\User', 'user_id');
     }
+
+//    public function transaksi_1(){
+//        return $this->hasOne('App\Transaksi_1');
+//    }
+    
     public function perbaikan(){
         return $this->hasMany('App\Perbaikan');
     }
+//    public function perbaikan(){
+  //      return $this->belongsTo('App\Perbaikan', 'perbaikan_id');
+    //}
+
+
+
+
+
 }

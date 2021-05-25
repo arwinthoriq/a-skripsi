@@ -29,10 +29,14 @@
                                 <thead>
                                     <tr>
                                     <th>No</th>
-                                        <th>Nama Aset</th>
+                                        <th>Aset</th>
+                                        <th>Merek</th>
+                                        <th>Ruang</th>
+                                        <th>Jenis</th>
                                         <th>Keterangan</th>
-                                        <th>Status</th>
                                         <th>Tanggal</th>
+                                        <th>Status</th>
+                                        <th>Edit Status</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -40,11 +44,21 @@
                                         <?php $no=1; ?>
                                         @foreach($data as $dt)
                                         <tr>
-                                        <td>{{ $no }}</td>
+                                            <td>{{ $no }}</td>
                                             <td>{{ $dt->aset->nama}}</td>
+                                            <td>{{ $dt->aset->merek}}</td>
+                                            <td>{{ $dt->aset->ruang->nama}}</td>
+                                            <td>{{ $dt->aset->jenis->nama}}</td>
                                             <td>{{ $dt->keterangan}}</td>
-                                            <td>{{ $dt->status}}</td>
                                             <td>{{ date("d F Y", strtotime($dt->created_at)) }}</td>
+                                            <td>{{ $dt->status}}</td>
+                                            @if($dt->status == 'selesai')
+                                            <td></td>
+                                            @else
+                                            <td>
+                                                <a href= "{{ url('/home/perbaikan/status',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-block bg-gradient-primary">Edit Status</a>
+                                            </td>
+                                            @endif
                                             <td>
                                                 <a href= "{{ url('/home/aset/hapus',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-danger">Hapus</a>
                                             </td>

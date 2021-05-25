@@ -8,11 +8,13 @@ use App\Aset;
 use App\Ruang;
 use App\Jenis;
 use App\Perbaikan;
+use App\Transaksi_1;
 use Illuminate\Support\Facades\Crypt;
 use Session;
 use Auth;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\DB;
 class SarprasController extends Controller
 {
     // menampilkan user
@@ -150,11 +152,11 @@ class SarprasController extends Controller
     }
     public function perbaikanaset(Request $req)
     {
-        $data = Aset::get();
-        $status = Perbaikan::get();
-        return view('perbaikan.aset',compact( 'data','status'));
+        $da = Perbaikan::select('aset_id')->where('status', '!=', 'selesai')->get();
+        $data = Aset::whereNotIn('id', $da)->get(); //pilih data aset dimana id tidak sama dengan aset_id(dimana status nya bukan selesai)
+        return view('perbaikan.aset',compact( 'data'));
     }
-    public function deleteperbaikan($id)
+    public function deleteperbaikan($id) // BELUM  SAYA  GANTI
     {
        try{
           $idi = Crypt::decrypt($id);
@@ -164,25 +166,22 @@ class SarprasController extends Controller
           return abort(404);
        }
     }
-    public function perbaikanform($id){
+    public function perbaikanform($id){ 
         try{
             $id = Crypt::decrypt($id);
             $data= Aset::findOrFail($id);
             $id_plaintext = $data->id;
             Session::put('id_session', $id_plaintext);
-            return view('perbaikan.tambah',['data'=>$data]);
+            return view('perbaikan.tambah',compact('data'));
         }catch (DecryptException $e) {
             return abort(404);
         }
     }
-    public function perbaikantambah(Request $request){
-        // diencrypt di blade
-        // di passing melalui url
-        // didecrypt di controller
+    public function perbaikantambah(Request $request){ 
         $this->validate($request, [
-            'users_id' =>'',
-            'aset_id'=>'',
-            'keterangan'=>'',
+            'user_id' =>'',
+            'aset_id' =>'',
+            'keterangan'=>'required|regex:/^[a-zA-Z0-9., ]{3,100}$/',
         ]);
         Perbaikan::create([
             'user_id' => Auth()->id(),
@@ -191,5 +190,33 @@ class SarprasController extends Controller
         ]);
         return redirect()->route('perbaikan');
     }
+    public function perbaikanformstatusupdate($id){ 
+        try{
+            $id = Crypt::decrypt($id);
+            $data= Perbaikan::findOrFail($id);
+            $status_perbaikan = $data->id;
+            Session::put('status_perbaikan', $status_perbaikan);
+            return view('perbaikan.status',compact('data'));
+        }catch (DecryptException $e) {
+            return abort(404);
+        }
+    }
+    public function perbaikanstatusupdate(Request $req) // ERROR 
+    {
+            $ids = Session::get('status_perbaikan');
+            \Validator::make($req->all(), 
+            [
+                'status'=>'',
+            ])->validate();
+                $field = [
+                    'status'=>$req->status,
+                ];
+            $result = Perbaikan::where('id', $ids)->update($field);
+            if($result){
+                return back();
+            }
+    }
+
+
 
 }

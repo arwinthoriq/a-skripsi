@@ -24,7 +24,7 @@
 
     <!-- Main content -->
     <section class="content">
-    <div class="card">
+                      <div class="card">
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
@@ -39,39 +39,25 @@
                                 </thead>
                                 <tbody>
                                         <?php $no=1; ?>
-                                        @foreach($data as $dt)
+                                        @foreach($data as $dt )
                                         <tr>
-                                        <td>{{ $no }}</td>
-                                            <td>{{ $dt->nama}}</td>
-                                            <td>{{ $dt->merek}}</td>
+                                          <td>{{ $no }}</td>
+                                            <td>{{ $dt->nama }}</td>
+                                            <td>{{ $dt->merek }}</td>
                                             <td>{{ $dt->ruang->nama}}</td>
                                             <td>{{ $dt->jenis->nama}}</td>
-                                              @foreach($status as $sts)
-                                               
-                                                @if($dt->id == $sts->aset_id)
-                                                  @if($sts->status == 'proses')
-                                                    <td>
-                                                        <a href= "{{ url('/home/perbaikan/aset/tambah',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn bg-warning disabled color-palette">Proses</a>
-                                                    </td>
-                                                  @elseif($sts->status == 'selesai')
-                                                    <td>
-                                                        <a href= "{{ url('/home/perbaikan/aset/tambah',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn bg-success disabled color-palette">Selesai</a>
-                                                    </td>
-                                                  @endif
-                                                @elseif($dt->id == $sts->user_id)
-                                                <td>
-                                                    <a href= "{{ url('/home/perbaikan/aset/tambah',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-primary">Perbaiki</a>
-                                                </td>
-                                                @endif
-                                               
-                                              @endforeach
+                                            <td>  <a href= "{{ url('/home/perbaikan/aset/tambah',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-primary">Perbaiki</a> </td>
+                                             
+
                                         </tr>
                                         <?php $no++; ?>    
-                                        @endforeach
+                                      @endforeach
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                      </div>
+
+
     </section>
     <!-- /.content -->
   </div>

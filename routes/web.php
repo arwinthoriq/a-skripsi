@@ -33,10 +33,13 @@ Route::group(['prefix'=>'home','middleware'=>'akses.sarpras'], function() { //ad
     Route::get('/jenis/tambah','SarprasController@jenisform')->name('jenis-form');
     Route::post('/jenis/tambah','SarprasController@jenistambah');
 
-    Route::get('/perbaikan', 'SarprasController@perbaikan')->name('perbaikan');
-    Route::get('/perbaikan/aset', 'SarprasController@perbaikanaset')->name('perbaikan-aset');
-    Route::get('/perbaikan/aset/tambah/{id}','SarprasController@perbaikanform')->name('perbaikan-passing-id');
-    Route::get('/perbaikan/aset/tambah','SarprasController@perbaikanform')->name('perbaikan-form');
-    Route::post('/perbaikan/aset/tambah','SarprasController@perbaikantambah');
+    Route::get('/perbaikan', 'SarprasController@perbaikan')->name('perbaikan'); //daftar perbaikan
+    Route::get('/perbaikan/status/{id}', 'SarprasController@perbaikanformstatusupdate'); //passing id status perbaikan
+    Route::get('/perbaikan/status', 'SarprasController@perbaikanformstatusupdate')->name('perbaikan-status'); //form edit status perbaikan
+    Route::post('/perbaikan/status', 'SarprasController@perbaikanstatusupdate'); //edit status perbaikan
+    Route::get('/perbaikan/aset', 'SarprasController@perbaikanaset')->name('perbaikan-aset'); //daftar aset(khusus perbaikan)
+    Route::get('/perbaikan/aset/tambah/{id}','SarprasController@perbaikanform'); //passing id perbaikan
+    Route::get('/perbaikan/aset/tambah','SarprasController@perbaikanform')->name('perbaikan-form'); //form tambah perbaikan
+    Route::post('/perbaikan/aset/tambah','SarprasController@perbaikantambah'); //tambah perbaikan
 });
 
