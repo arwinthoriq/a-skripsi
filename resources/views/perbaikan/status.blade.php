@@ -80,14 +80,81 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                             @if($data->status == 'menunggu')
-                            <button class="btn btn-block bg-gradient-primary" name="status" value="disetujui" type="submit">Disetujui</button>
+                            <button class="btn btn-block bg-gradient-warning"  type="button" data-toggle="modal" data-target="#modal-default">Disetujui</button>
+                            <div class="modal fade" id="modal-default">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title">Edit Status</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <center><h6>Status Akan Berubah Menjadi "Disetujui" </h6> Apakah Anda Yakin ?</center>
+                                  </div>
+                                  <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                                    <button name="status" value="proses" type="submit" class="btn btn-primary" >Simpan</button>
+                                  </div>
+                                </div>
+                                <!-- /.modal-content -->
+                              </div>
+                              <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
                             @elseif($data->status == 'disetujui')
-                            <button class="btn btn-block bg-gradient-warning" name="status" value="proses" type="submit">Proses</button>
+                            <button class="btn btn-block bg-gradient-warning" type="button" data-toggle="modal" data-target="#modal-default">Proses</button>
+                            <div class="modal fade" id="modal-default">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title">Edit Status</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <center><h6>Status Akan Berubah Menjadi "Proses" </h6> Apakah Anda Yakin ?</center>
+                                  </div>
+                                  <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                                    <button name="status" value="proses" type="submit" class="btn btn-primary" >Simpan</button>
+                                  </div>
+                                </div>
+                                <!-- /.modal-content -->
+                              </div>
+                              <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
                             @elseif($data->status == 'proses')
-                            <button class="btn btn-block bg-gradient-success" name="status" value="selesai" type="submit">Selesai</button>
+                            <button class="btn btn-block bg-gradient-warning" type="button" data-toggle="modal" data-target="#modal-default">Selesai</button>
+                            <div class="modal fade" id="modal-default">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title">Edit Status</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <center><h6>Status Akan Berubah Menjadi "Selesai" </h6> Apakah Anda Yakin ?</center>
+                                  </div>
+                                  <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                                    <button name="status" value="selesai" type="submit" class="btn btn-primary" >Simpan</button>
+                                  </div>
+                                </div>
+                                <!-- /.modal-content -->
+                              </div>
+                              <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
                             @endif
                       </div>
                     </div>
+
 
 
                 </form>

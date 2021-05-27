@@ -36,6 +36,62 @@ class SarprasController extends Controller
         $data = Aset::get();
         return view('aset.aset',['data'=>$data]);
     }
+    public function detailaset($id){ 
+        try{
+            $id = Crypt::decrypt($id);
+            $data= Aset::findOrFail($id);
+            return view('aset.detail',compact('data'));
+        }catch (DecryptException $e) {
+            return abort(404);
+        }
+    } public function formupdateaset($id){ 
+        try{
+            $id = Crypt::decrypt($id);
+            $data= aset::findOrFail($id);
+            $edit_aset = $data->id;
+            Session::put('edit_aset', $edit_aset);
+            $datar = Ruang::get(); // untuk menampilkan data ruang
+            $dataj = Jenis::get(); // untuk menampilkan data jenis
+            return view('aset.edit',compact('data', 'datar', 'dataj'));
+        }catch (DecryptException $e) {
+            return abort(404);
+        }
+    }
+    public function editupdateaset(Request $request)
+    {
+            $idedit_aset = Session::get('edit_aset');
+            \Validator::make($request->all(), 
+            [
+                'ruang_id'=>'',
+                'jenis_id'=>'',
+                'nama'=>'required|regex:/^[a-zA-Z ]{2,50}$/',
+                'keterangan'=>'required|regex:/^[a-zA-Z0-9., ]{3,100}$/',
+                'tahun_pengadaan'=>'required|regex:/^[0-9]{1,4}$/',
+                'merek'=>'required|regex:/^[a-zA-Z0-9 ]{1,50}$/',
+                'jumlah'=>'required|regex:/^[0-9]{1,10}$/',
+                'harga'=>'required|regex:/^[0-9,]{1,20}$/',
+                'total_harga'=>'required|regex:/^[0-9,]{1,20}$/',
+            ])->validate();
+            $idruang = Crypt::decrypt($request->ruang_id);
+            $idjenis = Crypt::decrypt($request->jenis_id);
+                $field = [
+                    'ruang_id' => $idruang,
+                    'jenis_id' => $idjenis,
+                    'nama' => $request->nama,
+                    'keterangan' => $request->keterangan,
+                    'tahun_pengadaan' => $request->tahun_pengadaan,
+                    'merek' => $request->merek,
+                    'jumlah' => $request->jumlah,
+                    'harga' => $request->harga,
+                    'total_harga' => $request->total_harga,
+                ];
+            $result = Aset::where('id', $idedit_aset)->update($field);
+            if($result){
+                return redirect()->route('aset');
+            } else{
+                return back();
+            }
+    }
     public function deleteaset($id)
     {
        try{
@@ -213,6 +269,10 @@ class SarprasController extends Controller
                 ];
             $result = Perbaikan::where('id', $ids)->update($field);
             if($result){
+               // Session::flash('sukses', 'Data Berhasil Disimpan');
+                return back();
+            } else{
+               // Session::flash('gagal', 'Data Gagal Disimpan');
                 return back();
             }
     }

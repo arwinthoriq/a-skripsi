@@ -56,7 +56,7 @@
                                             <td></td>
                                             @else
                                             <td>
-                                                <a href= "{{ url('/home/perbaikan/status',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-block bg-gradient-primary">Edit Status</a>
+                                                <a href= "{{ url('/home/perbaikan/status',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-block bg-gradient-warning">Edit Status</a>
                                             </td>
                                             @endif
                                             <td>

@@ -13,7 +13,7 @@
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
               <li class="breadcrumb-item"><a href="{{ route('aset') }}">Aset</a></li>
-              <li class="breadcrumb-item">Tambah</li>
+              <li class="breadcrumb-item">Edit</li>
             </ol>
           </div>
         </div><!-- /.row -->
@@ -30,12 +30,12 @@
             <!-- general form elements -->
             <div class="card card-dark">
               <div class="card-header">
-                <h3 class="card-title">Tambah Aset</h3>
+                <h3 class="card-title">Edit Aset</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <div class="card-body">
-                <form role="form" action="{{ route('aset-form') }}" method="POST" enctype="multipart/form-data">
+                <form role="form" action="{{ route('aset-form-edit') }}" method="POST" enctype="multipart/form-data">
                   {{csrf_field()}}
 
                   <div class="row">
@@ -43,37 +43,37 @@
                       <!-- text input -->
                       <div class="form-group">
                         <label for="text-input" class=" form-control-label">Nama</label>
-                        <input type="text"  name="nama" placeholder="Nama" class="form-control" required>
+                        <input type="text"  name="nama" value="{{ $data->nama}}" class="form-control" required>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
                           <label for="text-input" class=" form-control-label">Merek</label>
-                          <input type="text"  name="merek" placeholder="Merek" class="form-control" required>
+                          <input type="text"  name="merek" value="{{ $data->merek}}" class="form-control" required>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
                           <label for="text-input" class=" form-control-label">Jumlah</label>
-                          <input type="text"  name="jumlah" placeholder="Jumlah" class="form-control" required>
+                          <input type="text"  name="jumlah" value="{{ $data->jumlah}}" class="form-control" required>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
                           <label for="text-input" class=" form-control-label">Tahun</label>
-                          <input type="text"  name="tahun_pengadaan" placeholder="Tahun" class="form-control" required>
+                          <input type="text"  name="tahun_pengadaan" value="{{ $data->tahun_pengadaan}}" class="form-control" required>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
                           <label for="text-input" class=" form-control-label">Harga</label>
-                          <input type="text"  name="harga" placeholder="Harga" class="form-control" required>
+                          <input type="text"  name="harga" value="{{ $data->harga}}"  class="form-control" required>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
                           <label for="text-input" class=" form-control-label">Total Harga</label>
-                          <input type="text"  name="total_harga" placeholder="Total Harga" class="form-control" required>
+                          <input type="text"  name="total_harga" value="{{ $data->total_harga}}"  class="form-control" required>
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -99,14 +99,36 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                           <label for="text-input" class=" form-control-label">Keterangan</label>
-                          <textarea type="text"  name="keterangan" placeholder="Keterangan" class="form-control" required> </textarea>
+                          <textarea type="text"  name="keterangan" value="{{ $data->keterangan}}"  class="form-control" required>{{ $data->keterangan}} </textarea>
                       </div>
                     </div>
                      <!-- text input -->
                   </div>
 
                   <div class="card-footer">
-                      <button type="submit" class="btn btn-primary">Submit</button>
+                            <button class="btn btn-primary"  type="button" data-toggle="modal" data-target="#modal-default">Submit</button>
+                            <div class="modal fade" id="modal-default">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header bg-secondary">
+                                    <h5 class="modal-title">Edit Aset</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <center><h6>Data Aset Akan Berubah </h6> Apakah Anda Yakin ?</center>
+                                  </div>
+                                  <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                                    <button name="status" value="proses" type="submit" class="btn btn-primary" >Simpan</button>
+                                  </div>
+                                </div>
+                                <!-- /.modal-content -->
+                              </div>
+                              <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
                   </div>
 
                 </form>

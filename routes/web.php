@@ -20,10 +20,14 @@ Route::group(['prefix'=>'home','middleware'=>'akses.sarpras'], function() { //ad
 
     Route::get('/user', 'SarprasController@user')->name('user');
 
-    Route::get('/aset', 'SarprasController@aset')->name('aset');
-    Route::get('/aset/hapus/{id}','SarprasController@deleteaset'); // HAPUS
-    Route::get('/aset/tambah','SarprasController@asetform')->name('aset-form');
-    Route::post('/aset/tambah','SarprasController@asettambah');
+    Route::get('/aset', 'SarprasController@aset')->name('aset'); //daftar aset
+    Route::get('/aset/detail/{id}', 'SarprasController@detailaset'); //detail aset
+    Route::get('/aset/edit/{id}','SarprasController@formupdateaset'); //passing id edit aset
+    Route::get('/aset/edit','SarprasController@formupdateaset')->name('aset-form-edit'); //form edit aset
+    Route::post('/aset/edit','SarprasController@editupdateaset'); //edit aset
+    Route::get('/aset/hapus/{id}','SarprasController@deleteaset'); // hapus aset
+    Route::get('/aset/tambah','SarprasController@asetform')->name('aset-form'); //form tambah aset
+    Route::post('/aset/tambah','SarprasController@asettambah'); //tambah aset
 
     Route::get('/ruang', 'SarprasController@ruang')->name('ruang');
     Route::get('/ruang/tambah','SarprasController@ruangform')->name('ruang-form');
@@ -38,7 +42,7 @@ Route::group(['prefix'=>'home','middleware'=>'akses.sarpras'], function() { //ad
     Route::get('/perbaikan/status', 'SarprasController@perbaikanformstatusupdate')->name('perbaikan-status'); //form edit status perbaikan
     Route::post('/perbaikan/status', 'SarprasController@perbaikanstatusupdate'); //edit status perbaikan
     Route::get('/perbaikan/aset', 'SarprasController@perbaikanaset')->name('perbaikan-aset'); //daftar aset(khusus perbaikan)
-    Route::get('/perbaikan/aset/tambah/{id}','SarprasController@perbaikanform'); //passing id perbaikan
+    Route::get('/perbaikan/aset/tambah/{id}','SarprasController@perbaikanform'); //passing id tambah perbaikan
     Route::get('/perbaikan/aset/tambah','SarprasController@perbaikanform')->name('perbaikan-form'); //form tambah perbaikan
     Route::post('/perbaikan/aset/tambah','SarprasController@perbaikantambah'); //tambah perbaikan
 });

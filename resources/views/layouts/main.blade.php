@@ -13,6 +13,7 @@
      <script src="{{ asset('js/app.js') }}" ></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!--<link href="{{ asset('alert/css/bootstrap.min.css') }}" rel="stylesheet">-->
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('AdminLTE-master/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Ionicons -->
@@ -36,6 +37,10 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('AdminLTE-master/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('AdminLTE-master/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="{{ asset('AdminLTE-master/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ asset('AdminLTE-master/plugins/toastr/toastr.min.css') }}">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -226,6 +231,11 @@
 <script src="{{ asset('AdminLTE-master/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('AdminLTE-master/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('AdminLTE-master/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<!-- SweetAlert2 -->
+<script src="{{ asset('AdminLTE-master/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+<!-- Toastr -->
+<script src="{{ asset('AdminLTE-master/plugins/toastr/toastr.min.js') }}"></script>
+
 <!-- page script --> 
 <script>
   $(function () {
@@ -235,6 +245,8 @@
     });
   });
 </script>
+
+
 <!--  <script src="{{ asset('AdminLTE-master/plugins/datatables/dataTables-search..min.js') }}"></script>  --> 
 </body>
 </html>
