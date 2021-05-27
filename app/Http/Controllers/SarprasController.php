@@ -44,7 +44,8 @@ class SarprasController extends Controller
         }catch (DecryptException $e) {
             return abort(404);
         }
-    } public function formupdateaset($id){ 
+    }
+    public function formupdateaset($id){ 
         try{
             $id = Crypt::decrypt($id);
             $data= aset::findOrFail($id);
@@ -167,6 +168,34 @@ class SarprasController extends Controller
         ]);
         return redirect()->route('ruang');
     }
+    public function formupdateruang($id){ 
+        try{
+            $id = Crypt::decrypt($id);
+            $data= Ruang::findOrFail($id);
+            $edit_ruang = $data->id;
+            Session::put('edit_ruang', $edit_ruang);
+            return view('ruang.edit',compact('data'));
+        }catch (DecryptException $e) {
+            return abort(404);
+        }
+    }
+    public function editupdateruang(Request $request)
+    {
+            $idedit_ruang = Session::get('edit_ruang');
+            \Validator::make($request->all(), 
+            [
+                'nama'=>'required|regex:/^[a-zA-Z ]{3,50}$/',
+            ])->validate();
+                $field = [
+                    'nama' => $request->nama,
+                ];
+            $result = Ruang::where('id', $idedit_ruang)->update($field);
+            if($result){
+                return redirect()->route('ruang');
+            } else{
+                return back();
+            }
+    }
 
 
 
@@ -192,6 +221,34 @@ class SarprasController extends Controller
         'nama' => $request->nama,
         ]);
         return redirect()->route('jenis');
+    }
+    public function formupdatejenis($id){ 
+        try{
+            $id = Crypt::decrypt($id);
+            $data= Jenis::findOrFail($id);
+            $edit_jenis = $data->id;
+            Session::put('edit_jenis', $edit_jenis);
+            return view('jenis.edit',compact('data'));
+        }catch (DecryptException $e) {
+            return abort(404);
+        }
+    }
+    public function editupdatejenis(Request $request)
+    {
+            $idedit_jenis = Session::get('edit_jenis');
+            \Validator::make($request->all(), 
+            [
+                'nama'=>'required|regex:/^[a-zA-Z ]{3,50}$/',
+            ])->validate();
+                $field = [
+                    'nama' => $request->nama,
+                ];
+            $result = Jenis::where('id', $idedit_jenis)->update($field);
+            if($result){
+                return redirect()->route('jenis');
+            } else{
+                return back();
+            }
     }
         
 

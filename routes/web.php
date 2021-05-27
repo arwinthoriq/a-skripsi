@@ -30,12 +30,18 @@ Route::group(['prefix'=>'home','middleware'=>'akses.sarpras'], function() { //ad
     Route::post('/aset/tambah','SarprasController@asettambah'); //tambah aset
 
     Route::get('/ruang', 'SarprasController@ruang')->name('ruang');
+    Route::get('/ruang/edit/{id}','SarprasController@formupdateruang'); //passing id edit ruang
+    Route::get('/ruang/edit','SarprasController@formupdateruang')->name('ruang-form-edit'); //form edit ruang
+    Route::post('/ruang/edit','SarprasController@editupdateruang'); //edit ruang
     Route::get('/ruang/tambah','SarprasController@ruangform')->name('ruang-form');
     Route::post('/ruang/tambah','SarprasController@ruangtambah');
 
     Route::get('/jenis', 'SarprasController@jenis')->name('jenis');
-    Route::get('/jenis/tambah','SarprasController@jenisform')->name('jenis-form');
-    Route::post('/jenis/tambah','SarprasController@jenistambah');
+    Route::get('/jenis/edit/{id}','SarprasController@formupdatejenis'); //passing id edit jenis
+    Route::get('/jenis/edit','SarprasController@formupdatejenis')->name('jenis-form-edit'); //form edit jenis
+    Route::post('/jenis/edit','SarprasController@editupdatejenis'); //edit jenis
+    Route::get('/jenis/tambah','SarprasController@jenisform')->name('jenis-form'); //form tambah jenis
+    Route::post('/jenis/tambah','SarprasController@jenistambah'); //tambah jenis
 
     Route::get('/perbaikan', 'SarprasController@perbaikan')->name('perbaikan'); //daftar perbaikan
     Route::get('/perbaikan/status/{id}', 'SarprasController@perbaikanformstatusupdate'); //passing id status perbaikan
