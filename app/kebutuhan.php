@@ -5,18 +5,23 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 //use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Jenis extends Model
+class Kebutuhan extends Model
 {
-    protected $table = 'jenis';
+    protected $table = 'kebutuhan';
     protected $guarded = [];
 
-    public function aset(){
-        return $this->hasMany('App\Aset');
+    public function ruang(){
+        return $this->belongsTo('App\Ruang', 'ruang_id');
     }
-    public function kebutuhan(){
-        return $this->hasMany('App\Kebutuhan');
+    public function jenis(){
+        return $this->belongsTo('App\Jenis', 'jenis_id');
     }
     public function user(){
         return $this->belongsTo('App\User', 'user_id');
     }
+
+
+
+
+
 }

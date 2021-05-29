@@ -8,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-          <h5 class="m-0 "> Detail Aset </h5>
+          <h5 class="m-0 "> Detail Perbaikan </h5>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('aset') }}">Aset</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('aset') }}">Perbaikan</a></li>
               <li class="breadcrumb-item">Detail</li>
             </ol>
           </div>
@@ -30,7 +30,7 @@
           <div class="col-12">
             <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">Detail Aset</h3>
+                <h3 class="card-title">Detail Perbaikan</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
@@ -42,19 +42,19 @@
                   <tbody>
                     <tr>
                     <td><b class="d-block">Nama</b></td>
-                    <td>{{ $data->nama}}</td>
+                    <td>{{ $data->aset->nama}}</td>
                     <tr>
                     <td><b class="d-block">Tahun</b></td>
-                    <td>{{ $data->tahun_pengadaan}}</td>
+                    <td>{{ $data->aset->tahun_pengadaan}}</td>
                     <tr>
                     <td><b class="d-block">Merek</b></td>
-                    <td>{{ $data->merek}}</td>
+                    <td>{{ $data->aset->merek}}</td>
                     <tr>
                     <td><b class="d-block">Ruang</b></td>
-                    <td>{{ $data->ruang->nama}}</td>
+                    <td>{{ $data->aset->ruang->nama}}</td>
                     <tr>
                     <td><b class="d-block">Jenis</b></td>
-                    <td>{{ $data->jenis->nama}}</td>
+                    <td>{{ $data->aset->jenis->nama}}</td>
                     <tr>
                     <td><b class="d-block">Tanggal</b></td>
                     <td>{{ date("d F Y", strtotime($data->created_at)) }}</td>
@@ -62,21 +62,21 @@
                     <td><b class="d-block">Keterangan</b></td>
                     <td>{{ $data->keterangan}}</td>
                     <tr>
-                    <td><b class="d-block">Jumlah</b></td>
-                    <td>{{ $data->jumlah}}</td>
+                    <td><b class="d-block">Status</b></td>
+                    <td>{{ $data->status}}</td>
                     <tr>
-                    <td><b class="d-block">Harga</b></td>
-                    <td>{{ number_format($data->harga)}}</td>
+                    <td><b class="d-block">Dibuat oleh</b></td>
+                    <td>{{ $data->user->name}}</td>
                     <tr>
-                    <td><b class="d-block">Total Harga</b></td>
-                    <td>{{ number_format($data->total_harga)}}</td>
+                    <td><b class="d-block">Akses Pengguna</b></td>
+                    <td>{{ $data->user->akses}}</td>
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-                    <div><a href="{{ route('aset') }}" class="btn btn-success">Kembali</a></div><br>
+                    <div><a href="{{ route('perbaikan') }}" class="btn btn-success">Kembali</a></div><br>
           </div>
         </div>
         <!-- /.row -->

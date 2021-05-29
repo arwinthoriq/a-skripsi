@@ -17,6 +17,9 @@ class Perbaikan extends Model
     public function aset(){
         return $this->belongsTo('App\Aset', 'aset_id');
     }
+    public function user(){
+      return $this->belongsTo('App\User', 'user_id');
+  }
 //    public function aset(){
   //      return $this->hasOne('App\Aset');
     //}

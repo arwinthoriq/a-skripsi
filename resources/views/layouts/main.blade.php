@@ -129,42 +129,72 @@
           </li>
           <li class="nav-item">
             <a href="{{route('aset')}}" class="nav-link">
-              <i class="nav-icon fas fa-user-alt"></i>
+              <i class="nav-icon fas fa-file-alt"></i>
               <p> Aset </p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{route('ruang')}}" class="nav-link">
-              <i class="nav-icon fas fa-house-alt"></i>
+              <i class="nav-icon fas fa-table"></i>
               <p> Ruang </p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{route('jenis')}}" class="nav-link">
-              <i class="nav-icon fas fa-user-alt"></i>
+              <i class="nav-icon fas fa-plus-square"></i>
               <p> Jenis </p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{route('perbaikan')}}" class="nav-link">
-              <i class="nav-icon fas fa-user-alt"></i>
+              <i class="nav-icon fas fa-cog"></i>
               <p> Perbaikan </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('kebutuhan')}}" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p> Kebutuhan </p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{route('user')}}" class="nav-link">
               <i class="nav-icon fas fa-user-alt"></i>
-              <p> User </p>
+              <p> Pengguna </p>
             </a>
           </li>
           @endif
           @if(Auth::user()->akses == 'keuangan')
-          <li class="nav-item ">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Widgets
-              </p>
+          <li class="nav-item">
+            <a href="{{route('home')}}" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p> Dashboard </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('aset')}}" class="nav-link">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p> Aset </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('kebutuhan')}}" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p> Kebutuhan </p>
+            </a>
+          </li>
+          @endif
+          @if(Auth::user()->akses == 'unitkerja')
+          <li class="nav-item">
+            <a href="{{route('home')}}" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p> Dashboard </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('perbaikan')}}" class="nav-link">
+              <i class="nav-icon fas fa-cog"></i>
+              <p> Perbaikan </p>
             </a>
           </li>
           @endif

@@ -8,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('perbaikan-aset') }}">Tambah </a> </h3>
+            <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('kebutuhan-form') }}">Tambah </a> </h3>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-              <li class="breadcrumb-item">Perbaikan</li>
+              <li class="breadcrumb-item">Kebutuhan</li>
             </ol>
           </div>
         </div><!-- /.row -->
@@ -29,11 +29,12 @@
                                 <thead>
                                     <tr>
                                     <th>No</th>
-                                        <th>Aset</th>
+                                        <th>Nama</th>
+                                        <th>Tahun</th>
                                         <th>Merek</th>
+                                        <th>Jumlah</th>
                                         <th>Ruang</th>
-                                        <th>Jenis</th>
-                                        <th>Tanggal</th>
+                                        <th>jenis</th>
                                         <th>Status</th>
                                         <th></th>
                                         <th></th>
@@ -43,28 +44,24 @@
                                         <?php $no=1; ?>
                                         @foreach($data as $dt)
                                         <tr>
-                                            <td>{{ $no }}</td>
-                                            <td>{{ $dt->aset->nama}}</td>
-                                            <td>{{ $dt->aset->merek}}</td>
-                                            <td>{{ $dt->aset->ruang->nama}}</td>
-                                            <td>{{ $dt->aset->jenis->nama}}</td>
-                                            <td>{{ date("d F Y", strtotime($dt->created_at)) }}</td>
+                                        <td>{{ $no }}</td>
+                                            <td>{{ $dt->nama}}</td>
+                                            <td>{{ $dt->tahun}}</td>
+                                            <td>{{ $dt->merek}}</td>
+                                            <td>{{ $dt->jumlah}}</td>
+                                            <td>{{ $dt->ruang->nama}}</td>
+                                            <td>{{ $dt->jenis->nama}}</td>
                                             <td>{{ $dt->status}}</td>
                                             <td>
-                                                <a href= "{{ url('/home/perbaikan/detail',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-success">Detail</a>
+                                                <a href= "{{ url('/home/kebutuhan/detail',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-success">Detail</a>
                                             </td>
-                                            @if($dt->status == 'selesai')
-                                            <td></td>
-                                            @elseif($dt->status == 'ditolak')
-                                            <td></td>
+                                            @if($dt->status == 'ditolak')
+                                            <td>
+                                                <a href= "{{ url('/home/kebutuhan/hapus',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-danger">Hapus</a>
+                                            </td>
                                             @else
-                                            <td>
-                                                <a href= "{{ url('/home/perbaikan/status',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-block bg-gradient-warning">Edit Status</a>
-                                            </td>
+                                            <td></td>
                                             @endif
-                                            <td>
-                                                <a href= "{{ url('/home/aset/hapus',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-danger">Hapus</a>
-                                            </td>
                                         </tr>
                                         <?php $no++; ?>    
                                         @endforeach

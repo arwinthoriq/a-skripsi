@@ -8,20 +8,79 @@ use App\Aset;
 use App\Ruang;
 use App\Jenis;
 use App\Perbaikan;
-use App\Transaksi_1;
+use App\Kebutuhan;
 use Illuminate\Support\Facades\Crypt;
 use Session;
 use Auth;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 class SarprasController extends Controller
-{
+{ 
+    /**
+    * Create a new controller instance.
+    *
+    * @return void
+    */
+   public function __construct()
+   {
+       $this->middleware('auth');
+   }
+
+
+
+
+
+
+
+
+    // menampilkan dashboard
+    public function dashboard()
+    {
+        $aset = Aset::select('id');
+        $ruang = Ruang::select('id');
+        $jenis = Jenis::select('id');
+        $user = User::select('id');
+        $perbaikan = Perbaikan::select('id');
+        $menunggu = Perbaikan::select('id')->where('status', '=', 'menunggu');
+        $disetujui = Perbaikan::select('id')->where('status', '=', 'disetujui');
+        $ditolak = Perbaikan::select('id')->where('status', '=', 'ditolak');
+        $proses = Perbaikan::select('id')->where('status', '=', 'proses');
+        $selesai = Perbaikan::select('id')->where('status', '=', 'selesai');
+        $belumselesai = Perbaikan::select('id')->where('status', '!=', 'selesai')->where('status', '!=', 'ditolak');
+        return view('dashboard.home', compact('aset', 'ruang', 'jenis', 'user', 'perbaikan', 'menunggu', 'disetujui', 'ditolak', 'proses', 'selesai', 'belumselesai'));
+    }
+
+
+
+
+
+
+
     // menampilkan user
     public function user(Request $req)
     {
         $data = User::get();
         return view('user.user',['data'=>$data]);
+    }
+    public function userform(){
+        return view('user.tambah');
+    }
+    public function usertambah(Request $request){
+        $this->validate($request, [
+            'nama'=>'required|regex:/^[a-zA-Z ]{1,50}$/',
+            'email' => 'string', 'email', 'unique:users', 'required|regex:/^[a-zA-Z ]{1,50}$/',
+            'password' => 'string', 'min:8', 'confirmed','required|regex:/^[a-zA-Z0-9.,/_-!() ]$/',
+            'akses'=>'',
+        ]);
+        User::create([
+            'name' => $request->nama,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'akses' => $request->akses,
+        ]);
+        return redirect()->route('user');
     }
     
 
@@ -265,9 +324,18 @@ class SarprasController extends Controller
     }
     public function perbaikanaset(Request $req)
     {
-        $da = Perbaikan::select('aset_id')->where('status', '!=', 'selesai')->get();
-        $data = Aset::whereNotIn('id', $da)->get(); //pilih data aset dimana id tidak sama dengan aset_id(dimana status nya bukan selesai)
+        $da = Perbaikan::select('aset_id')->where('status', '!=', 'selesai',)->where('status', '!=', 'ditolak',)->get();
+        $data = Aset::whereNotIn('id', $da)->get(); //pilih data aset dimana id tidak sama dengan aset_id(dimana status nya bukan selesai dan bukan ditolak)
         return view('perbaikan.aset',compact( 'data'));
+    }
+    public function detailperbaikan($id){ 
+        try{
+            $id = Crypt::decrypt($id);
+            $data= Perbaikan::findOrFail($id);
+            return view('perbaikan.detail',compact('data'));
+        }catch (DecryptException $e) {
+            return abort(404);
+        }
     }
     public function deleteperbaikan($id) // BELUM  SAYA  GANTI
     {
@@ -333,6 +401,72 @@ class SarprasController extends Controller
                 return back();
             }
     }
+
+
+
+
+
+
+     // menampilkan kebutuhan
+     public function kebutuhan(Request $req)
+     {
+         $data = Kebutuhan::get();
+         return view('kebutuhan.kebutuhan',['data'=>$data]);
+     }
+     public function detailkebutuhan($id){ 
+         try{
+             $id = Crypt::decrypt($id);
+             $data= Kebutuhan::findOrFail($id);
+             return view('kebutuhan.detail',compact('data'));
+         }catch (DecryptException $e) {
+             return abort(404);
+         }
+     }
+     public function deletekebutuhan($id) // BELUM  SAYA  GANTI
+     {
+        try{
+           $idi = Crypt::decrypt($id);
+           Kebutuhan::find($idi)->delete();
+           return redirect()->route('kebutuhan');
+        }catch (DecryptException $e) {
+           return abort(404);
+        }
+     }
+     public function kebutuhanform()
+     { 
+        $datar = Ruang::get(); // untuk menampilkan data ruang
+        $dataj = Jenis::get(); // untuk menampilkan data jenis
+        return view('kebutuhan.tambah',compact( 'datar','dataj'));
+     }
+     public function kebutuhantambah(Request $request){ 
+         $this->validate($request, [
+            'ruang_id' => '',
+            'jenis_id' => '',
+            'nama'=>'required|regex:/^[a-zA-Z ]{2,50}$/',
+            'tahun'=>'required|regex:/^[0-9]{1,4}$/',
+            'keterangan'=>'required|regex:/^[a-zA-Z0-9., ]{3,100}$/',
+            'merek'=>'required|regex:/^[a-zA-Z0-9 ]{1,50}$/',
+            'jumlah'=>'required|regex:/^[0-9]{1,10}$/',
+            'harga'=>'required|regex:/^[0-9,]{1,20}$/',
+            'total_harga'=>'required|regex:/^[0-9,]{1,20}$/',
+         ]);
+         $idr = Crypt::decrypt($request->ruang_id);
+         $idj = Crypt::decrypt($request->jenis_id);
+         Kebutuhan::create([
+             'user_id' => Auth()->id(),
+             'ruang_id' => $idr,
+             'jenis_id' => $idj,
+             'nama' => $request->nama,
+             'tahun' => $request->tahun,
+             'keterangan' => $request->keterangan,
+             'merek' => $request->merek,
+             'jumlah' => $request->jumlah,
+             'harga' => $request->harga,
+             'total_harga' => $request->total_harga,
+         ]);
+         return redirect()->route('kebutuhan');
+     }
+ 
 
 
 

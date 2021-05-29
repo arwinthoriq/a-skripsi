@@ -76,12 +76,12 @@
                     </div>
                     
                      <!-- text input -->
-                 
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                            @if($data->status == 'menunggu')
-                            <button class="btn btn-block bg-gradient-warning"  type="button" data-toggle="modal" data-target="#modal-default">Disetujui</button>
-                            <div class="modal fade" id="modal-default">
+                <div class="col-sm-6">
+                  <div class="margin">
+                  @if($data->status == 'menunggu')
+                    <div class="btn-group">
+                            <button class="btn btn-block bg-gradient-primary"  type="button" data-toggle="modal" data-target="#modal-disetujui">Disetujui</button>
+                            <div class="modal fade" id="modal-disetujui">
                               <div class="modal-dialog">
                                 <div class="modal-content">
                                   <div class="modal-header">
@@ -95,7 +95,7 @@
                                   </div>
                                   <div class="modal-footer justify-content-between">
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                                    <button name="status" value="proses" type="submit" class="btn btn-primary" >Simpan</button>
+                                    <button name="status" value="disetujui" type="submit" class="btn btn-primary" >Simpan</button>
                                   </div>
                                 </div>
                                 <!-- /.modal-content -->
@@ -103,7 +103,34 @@
                               <!-- /.modal-dialog -->
                             </div>
                             <!-- /.modal -->
-                            @elseif($data->status == 'disetujui')
+                    </div>
+                    <div class="btn-group">
+                            <button class="btn btn-block bg-gradient-danger"  type="button" data-toggle="modal" data-target="#modal-ditolak">Ditolak</button>
+                            <div class="modal fade" id="modal-ditolak">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title">Edit Status</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <center><h6>Status Akan Berubah Menjadi "Ditolak" </h6> Apakah Anda Yakin ?</center>
+                                  </div>
+                                  <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                                    <button name="status" value="ditolak" type="submit" class="btn btn-primary" >Simpan</button>
+                                  </div>
+                                </div>
+                                <!-- /.modal-content -->
+                              </div>
+                              <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
+                  </div>
+                  @elseif($data->status == 'disetujui')
+                    <div class="btn-group">
                             <button class="btn btn-block bg-gradient-warning" type="button" data-toggle="modal" data-target="#modal-default">Proses</button>
                             <div class="modal fade" id="modal-default">
                               <div class="modal-dialog">
@@ -127,8 +154,10 @@
                               <!-- /.modal-dialog -->
                             </div>
                             <!-- /.modal -->
-                            @elseif($data->status == 'proses')
-                            <button class="btn btn-block bg-gradient-warning" type="button" data-toggle="modal" data-target="#modal-default">Selesai</button>
+                    </div>
+                  @elseif($data->status == 'proses')
+                    <div class="btn-group">
+                            <button class="btn btn-block bg-gradient-success" type="button" data-toggle="modal" data-target="#modal-default">Selesai</button>
                             <div class="modal fade" id="modal-default">
                               <div class="modal-dialog">
                                 <div class="modal-content">
@@ -151,10 +180,11 @@
                               <!-- /.modal-dialog -->
                             </div>
                             <!-- /.modal -->
-                            @endif
-                      </div>
                     </div>
-
+                  @endif
+                </div>
+              </div>
+              
 
 
                 </form>

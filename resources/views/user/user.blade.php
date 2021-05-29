@@ -9,7 +9,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('register') }}">Tambah </a> </h3>
+            <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('user-form') }}">Tambah </a> </h3>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -30,7 +30,7 @@
                                 <thead>
                                     <tr>
                                     <th>No</th>
-                                        <th>Name</th>
+                                        <th>Nama</th>
                                         <th>Email</th>
                                         <th>Akses</th>
                                         <th>Tanggal</th>

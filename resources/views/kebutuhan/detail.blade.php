@@ -8,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-          <h5 class="m-0 "> Detail Aset </h5>
+          <h5 class="m-0 "> Detail Kebutuhan </h5>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('aset') }}">Aset</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('kebutuhan') }}">Kebutuhan</a></li>
               <li class="breadcrumb-item">Detail</li>
             </ol>
           </div>
@@ -30,7 +30,7 @@
           <div class="col-12">
             <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">Detail Aset</h3>
+                <h3 class="card-title">Detail Kebutuhan</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
@@ -45,7 +45,7 @@
                     <td>{{ $data->nama}}</td>
                     <tr>
                     <td><b class="d-block">Tahun</b></td>
-                    <td>{{ $data->tahun_pengadaan}}</td>
+                    <td>{{ $data->tahun}}</td>
                     <tr>
                     <td><b class="d-block">Merek</b></td>
                     <td>{{ $data->merek}}</td>
@@ -70,13 +70,22 @@
                     <tr>
                     <td><b class="d-block">Total Harga</b></td>
                     <td>{{ number_format($data->total_harga)}}</td>
+                    <tr>
+                    <td><b class="d-block">Status</b></td>
+                    <td>{{ $data->status}}</td>
+                    <tr>
+                    <td><b class="d-block">Dibuat Oleh</b></td>
+                    <td>{{ $data->user->name}}</td>
+                    <tr>
+                    <td><b class="d-block">Akses Pengguna</b></td>
+                    <td>{{ $data->user->akses}}</td>
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-                    <div><a href="{{ route('aset') }}" class="btn btn-success">Kembali</a></div><br>
+                    <div><a href="{{ route('kebutuhan') }}" class="btn btn-success">Kembali</a></div><br>
           </div>
         </div>
         <!-- /.row -->
