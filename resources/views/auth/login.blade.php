@@ -21,7 +21,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{route('home')}}"><b>SIMA</b>SET</a>
+    <a href=""><b>SIMA</b>SET</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">

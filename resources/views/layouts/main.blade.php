@@ -122,43 +122,43 @@
                with font-awesome or any other icon font library -->
           @if(Auth::user()->akses == 'sarpras')
           <li class="nav-item">
-            <a href="{{route('home')}}" class="nav-link">
+            <a href="{{route('sarpras-home')}}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p> Dashboard </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('aset')}}" class="nav-link">
+            <a href="{{route('sarpras-aset')}}" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p> Aset </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('ruang')}}" class="nav-link">
+            <a href="{{route('sarpras-ruang')}}" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p> Ruang </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('jenis')}}" class="nav-link">
+            <a href="{{route('sarpras-jenis')}}" class="nav-link">
               <i class="nav-icon fas fa-plus-square"></i>
               <p> Jenis </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('perbaikan')}}" class="nav-link">
+            <a href="{{route('sarpras-perbaikan')}}" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
               <p> Perbaikan </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('kebutuhan')}}" class="nav-link">
+            <a href="{{route('sarpras-kebutuhan')}}" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p> Kebutuhan </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('user')}}" class="nav-link">
+            <a href="{{route('sarpras-user')}}" class="nav-link">
               <i class="nav-icon fas fa-user-alt"></i>
               <p> Pengguna </p>
             </a>
@@ -166,19 +166,19 @@
           @endif
           @if(Auth::user()->akses == 'keuangan')
           <li class="nav-item">
-            <a href="{{route('home')}}" class="nav-link">
+            <a href="{{route('keuangan-home')}}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p> Dashboard </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('aset')}}" class="nav-link">
+            <a href="{{route('keuangan-aset')}}" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p> Aset </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{route('kebutuhan')}}" class="nav-link">
+            <a href="{{route('keuangan-kebutuhan')}}" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p> Kebutuhan </p>
             </a>

@@ -49,7 +49,16 @@ class SarprasController extends Controller
         $proses = Perbaikan::select('id')->where('status', '=', 'proses');
         $selesai = Perbaikan::select('id')->where('status', '=', 'selesai');
         $belumselesai = Perbaikan::select('id')->where('status', '!=', 'selesai')->where('status', '!=', 'ditolak');
-        return view('dashboard.home', compact('aset', 'ruang', 'jenis', 'user', 'perbaikan', 'menunggu', 'disetujui', 'ditolak', 'proses', 'selesai', 'belumselesai'));
+        $kebutuhan = Kebutuhan::select('id');
+        $kebutuhan_menunggu = Kebutuhan::select('id')->where('status', '=', 'menunggu');
+        $kebutuhan_disetujui = Kebutuhan::select('id')->where('status', '=', 'disetujui');
+        $kebutuhan_ditolak = Kebutuhan::select('id')->where('status', '=', 'ditolak');
+        $kebutuhan_proses = Kebutuhan::select('id')->where('status', '=', 'proses');
+        $kebutuhan_selesai = Kebutuhan::select('id')->where('status', '=', 'selesai');
+        $kebutuhan_belumselesai = Kebutuhan::select('id')->where('status', '!=', 'selesai')->where('status', '!=', 'ditolak');
+        return view('sarpras.dashboard.home', compact('aset', 'ruang', 'jenis', 'user', 
+        'perbaikan', 'menunggu', 'disetujui', 'ditolak', 'proses', 'selesai', 'belumselesai', 
+        'kebutuhan','kebutuhan_menunggu', 'kebutuhan_disetujui', 'kebutuhan_ditolak', 'kebutuhan_proses', 'kebutuhan_selesai', 'kebutuhan_belumselesai'));
     }
 
 
@@ -62,16 +71,16 @@ class SarprasController extends Controller
     public function user(Request $req)
     {
         $data = User::get();
-        return view('user.user',['data'=>$data]);
+        return view('sarpras.user.user',['data'=>$data]);
     }
     public function userform(){
-        return view('user.tambah');
+        return view('sarpras.user.tambah');
     }
     public function usertambah(Request $request){
         $this->validate($request, [
             'nama'=>'required|regex:/^[a-zA-Z ]{1,50}$/',
-            'email' => 'string', 'email', 'unique:users', 'required|regex:/^[a-zA-Z ]{1,50}$/',
-            'password' => 'string', 'min:8', 'confirmed','required|regex:/^[a-zA-Z0-9.,/_-!() ]$/',
+            'email' => 'required|regex:/^[a-zA-Z0-9@., ]{1,50}$/', 'string', 'email', 'unique:users',
+            'password' => 'required', 'string', 'min:8',
             'akses'=>'',
         ]);
         User::create([
@@ -93,13 +102,13 @@ class SarprasController extends Controller
     public function Aset(Request $req)
     {
         $data = Aset::get();
-        return view('aset.aset',['data'=>$data]);
+        return view('sarpras.aset.aset',['data'=>$data]);
     }
     public function detailaset($id){ 
         try{
             $id = Crypt::decrypt($id);
             $data= Aset::findOrFail($id);
-            return view('aset.detail',compact('data'));
+            return view('sarpras.aset.detail',compact('data'));
         }catch (DecryptException $e) {
             return abort(404);
         }
@@ -112,7 +121,7 @@ class SarprasController extends Controller
             Session::put('edit_aset', $edit_aset);
             $datar = Ruang::get(); // untuk menampilkan data ruang
             $dataj = Jenis::get(); // untuk menampilkan data jenis
-            return view('aset.edit',compact('data', 'datar', 'dataj'));
+            return view('sarpras.aset.edit',compact('data', 'datar', 'dataj'));
         }catch (DecryptException $e) {
             return abort(404);
         }
@@ -165,7 +174,7 @@ class SarprasController extends Controller
     public function asetform(){
         $datar = Ruang::get(); // untuk menampilkan data ruang
         $dataj = Jenis::get(); // untuk menampilkan data jenis
-        return view('aset.tambah',compact( 'datar','dataj'));
+        return view('sarpras.aset.tambah',compact( 'datar','dataj'));
     }
     public function asettambah(Request $request){
         // logika encrypt decrypt pada variabel datar & dataj
@@ -212,10 +221,10 @@ class SarprasController extends Controller
     public function ruang(Request $req)
     {
         $data = Ruang::get();
-        return view('ruang.ruang',['data'=>$data]);
+        return view('sarpras.ruang.ruang',['data'=>$data]);
     }
     public function ruangform(){
-        return view('ruang.tambah');
+        return view('sarpras.ruang.tambah');
     }
     public function ruangtambah(Request $request){
         $this->validate($request, [
@@ -233,7 +242,7 @@ class SarprasController extends Controller
             $data= Ruang::findOrFail($id);
             $edit_ruang = $data->id;
             Session::put('edit_ruang', $edit_ruang);
-            return view('ruang.edit',compact('data'));
+            return view('sarpras.ruang.edit',compact('data'));
         }catch (DecryptException $e) {
             return abort(404);
         }
@@ -266,10 +275,10 @@ class SarprasController extends Controller
     public function jenis(Request $req)
     {
         $data = Jenis::get();
-        return view('jenis.jenis',['data'=>$data]);
+        return view('sarpras.jenis.jenis',['data'=>$data]);
     }
     public function jenisform(){
-        return view('jenis.tambah');
+        return view('sarpras.jenis.tambah');
     }
     public function jenistambah(Request $request){
         $this->validate($request, [
@@ -287,7 +296,7 @@ class SarprasController extends Controller
             $data= Jenis::findOrFail($id);
             $edit_jenis = $data->id;
             Session::put('edit_jenis', $edit_jenis);
-            return view('jenis.edit',compact('data'));
+            return view('sarpras.jenis.edit',compact('data'));
         }catch (DecryptException $e) {
             return abort(404);
         }
@@ -320,19 +329,19 @@ class SarprasController extends Controller
     public function perbaikan(Request $req)
     {
         $data = Perbaikan::get();
-        return view('perbaikan.perbaikan',['data'=>$data]);
+        return view('sarpras.perbaikan.perbaikan',['data'=>$data]);
     }
     public function perbaikanaset(Request $req)
     {
         $da = Perbaikan::select('aset_id')->where('status', '!=', 'selesai',)->where('status', '!=', 'ditolak',)->get();
         $data = Aset::whereNotIn('id', $da)->get(); //pilih data aset dimana id tidak sama dengan aset_id(dimana status nya bukan selesai dan bukan ditolak)
-        return view('perbaikan.aset',compact( 'data'));
+        return view('sarpras.perbaikan.aset',compact( 'data'));
     }
     public function detailperbaikan($id){ 
         try{
             $id = Crypt::decrypt($id);
             $data= Perbaikan::findOrFail($id);
-            return view('perbaikan.detail',compact('data'));
+            return view('sarpras.perbaikan.detail',compact('data'));
         }catch (DecryptException $e) {
             return abort(404);
         }
@@ -353,7 +362,7 @@ class SarprasController extends Controller
             $data= Aset::findOrFail($id);
             $id_plaintext = $data->id;
             Session::put('id_session', $id_plaintext);
-            return view('perbaikan.tambah',compact('data'));
+            return view('sarpras.perbaikan.tambah',compact('data'));
         }catch (DecryptException $e) {
             return abort(404);
         }
@@ -377,7 +386,7 @@ class SarprasController extends Controller
             $data= Perbaikan::findOrFail($id);
             $status_perbaikan = $data->id;
             Session::put('status_perbaikan', $status_perbaikan);
-            return view('perbaikan.status',compact('data'));
+            return view('sarpras.perbaikan.status',compact('data'));
         }catch (DecryptException $e) {
             return abort(404);
         }
@@ -411,13 +420,13 @@ class SarprasController extends Controller
      public function kebutuhan(Request $req)
      {
          $data = Kebutuhan::get();
-         return view('kebutuhan.kebutuhan',['data'=>$data]);
+         return view('sarpras.kebutuhan.kebutuhan',['data'=>$data]);
      }
      public function detailkebutuhan($id){ 
          try{
              $id = Crypt::decrypt($id);
              $data= Kebutuhan::findOrFail($id);
-             return view('kebutuhan.detail',compact('data'));
+             return view('sarpras.kebutuhan.detail',compact('data'));
          }catch (DecryptException $e) {
              return abort(404);
          }
@@ -436,7 +445,7 @@ class SarprasController extends Controller
      { 
         $datar = Ruang::get(); // untuk menampilkan data ruang
         $dataj = Jenis::get(); // untuk menampilkan data jenis
-        return view('kebutuhan.tambah',compact( 'datar','dataj'));
+        return view('sarpras.kebutuhan.tambah',compact( 'datar','dataj'));
      }
      public function kebutuhantambah(Request $request){ 
          $this->validate($request, [
