@@ -107,14 +107,19 @@ class KeuanganController extends Controller
          try{
              $id = Crypt::decrypt($id);
              $data= Kebutuhan::findOrFail($id);
-             $status_kebutuhan = $data->id;
+             $status_kebutuhan = $data->id; //isi dari kolom id 
              Session::put('status_kebutuhan', $status_kebutuhan);
              return view('keuangan.kebutuhan.status',compact('data'));
+            //if(Kebutuhan::where('status', '=', 'proses')->where('id', $status_kebutuhan_selesai)->get()) {
+               // return view('keuangan.kebutuhan.selesai',compact('data'));
+            //}else {
+            //    return abort(404);
+           // }
          }catch (DecryptException $e) {
              return abort(404);
          }
      }
-     public function kebutuhanstatusupdate(Request $req) // ERROR 
+     public function kebutuhanstatusupdate(Request $req) 
      {
              $ids = Session::get('status_kebutuhan');
              \Validator::make($req->all(), 
@@ -123,16 +128,112 @@ class KeuanganController extends Controller
              ])->validate();
                  $field = [
                      'status'=>$req->status,
-                 ];
-             $result = Kebutuhan::where('id', $ids)->update($field);
-             if($result){
-                // Session::flash('sukses', 'Data Berhasil Disimpan');
-                 return back();
-             } else{
-                // Session::flash('gagal', 'Data Gagal Disimpan');
-                 return back();
-             }
+                 ];  
+                 $result= Kebutuhan::where('id', $ids)->update($field);
+                 if($result){
+                    return back();
+                 }else{
+                    return back();
+                 }
+                                      // jika menunggu maka diupdate menjadi disetujui
+           //      $result_m = Kebutuhan::where('status', '=', 'menunggu')->where('id', $ids)->update($field);
+                                          // jika disetujui maka diupdate menjadi proses dan dialihkan ke halaman selesai
+            //     $result_dj = Kebutuhan::where('status', '=', 'disetujui')->where('id', $ids)->update($field);
+                                          // di halaman selesai jika proses maka diupdate menjadi selesai 
+            //     $result_p = Kebutuhan::where('status', '=', 'proses')->where('id', $ids)->update($field);
+            // if($result_m){
+            //    return back();
+            // }elseif($result_dj){
+               // return url('/keuangan/home/kebutuhan/status/selesai',['id'=>Crypt::encrypt($ids)]);
+               // return route('keuangan-kebutuhan-status-selesai');
+            //    return back();
+            // }elseif($result_p){
+            //     return route('keuangan-kebutuhan-status-selesai');
+                //return back();
+            // }else{
+            //    return back();
+            // }
      }
+
+     public function kebutuhanformstatusupdateselesai($id){ 
+        try{
+            $id = Crypt::decrypt($id);
+            $data= Kebutuhan::findOrFail($id);
+            $status_kebutuhan_selesai = $data->id;
+            Session::put('status_kebutuhan_selesai', $status_kebutuhan_selesai);
+            $user_id_kebutuhan = $data->user_id;
+            $ruang_id_kebutuhan = $data->ruang_id;
+            $jenis_id_kebutuhan = $data->jenis_id;
+            $nama_kebutuhan = $data->nama;
+            $keterangan_kebutuhan = $data->keterangan;
+            $tahun_pengadaan_kebutuhan = $data->tahun;
+            $merek_kebutuhan = $data->merek;
+            $jumlah_kebutuhan = $data->jumlah;
+            $harga_kebutuhan = $data->harga;
+            $total_harga_kebutuhan = $data->total_harga;
+            Session::put('user_id_kebutuhan', $user_id_kebutuhan);
+            Session::put('ruang_id_kebutuhan', $ruang_id_kebutuhan);
+            Session::put('jenis_id_kebutuhan', $jenis_id_kebutuhan);
+            Session::put('nama_kebutuhan', $nama_kebutuhan);
+            Session::put('keterangan_kebutuhan', $keterangan_kebutuhan);
+            Session::put('tahun_pengadaan_kebutuhan', $tahun_pengadaan_kebutuhan);
+            Session::put('merek_kebutuhan', $merek_kebutuhan);
+            Session::put('jumlah_kebutuhan', $jumlah_kebutuhan);
+            Session::put('harga_kebutuhan', $harga_kebutuhan);
+            Session::put('total_harga_kebutuhan', $total_harga_kebutuhan);
+                return view('keuangan.kebutuhan.selesai',compact('data'));
+        }catch (DecryptException $e) {
+            return abort(404);
+        }
+    }
+    public function kebutuhanstatusupdateselesai(Request $req) // ERROR 
+    {
+          // $statusk = Session::get('statusk');
+            $ids_selesai = Session::get('status_kebutuhan_selesai');
+            $user_id_kebutuhan = Session::get('user_id_kebutuhan');
+            $ruang_id_kebutuhan = Session::get('ruang_id_kebutuhan');
+            $jenis_id_kebutuhan = Session::get('jenis_id_kebutuhan');
+            $nama_kebutuhan = Session::get('nama_kebutuhan');
+            $keterangan_kebutuhan = Session::get('keterangan_kebutuhan');
+            $tahun_pengadaan_kebutuhan = Session::get('tahun_pengadaan_kebutuhan');
+            $merek_kebutuhan = Session::get('merek_kebutuhan');
+            $jumlah_kebutuhan = Session::get('jumlah_kebutuhan');
+            $harga_kebutuhan = Session::get('harga_kebutuhan');
+            $total_harga_kebutuhan = Session::get('total_harga_kebutuhan');
+            \Validator::make($req->all(), 
+            [
+                'status'=>'',
+            ])->validate();
+            // bagaimana caranya agar  jika status kebutuhan nya selesai maka data kebutuhan ter create secara otomatis ke tabel aaset
+               $field_aset = [
+                  'user_id' => $user_id_kebutuhan,
+                  'ruang_id' => $ruang_id_kebutuhan,
+                  'jenis_id' => $jenis_id_kebutuhan,
+                  'nama' => $nama_kebutuhan,
+                  'keterangan' => $keterangan_kebutuhan,
+                  'tahun_pengadaan' => $tahun_pengadaan_kebutuhan,
+                  'merek' => $merek_kebutuhan,
+                  'jumlah' => $jumlah_kebutuhan,
+                  'harga' => $harga_kebutuhan,
+                  'total_harga' => $total_harga_kebutuhan,
+               ];
+               Aset::create($field_aset);
+                $field_selesai = [
+                    'status'=>$req->status,
+                ];
+               $result_selesai = Kebutuhan::where('id', $ids_selesai)->update($field_selesai);
+            if($result_selesai){
+               //Session::flash('sukses','haha');
+               return redirect()->route('keuangan-kebutuhan');
+               return back();
+            }else{
+               //Session::flash('gagal', 'Data Gagal Disimpan');
+               return back();
+            }
+            //Kebutuhan::where('status', '=', 'menunggu')->where('id', $ids)->update($field);
+            //Kebutuhan::where('status', '=', 'disetujui')->where('id', $ids)->update($field);
+    }
+     
  
 
 

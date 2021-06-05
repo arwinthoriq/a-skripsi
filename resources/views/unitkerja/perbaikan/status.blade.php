@@ -8,19 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-          <h5 class="m-0 "> Edit Status Kebutuhan </h5>
-@if($m = session::get('sukses'))
-<div class="alert alert-success alert-block">
-    <strong>{{$m}}</strong> 
-    <button type="button" class="close" data-dismiss="alert"> &times;
-    </button>
-</div>
-@endif
+          <h5 class="m-0 "> Edit Status Perbaikan </h5>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('keuangan-home') }}">Home</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('keuangan-kebutuhan') }}">kebutuhan</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('sarpras-home') }}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('sarpras-perbaikan') }}">Perbaikan</a></li>
               <li class="breadcrumb-item">Status</li>
             </ol>
           </div>
@@ -28,22 +21,6 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-@if($data->status == 'selesai')
-    <!-- Main content -->
-    <section class="content">
-      <div class="error-page">
-
-        <div class="error-content">
-          <h3><i class="fas fa-exclamation-triangle text-warning"></i> Oops! Akses Ditolak.</h3>
-
-
-        </div>
-        <!-- /.error-content -->
-      </div>
-      <!-- /.error-page -->
-    </section>
-    <!-- /.content -->
-@else
 
     <!-- Main content -->
     <section class="content">
@@ -56,57 +33,33 @@
               <!-- /.card-header -->
               <!-- form start -->
               <div class="card-body">
-                <form role="form" action="{{ route('keuangan-kebutuhan-status') }}" method="POST" enctype="multipart/form-data">
+                <form role="form" action="{{ route('sarpras-perbaikan-status') }}" method="POST" enctype="multipart/form-data">
                   {{csrf_field()}}
 
                   <div class="row">
-                      <!-- text input -->
                     <div class="col-sm-6">
+                      <!-- text input -->
                       <div class="form-group">
                         <label for="text-input" class=" form-control-label">Nama</label>
-                        <input type="text"  name="" placeholder="{{ $data->nama}}" class="form-control" disabled>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="text-input" class=" form-control-label">Tahun</label>
-                        <input type="text"  name="" placeholder="{{ $data->tahun}}" class="form-control" disabled>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="text-input" class=" form-control-label">Jumlah</label>
-                        <input type="text"  name="" placeholder="{{ $data->jumlah}}" class="form-control" disabled>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="text-input" class=" form-control-label">Harga</label>
-                        <input type="text"  name="" placeholder="{{ $data->harga}}" class="form-control" disabled>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="text-input" class=" form-control-label">Total Harga</label>
-                        <input type="text"  name="" placeholder="{{ $data->total_harga}}" class="form-control" disabled>
+                        <input type="text"  name="" placeholder="{{ $data->aset->nama}}" class="form-control" disabled>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
                           <label for="text-input" class=" form-control-label">Merek</label>
-                          <input type="text"   name="" placeholder="{{ $data->merek}}" class="form-control" disabled>
+                          <input type="text"  name="" placeholder="{{ $data->aset->merek}}" class="form-control" disabled>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
                           <label for="text-input" class=" form-control-label">Ruang</label>
-                          <input type="text"   name="" placeholder="{{ $data->ruang->nama}}" class="form-control" disabled>
+                          <input type="text"  name="" placeholder="{{ $data->aset->ruang->nama}}" class="form-control" disabled>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
                           <label for="text-input" class=" form-control-label">Jenis</label>
-                          <input type="text"   name="" placeholder="{{ $data->jenis->nama}}" class="form-control" disabled>
+                          <input type="text"  name="" placeholder="{{ $data->aset->jenis->nama}}" class="form-control" disabled>
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -202,18 +155,35 @@
                             </div>
                             <!-- /.modal -->
                     </div>
-
+                  @elseif($data->status == 'proses')
+                    <div class="btn-group">
+                            <button class="btn btn-block bg-gradient-success" type="button" data-toggle="modal" data-target="#modal-default">Selesai</button>
+                            <div class="modal fade" id="modal-default">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title">Edit Status</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <center><h6>Status Akan Berubah Menjadi "Selesai" </h6> Apakah Anda Yakin ?</center>
+                                  </div>
+                                  <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                                    <button name="status" value="selesai" type="submit" class="btn btn-primary" >Simpan</button>
+                                  </div>
+                                </div>
+                                <!-- /.modal-content -->
+                              </div>
+                              <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
+                    </div>
                   @endif
                 </div>
               </div>
-              
-              @if($data->status == 'proses')
-              <div class="col-sm-6">
-                      <div class="form-group">
-                        <a href= "{{ url('/keuangan/home/kebutuhan/status/selesai',['id'=>Crypt::encrypt($data->id)]) }} " class="btn btn-success">Ke Halaman Helesai</a>
-                      </div>
-                    </div>
-              @endif
               
 
 
@@ -228,7 +198,7 @@
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
-@endif
+
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

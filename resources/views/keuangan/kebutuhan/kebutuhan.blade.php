@@ -54,18 +54,15 @@
                                             <td>
                                                 <a href= "{{ url('/keuangan/home/kebutuhan/detail',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-success">Detail</a>
                                             </td>
-                                            @if($dt->status == 'selesai')
-                                            <td></td>
-                                            @elseif($dt->status == 'ditolak')
-                                            <td></td>
-                                            @else
+                                            @if(($dt->status != 'selesai') && ($dt->status != 'ditolak') )
                                             <td>
                                                 <a href= "{{ url('/keuangan/home/kebutuhan/status',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-block bg-gradient-warning">Edit Status</a>
                                             </td>
-                                            @endif
+                                            @else
                                             <td>
                                                 <a href= "{{ url('/keuangan/home/kebutuhan/hapus',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-danger">Hapus</a>
                                             </td>
+                                            @endif
                                         </tr>
                                         <?php $no++; ?>    
                                         @endforeach

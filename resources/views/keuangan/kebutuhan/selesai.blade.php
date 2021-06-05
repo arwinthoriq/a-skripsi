@@ -9,13 +9,6 @@
         <div class="row mb-2">
           <div class="col-sm-6">
           <h5 class="m-0 "> Edit Status Kebutuhan </h5>
-@if($m = session::get('sukses'))
-<div class="alert alert-success alert-block">
-    <strong>{{$m}}</strong> 
-    <button type="button" class="close" data-dismiss="alert"> &times;
-    </button>
-</div>
-@endif
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -28,22 +21,6 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-@if($data->status == 'selesai')
-    <!-- Main content -->
-    <section class="content">
-      <div class="error-page">
-
-        <div class="error-content">
-          <h3><i class="fas fa-exclamation-triangle text-warning"></i> Oops! Akses Ditolak.</h3>
-
-
-        </div>
-        <!-- /.error-content -->
-      </div>
-      <!-- /.error-page -->
-    </section>
-    <!-- /.content -->
-@else
 
     <!-- Main content -->
     <section class="content">
@@ -52,11 +29,12 @@
           <!-- left column -->
           <div class="col-md-10">
             <!-- general form elements -->
+@if($data->status == 'proses')
             <div class="card card-dark">
               <!-- /.card-header -->
               <!-- form start -->
               <div class="card-body">
-                <form role="form" action="{{ route('keuangan-kebutuhan-status') }}" method="POST" enctype="multipart/form-data">
+                <form role="form" action="{{ route('keuangan-kebutuhan-status-selesai') }}" method="POST" enctype="multipart/form-data">
                   {{csrf_field()}}
 
                   <div class="row">
@@ -124,61 +102,11 @@
                     
                      <!-- text input -->
                 <div class="col-sm-6">
+                <small> <cite title="Source Title"> <p class="text-muted">* Data akan otomatis masuk ke data aset</p></cite></small>
                   <div class="margin">
-                  @if($data->status == 'menunggu')
+                  <!--@if($data->status == 'proses') -->
                     <div class="btn-group">
-                            <button class="btn btn-block bg-gradient-primary"  type="button" data-toggle="modal" data-target="#modal-disetujui">Disetujui</button>
-                            <div class="modal fade" id="modal-disetujui">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">Edit Status</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <center><h6>Status Akan Berubah Menjadi "Disetujui" </h6> Apakah Anda Yakin ?</center>
-                                  </div>
-                                  <div class="modal-footer justify-content-between">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                                    <button name="status" value="disetujui" type="submit" class="btn btn-primary" >Simpan</button>
-                                  </div>
-                                </div>
-                                <!-- /.modal-content -->
-                              </div>
-                              <!-- /.modal-dialog -->
-                            </div>
-                            <!-- /.modal -->
-                    </div>
-                    <div class="btn-group">
-                            <button class="btn btn-block bg-gradient-danger"  type="button" data-toggle="modal" data-target="#modal-ditolak">Ditolak</button>
-                            <div class="modal fade" id="modal-ditolak">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title">Edit Status</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <center><h6>Status Akan Berubah Menjadi "Ditolak" </h6> Apakah Anda Yakin ?</center>
-                                  </div>
-                                  <div class="modal-footer justify-content-between">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                                    <button name="status" value="ditolak" type="submit" class="btn btn-primary" >Simpan</button>
-                                  </div>
-                                </div>
-                                <!-- /.modal-content -->
-                              </div>
-                              <!-- /.modal-dialog -->
-                            </div>
-                            <!-- /.modal -->
-                  </div>
-                  @elseif($data->status == 'disetujui')
-                    <div class="btn-group">
-                            <button class="btn btn-block bg-gradient-warning" type="button" data-toggle="modal" data-target="#modal-default">Proses</button>
+                            <button class="btn btn-block bg-gradient-success" type="button" data-toggle="modal" data-target="#modal-default">Selesai</button>
                             <div class="modal fade" id="modal-default">
                               <div class="modal-dialog">
                                 <div class="modal-content">
@@ -189,11 +117,11 @@
                                     </button>
                                   </div>
                                   <div class="modal-body">
-                                    <center><h6>Status Akan Berubah Menjadi "Proses" </h6> Apakah Anda Yakin ?</center>
+                                    <center><h6>Status Akan Berubah Menjadi "Selesai" </h6> Apakah Anda Yakin ?</center>
                                   </div>
                                   <div class="modal-footer justify-content-between">
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                                    <button name="status" value="proses" type="submit" class="btn btn-primary" >Simpan</button>
+                                    <button name="status" value="selesai" type="submit" class="btn btn-primary" >Simpan</button>
                                   </div>
                                 </div>
                                 <!-- /.modal-content -->
@@ -202,18 +130,10 @@
                             </div>
                             <!-- /.modal -->
                     </div>
-
-                  @endif
+                    <!-- @endif -->
+                  
                 </div>
               </div>
-              
-              @if($data->status == 'proses')
-              <div class="col-sm-6">
-                      <div class="form-group">
-                        <a href= "{{ url('/keuangan/home/kebutuhan/status/selesai',['id'=>Crypt::encrypt($data->id)]) }} " class="btn btn-success">Ke Halaman Helesai</a>
-                      </div>
-                    </div>
-              @endif
               
 
 
@@ -221,6 +141,22 @@
               </div>
 
             </div>
+            
+@else    <!-- Main content -->
+    <section class="content">
+      <div class="error-page">
+
+        <div class="error-content">
+          <h3><i class="fas fa-exclamation-triangle text-warning"></i> Oops! Akses Ditolak.</h3>
+
+
+        </div>
+        <!-- /.error-content -->
+      </div>
+      <!-- /.error-page -->
+    </section>
+    <!-- /.content -->
+@endif
             <!-- /.card -->
           </div>
           <!--/.col (left) -->
@@ -228,8 +164,13 @@
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
-@endif
+
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+ <!--@if($data->status != 'proses')-->
+ <!-- {{Session::get('404')}} -->
+  <!--{{Session::get('404')}}-->
+  <!--@endif-->
 @endsection
