@@ -83,3 +83,16 @@ Route::group(['prefix'=>'keuangan','middleware'=>'akses.keuangan'], function() {
 
 });
 
+
+Route::group(['prefix'=>'unitkerja','middleware'=>'akses.unitkerja'], function() { //admin
+    Route::get('/home', 'UnitkerjaController@dashboard')->name('unitkerja-home'); //dashboard
+    
+    Route::get('/home/perbaikan', 'UnitkerjaController@perbaikan')->name('unitkerja-perbaikan'); //daftar perbaikan
+    Route::get('/home/perbaikan/detail/{id}', 'UnitkerjaController@detailperbaikan'); //detail perbaikan
+    Route::get('/home/perbaikan/aset', 'UnitkerjaController@perbaikanaset')->name('unitkerja-perbaikan-aset'); //daftar aset(khusus perbaikan)
+    Route::get('/home/perbaikan/aset/tambah/{id}','UnitkerjaController@perbaikanform'); //passing id tambah perbaikan
+    Route::get('/home/perbaikan/aset/tambah','UnitkerjaController@perbaikanform')->name('unitkerja-perbaikan-form'); //form tambah perbaikan
+    Route::post('/home/perbaikan/aset/tambah','UnitkerjaController@perbaikantambah'); //tambah perbaikan
+
+});
+

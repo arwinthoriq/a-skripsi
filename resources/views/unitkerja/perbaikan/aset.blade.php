@@ -12,9 +12,9 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('sarpras-home') }}">Home</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('sarpras-perbaikan') }}">Perbaikan</a></li>
-              <li class="breadcrumb-item">Aset</li>
+              <li class="breadcrumb-item"><a href="{{ route('unitkerja-home') }}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('unitkerja-perbaikan') }}">Perbaikan</a></li>
+              <li class="breadcrumb-item">Unit Kerja</li>
             </ol>
           </div>
         </div><!-- /.row -->
@@ -46,7 +46,7 @@
                                             <td>{{ $dt->merek }}</td>
                                             <td>{{ $dt->ruang->nama}}</td>
                                             <td>{{ $dt->jenis->nama}}</td>
-                                            <td>  <a href= "{{ url('/sarpras/home/perbaikan/aset/tambah',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-primary">Perbaiki</a> </td>
+                                            <td>  <a href= "{{ url('/unitkerja/home/perbaikan/aset/tambah',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-primary">Perbaiki</a> </td>
                                              
 
                                         </tr>

@@ -8,11 +8,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('sarpras-perbaikan-aset') }}">Tambah </a> </h3>
+            <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('unitkerja-perbaikan-aset') }}">Tambah </a> </h3>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('sarpras-home') }}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('unitkerja-home') }}">Home</a></li>
               <li class="breadcrumb-item">Perbaikan</li>
             </ol>
           </div>
@@ -51,15 +51,11 @@
                                             <td>{{ date("d F Y", strtotime($dt->created_at)) }}</td>
                                             <td>{{ $dt->status}}</td>
                                             <td>
-                                                <a href= "{{ url('/sarpras/home/perbaikan/detail',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-success">Detail</a>
+                                                <a href= "{{ url('/unitkerja/home/perbaikan/detail',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-success">Detail</a>
                                             </td>
-                                            @if(($dt->status != 'selesai') && ($dt->status != 'ditolak') )
+                                            @if($dt->status == 'menunggu')
                                             <td>
-                                                <a href= "{{ url('/sarpras/home/perbaikan/status',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-block bg-gradient-warning">Edit Status</a>
-                                            </td>
-                                            @else
-                                            <td>
-                                                <a href= "{{ url('/sarpras/home/aset/hapus',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-danger">Hapus</a>
+                                                <a href= "{{ url('/unitkerja/home/aset/hapus',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-danger">Hapus</a>
                                             </td>
                                             @endif
                                         </tr>

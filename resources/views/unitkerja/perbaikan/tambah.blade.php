@@ -12,9 +12,9 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('sarpras-home') }}">Home</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('sarpras-perbaikan') }}">Perbaikan</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('sarpras-perbaikan-aset') }}">Aset</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('unitkerja-home') }}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('unitkerja-perbaikan') }}">Perbaikan</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('unitkerja-perbaikan-aset') }}">Aset</a></li>
               <li class="breadcrumb-item">Tambah</li>
             </ol>
           </div>
@@ -34,7 +34,7 @@
               <!-- /.card-header -->
               <!-- form start -->
               <div class="card-body">
-                <form role="form" action="{{ route('sarpras-perbaikan-form') }}" method="POST" enctype="multipart/form-data">
+                <form role="form" action="{{ route('unitkerja-perbaikan-form') }}" method="POST" enctype="multipart/form-data">
                   {{csrf_field()}}
 
                   <div class="row">

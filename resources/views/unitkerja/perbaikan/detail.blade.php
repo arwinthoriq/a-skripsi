@@ -12,8 +12,8 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('sarpras-home') }}">Home</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('sarpras-aset') }}">Perbaikan</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('unitkerja-home') }}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('unitkerja-perbaikan') }}">Perbaikan</a></li>
               <li class="breadcrumb-item">Detail</li>
             </ol>
           </div>
@@ -76,7 +76,7 @@
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-                    <div><a href="{{ route('sarpras-perbaikan') }}" class="btn btn-success">Kembali</a></div><br>
+                    <div><a href="{{ route('unitkerja-perbaikan') }}" class="btn btn-success">Kembali</a></div><br>
           </div>
         </div>
         <!-- /.row -->
