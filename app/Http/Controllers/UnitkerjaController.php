@@ -48,7 +48,7 @@ class UnitkerjaController extends Controller
         // menampilkan perbaikan
         public function perbaikan(Request $req)
         {
-            $data = Perbaikan::get();
+            $data = Perbaikan::where(['user_id' => auth()->user()->id])->get();
             return view('unitkerja.perbaikan.perbaikan',['data'=>$data]);
         }
         public function perbaikanaset(Request $req)
