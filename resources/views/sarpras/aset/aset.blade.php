@@ -9,6 +9,7 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('sarpras-aset-form') }}">Tambah </a> </h3>
+            <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('print-aset') }}" target="_blank">Print </a> </h3>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

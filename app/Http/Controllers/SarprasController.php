@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use PDF;
 class SarprasController extends Controller
 { 
     /**
@@ -209,6 +210,13 @@ class SarprasController extends Controller
             'total_harga' => $request->total_harga,
         ]);
         return redirect()->route('aset');
+    }
+    public function printaset()
+    {
+        $data = Aset::all();
+        $pdf = PDF::loadview('sarpras.aset.print', ['data' => $data]);
+        //return $pdf->download('laporan-aset.pdf');
+        return $pdf->stream();
     }
 
 

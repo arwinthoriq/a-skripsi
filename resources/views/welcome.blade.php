@@ -69,9 +69,9 @@
                 <div class="top-right links">
                     @auth
                         @if(Auth::user()->akses == 'sarpras')
-                        <a href="{{ url('/sarpras/home') }}">Home</a>
+                        <a href="{{ url('/sarpras/home/dashboard') }}">Home</a>
                         @elseif(Auth::user()->akses == 'keuangan')
-                        <a href="{{ url('/keuangan/home') }}">Home</a>
+                        <a href="{{ url('/keuangan/home/dashboard') }}">Home</a>
                         @elseif(Auth::user()->akses == 'unitkerja')
                         <a href="{{ url('/unitkerja/home') }}">Home</a>
                         @endif

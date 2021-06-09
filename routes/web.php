@@ -31,6 +31,7 @@ Route::group(['prefix'=>'sarpras','middleware'=>'akses.sarpras'], function() { /
     Route::get('/home/aset/hapus/{id}','SarprasController@deleteaset'); // hapus aset
     Route::get('/home/aset/tambah','SarprasController@asetform')->name('sarpras-aset-form'); //form tambah aset
     Route::post('/home/aset/tambah','SarprasController@asettambah'); //tambah aset
+    Route::get('/home/aset/print', 'SarprasController@printaset')->name('print-aset'); //daftar aset
 
     Route::get('/home/ruang', 'SarprasController@ruang')->name('sarpras-ruang');
     Route::get('/home/ruang/edit/{id}','SarprasController@formupdateruang'); //passing id edit ruang

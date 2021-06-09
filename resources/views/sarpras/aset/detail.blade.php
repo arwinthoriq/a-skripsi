@@ -57,7 +57,7 @@
                     <td>{{ $data->jenis->nama}}</td>
                     <tr>
                     <td><b class="d-block">Tanggal</b></td>
-                    <td>{{ date("d F Y", strtotime($data->created_at)) }}</td>
+                    <td>{{ date("d-m-Y", strtotime($data->created_at)) }}</td>
                     <tr>
                     <td><b class="d-block">Keterangan</b></td>
                     <td>{{ $data->keterangan}}</td>
@@ -66,10 +66,10 @@
                     <td>{{ $data->jumlah}}</td>
                     <tr>
                     <td><b class="d-block">Harga</b></td>
-                    <td>{{ number_format($data->harga)}}</td>
+                    <td>{{ number_format($data->harga, 0, "," , ".")  }}</td>
                     <tr>
                     <td><b class="d-block">Total Harga</b></td>
-                    <td>{{ number_format($data->total_harga)}}</td>
+                    <td>{{  number_format($data->total_harga, 0, "," , ".")  }}</td>
                   </tbody>
                 </table>
               </div>
