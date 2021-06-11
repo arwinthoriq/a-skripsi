@@ -29,13 +29,13 @@
     <!-- title row -->
     <div class="row">
       <div class="col-12">
-        <h2 class="page-header">
-          <center>Data Aset Dinas Pendidikan Kabupaten Blora <br> Tahun </center>
+        <h2 class="page-header">  
+          <center>Data Aset Dinas Pendidikan Kabupaten Blora <br> Tahun {{ $dth }}</center>
         </h2>
       </div>
       <!-- /.col -->
     </div>
-    <!-- info row -->
+    <!-- info row.. -->
     <div class="row invoice-info">
       <div class="col-sm-4 invoice-col">
         
@@ -63,7 +63,6 @@
                                         <th>Jumlah</th>
                                         <th>Harga</th>
                                         <th>Total Harga</th>
-                                        <th>Tanggal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,7 +78,6 @@
                                             <td>{{ $dt->jumlah}}</td>
                                             <td>{{ number_format($dt->harga, 0, "," , ".")  }}</td>
                                             <td>{{ number_format($dt->total_harga, 0, "," , ".")  }}</td>
-                                            <td>{{ date("d-m-Y", strtotime($dt->created_at)) }}</td>
                                         </tr>
                                         <?php $no++; ?>    
                                         @endforeach

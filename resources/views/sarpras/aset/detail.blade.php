@@ -73,7 +73,7 @@
                   </tbody>
                 </table>
               </div>
-              <!-- /.card-body -->
+              <!-- /.card-body.. -->
             </div>
             <!-- /.card -->
                     <div><a href="{{ route('sarpras-aset') }}" class="btn btn-success">Kembali</a></div><br>

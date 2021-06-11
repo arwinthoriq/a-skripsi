@@ -17,6 +17,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use PDF;
+//use Illuminate\Support\Str;
 class SarprasController extends Controller
 { 
     /**
@@ -102,8 +103,9 @@ class SarprasController extends Controller
     // menampilkan aset
     public function Aset(Request $req)
     {
+        $das = Aset::distinct()->get('tahun_pengadaan'); //solved
         $data = Aset::get();
-        return view('sarpras.aset.aset',['data'=>$data]);
+        return view('sarpras.aset.aset',compact('data','das'));
     }
     public function detailaset($id){ 
         try{
@@ -209,15 +211,24 @@ class SarprasController extends Controller
             'harga' => $request->harga,
             'total_harga' => $request->total_harga,
         ]);
-        return redirect()->route('aset');
+        return redirect()->route('sarpras-aset');
     }
-    public function printaset()
+    public function printaset(Request $req)
     {
-        $data = Aset::all();
-        $pdf = PDF::loadview('sarpras.aset.print', ['data' => $data]);
-        //return $pdf->download('laporan-aset.pdf');
-        return $pdf->stream();
+        $this->validate($req, [
+            'Tahun'=>'required|regex:/^[0-9]{4}$/',
+        ]);
+        $data = Aset::where('tahun_pengadaan','=', $req->Tahun)->get();
+       if( $data){
+            $dth = $req->Tahun;
+            $pdf = PDF::loadview('sarpras.aset.print',compact( 'data', 'dth'));
+            return $pdf->download('laporan-aset.pdf');
+            // return $pdf->stream();
+       } else{
+           return back();
+       }
     }
+
 
 
 
