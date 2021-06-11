@@ -46,7 +46,7 @@
             "Tests\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "deva",
     "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [
