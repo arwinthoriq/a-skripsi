@@ -16,6 +16,8 @@ use Illuminate\Support\Str;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use PDF;
+
 class UnitkerjaController extends Controller
 { 
 
@@ -48,8 +50,10 @@ class UnitkerjaController extends Controller
         // menampilkan perbaikan
         public function perbaikan(Request $req)
         {
+            $dp = Perbaikan::selectRaw('YEAR(created_at) as year')->distinct()->where(['user_id' => auth()->user()->id])->get();
+            $g = $dp->pluck('year');
             $data = Perbaikan::where(['user_id' => auth()->user()->id])->get();
-            return view('unitkerja.perbaikan.perbaikan',['data'=>$data]);
+            return view('unitkerja.perbaikan.perbaikan',compact( 'data', 'g'));
         }
         public function perbaikanaset(Request $req)
         {
@@ -99,6 +103,22 @@ class UnitkerjaController extends Controller
                 'keterangan' => $request->keterangan,
             ]);
             return redirect()->route('unitkerja-perbaikan');
+        }
+        public function printperbaikan(Request $req)  // mengambil Y pada kolom created_at untuk di ambil data nya dan di print
+        {
+            $this->validate($req, [
+                'Tahun'=>'required|regex:/^[0-9]{4}$/',
+            ]);
+            $data = Perbaikan::whereYear('created_at','=', $req->Tahun)->where(['user_id' => auth()->user()->id])->get();
+           if( $data){
+                $j = Perbaikan::select('id')->whereYear('created_at','=', $req->Tahun)->where(['user_id' => auth()->user()->id])->get();
+                $dth = $req->Tahun;
+                $pdf = PDF::loadview('unitkerja.perbaikan.print',compact( 'data', 'dth', 'j'));
+                return $pdf->download('laporan-perbaikan.pdf');
+                // return $pdf->stream();
+           } else{
+               return back();
+           }
         }
         
         

@@ -41,7 +41,7 @@
                                         <tr>
                                         <td>{{ $no }}</td>
                                             <td>{{ $dt->nama}}</td>
-                                            <td>{{ date("d F Y", strtotime($dt->created_at)) }}</td>
+                                            <td>{{ date("d-m-Y", strtotime($dt->created_at)) }}</td>
                                             <td>
                                                 <a href= "{{ url('/sarpras/home/ruang/edit',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-warning">Edit</a>
                                             </td>

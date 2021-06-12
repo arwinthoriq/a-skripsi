@@ -9,6 +9,9 @@ class Perbaikan extends Model
 {
     protected $table = 'perbaikan';
     protected $guarded = [];
+   // public function getDates() {
+     // return array('created_at', 'updated_at', 'date_time_field');
+   // }
 
 //    public function transaksi_1(){
  //     return $this->hasOne('App\Transaksi_1');

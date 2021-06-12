@@ -16,6 +16,8 @@ use Illuminate\Support\Str;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use PDF;
+
 class KeuanganController extends Controller
 { 
 
@@ -81,8 +83,9 @@ class KeuanganController extends Controller
      // menampilkan kebutuhan
      public function kebutuhan(Request $req)
      {
+        $das = Kebutuhan::distinct()->get('tahun');
          $data = Kebutuhan::get();
-         return view('keuangan.kebutuhan.kebutuhan',['data'=>$data]);
+         return view('keuangan.kebutuhan.kebutuhan',compact('data','das'));
      }
      public function detailkebutuhan($id){ 
          try{
@@ -204,7 +207,7 @@ class KeuanganController extends Controller
             [
                 'status'=>'',
             ])->validate();
-            // bagaimana caranya agar  jika status kebutuhan nya selesai maka data kebutuhan ter create secara otomatis ke tabel aaset
+            // bagaimana caranya agar  jika status kebutuhan nya selesai   maka data kebutuhan ter create secara otomatis ke tabel aaset
                $field_aset = [
                   'user_id' => $user_id_kebutuhan,
                   'ruang_id' => $ruang_id_kebutuhan,
@@ -232,6 +235,21 @@ class KeuanganController extends Controller
             }
             //Kebutuhan::where('status', '=', 'menunggu')->where('id', $ids)->update($field);
             //Kebutuhan::where('status', '=', 'disetujui')->where('id', $ids)->update($field);
+    }
+    public function printkebutuhan(Request $req)
+    {
+        $this->validate($req, [
+            'Tahun'=>'required|regex:/^[0-9]{4}$/',
+        ]);
+        $data = Kebutuhan::where('tahun','=', $req->Tahun)->get();
+       if( $data){
+            $dth = $req->Tahun;
+            $pdf = PDF::loadview('keuangan.kebutuhan.print',compact( 'data', 'dth'));
+            return $pdf->download('laporan-kebutuhan.pdf');
+            // return $pdf->stream();
+       } else{
+           return back();
+       }
     }
      
  

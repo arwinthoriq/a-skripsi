@@ -7,9 +7,41 @@
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('sarpras-kebutuhan-form') }}">Tambah </a> </h3>
-          </div><!-- /.col -->
+
+
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-left">
+            <li >
+              <div class="col-sm-6">
+                <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('sarpras-kebutuhan-form') }}">Tambah </a> </h3>
+              </div>
+            </li>
+            <li >
+              <div class="col-sm-6">
+              </div>
+            </li>
+            <li >
+              <div >
+                <form role="form" action="{{ route('print-kebutuhan') }}" method="GET" enctype="multipart/form-data">
+                  {{csrf_field()}}
+                        <div class="input-group-prepend">
+                        <button type="submit" class="btn btn-default"><i class="fas fa-download"></i></button>
+                          <select class="form-control" name="Tahun">
+                          @foreach($das as $dtj)
+                                <option > {{  $dtj->tahun  }}</option>
+                            @endforeach
+                            </select>
+                        </div>
+                        <!-- /btn-group -->
+                </form>
+              </div>
+            </li>
+          </ol>
+          <!--  <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('print-aset') }}" target="_blank">Print </a> </h3>  -->
+        </div><!-- /.col -->
+
+
+
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('sarpras-home') }}">Home</a></li>
@@ -36,6 +68,7 @@
                                         <th>Ruang</th>
                                         <th>jenis</th>
                                         <th>Status</th>
+                                        <th>Tanggal</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -52,6 +85,7 @@
                                             <td>{{ $dt->ruang->nama}}</td>
                                             <td>{{ $dt->jenis->nama}}</td>
                                             <td>{{ $dt->status}}</td>
+                                            <td>{{ date("d-m-Y", strtotime($dt->created_at)) }}</td>
                                             <td>
                                                 <a href= "{{ url('/sarpras/home/kebutuhan/detail',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-success">Detail</a>
                                             </td>

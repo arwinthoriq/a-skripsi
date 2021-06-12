@@ -45,7 +45,7 @@
                                             <td>{{ $dt->name}}</td>
                                             <td>{{ $dt->email}}</td>
                                             <td>{{ $dt->akses}}</td>
-                                            <td>{{ date("d F Y", strtotime($dt->created_at)) }}</td>
+                                            <td>{{ date("d-m-Y", strtotime($dt->created_at)) }}</td>
                                             <td>
                                                 <a href= "{{ url('/sarpras/home/Admin/Managemen/User/Hapus',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-danger">Hapus</a>
                                             </td>

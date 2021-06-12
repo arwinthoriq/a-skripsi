@@ -91,7 +91,7 @@ class SarprasController extends Controller
             'password' => Hash::make($request->password),
             'akses' => $request->akses,
         ]);
-        return redirect()->route('user');
+        return redirect()->route('sarpras-user');
     }
     
 
@@ -159,7 +159,7 @@ class SarprasController extends Controller
                 ];
             $result = Aset::where('id', $idedit_aset)->update($field);
             if($result){
-                return redirect()->route('aset');
+                return redirect()->route('sarpras-aset');
             } else{
                 return back();
             }
@@ -169,7 +169,7 @@ class SarprasController extends Controller
        try{
           $idi = Crypt::decrypt($id);
           Aset::find($idi)->delete();
-          return redirect()->route('aset');
+          return redirect()->route('sarpras-aset');
        }catch (DecryptException $e) {
           return abort(404);
        }
@@ -253,7 +253,7 @@ class SarprasController extends Controller
         'user_id' => Auth()->id(),
         'nama' => $request->nama,
         ]);
-        return redirect()->route('ruang');
+        return redirect()->route('sarpras-ruang');
     }
     public function formupdateruang($id){ 
         try{
@@ -278,7 +278,7 @@ class SarprasController extends Controller
                 ];
             $result = Ruang::where('id', $idedit_ruang)->update($field);
             if($result){
-                return redirect()->route('ruang');
+                return redirect()->route('sarpras-ruang');
             } else{
                 return back();
             }
@@ -307,7 +307,7 @@ class SarprasController extends Controller
         'user_id' => Auth()->id(),
         'nama' => $request->nama,
         ]);
-        return redirect()->route('jenis');
+        return redirect()->route('sarpras-jenis');
     }
     public function formupdatejenis($id){ 
         try{
@@ -332,7 +332,7 @@ class SarprasController extends Controller
                 ];
             $result = Jenis::where('id', $idedit_jenis)->update($field);
             if($result){
-                return redirect()->route('jenis');
+                return redirect()->route('sarpras-jenis');
             } else{
                 return back();
             }
@@ -347,8 +347,10 @@ class SarprasController extends Controller
     // menampilkan perbaikan
     public function perbaikan(Request $req)
     {
+        $dp = Perbaikan::selectRaw('YEAR(created_at) as year')->distinct()->get();
+        $g = $dp->pluck('year');
         $data = Perbaikan::get();
-        return view('sarpras.perbaikan.perbaikan',['data'=>$data]);
+        return view('sarpras.perbaikan.perbaikan',compact( 'data', 'g'));
     }
     public function perbaikanaset(Request $req)
     {
@@ -370,7 +372,7 @@ class SarprasController extends Controller
        try{
           $idi = Crypt::decrypt($id);
           Perbaikan::find($idi)->delete();
-          return redirect()->route('perbaikan');
+          return redirect()->route('sarpras-perbaikan');
        }catch (DecryptException $e) {
           return abort(404);
        }
@@ -397,7 +399,7 @@ class SarprasController extends Controller
             'aset_id' => Session::get('id_session'),
             'keterangan' => $request->keterangan,
         ]);
-        return redirect()->route('perbaikan');
+        return redirect()->route('sarpras-perbaikan');
     }
     public function perbaikanformstatusupdate($id){ 
         try{
@@ -429,6 +431,22 @@ class SarprasController extends Controller
                 return back();
             }
     }
+    public function printperbaikan(Request $req)  // mengambil Y pada kolom created_at untuk di ambil data nya dan di print
+    {
+        $this->validate($req, [
+            'Tahun'=>'required|regex:/^[0-9]{4}$/',
+        ]);
+        $data = Perbaikan::whereYear('created_at','=', $req->Tahun)->get();
+       if( $data){
+            $j = Perbaikan::select('id')->whereYear('created_at','=', $req->Tahun)->get();
+            $dth = $req->Tahun;
+            $pdf = PDF::loadview('sarpras.perbaikan.print',compact( 'data', 'dth', 'j'));
+            return $pdf->download('laporan-perbaikan.pdf');
+            // return $pdf->stream();
+       } else{
+           return back();
+       }
+    }
 
 
 
@@ -438,8 +456,9 @@ class SarprasController extends Controller
      // menampilkan kebutuhan
      public function kebutuhan(Request $req)
      {
+        $das = Kebutuhan::distinct()->get('tahun');
          $data = Kebutuhan::get();
-         return view('sarpras.kebutuhan.kebutuhan',['data'=>$data]);
+         return view('sarpras.kebutuhan.kebutuhan',compact('data','das'));
      }
      public function detailkebutuhan($id){ 
          try{
@@ -455,7 +474,7 @@ class SarprasController extends Controller
         try{
            $idi = Crypt::decrypt($id);
            Kebutuhan::find($idi)->delete();
-           return redirect()->route('kebutuhan');
+           return redirect()->route('sarpras-kebutuhan');
         }catch (DecryptException $e) {
            return abort(404);
         }
@@ -492,7 +511,22 @@ class SarprasController extends Controller
              'harga' => $request->harga,
              'total_harga' => $request->total_harga,
          ]);
-         return redirect()->route('kebutuhan');
+         return redirect()->route('sarpras-kebutuhan');
+     }
+     public function printkebutuhan(Request $req)
+     {
+         $this->validate($req, [
+             'Tahun'=>'required|regex:/^[0-9]{4}$/',
+         ]);
+         $data = Kebutuhan::where('tahun','=', $req->Tahun)->get();
+        if( $data){
+             $dth = $req->Tahun;
+             $pdf = PDF::loadview('sarpras.kebutuhan.print',compact( 'data', 'dth'));
+             return $pdf->download('laporan-kebutuhan.pdf');
+             // return $pdf->stream();
+        } else{
+            return back();
+        }
      }
  
 

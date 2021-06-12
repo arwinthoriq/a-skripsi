@@ -49,7 +49,7 @@
                                             <td>{{ $dt->jumlah}}</td>
                                             <td>{{ $dt->ruang->nama}}</td>
                                             <td>{{ $dt->jenis->nama}}</td>
-                                            <td>{{ date("d F Y", strtotime($dt->created_at)) }}</td>
+                                            <td>{{ date("d-m-Y", strtotime($dt->created_at)) }}</td>
                                             <td>
                                                 <a href= "{{ url('/keuangan/home/aset/detail',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-success">Detail</a>
                                             </td>

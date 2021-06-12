@@ -9,9 +9,36 @@
         <div class="row mb-2">
 
           <div class="col-sm-6">
-            <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('sarpras-aset-form') }}">Tambah </a> </h3>
+          <ol class="breadcrumb float-sm-left">
+            <li >
+              <div class="col-sm-6">
+                <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('sarpras-aset-form') }}">Tambah </a> </h3>
+              </div>
+            </li>
+            <li >
+              <div class="col-sm-6">
+              </div>
+            </li>
+            <li >
+              <div >
+                <form role="form" action="{{ route('print-aset') }}" method="GET" enctype="multipart/form-data">
+                  {{csrf_field()}}
+                        <div class="input-group-prepend">
+                        <button type="submit" class="btn btn-default"><i class="fas fa-download"></i></button>
+                          <select class="form-control" name="Tahun">
+                          @foreach($das as $dtj)
+                                <option > {{  $dtj->tahun_pengadaan  }}</option>
+                            @endforeach
+                            </select>
+                        </div>
+                        <!-- /btn-group -->
+                </form>
+              </div>
+            </li>
+          </ol>
           <!--  <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('print-aset') }}" target="_blank">Print </a> </h3>  -->
           </div><!-- /.col -->
+
 
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -26,26 +53,6 @@
     <!-- /.content-header -->
     
         
-    <div class="col-sm-6">
-          <form role="form" action="{{ route('print-aset') }}" method="GET" enctype="multipart/form-data">
-                  {{csrf_field()}}
-                    <div class="col-sm-4">
-                      <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                        <button type="submit" class="btn btn-default"><i class="fas fa-download"></i></button>
-                          <div >
-                          <select class="form-control" name="Tahun">
-                          @foreach($das as $dtj)
-                                <option > {{  $dtj->tahun_pengadaan  }}</option>
-                            @endforeach
-                            </select>
-                          </div>
-                        </div>
-                        <!-- /btn-group -->
-                      </div>
-                    </div>
-                </form>
-          </div><!-- /.col -->
 
                 
             

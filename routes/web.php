@@ -31,7 +31,7 @@ Route::group(['prefix'=>'sarpras','middleware'=>'akses.sarpras'], function() { /
     Route::get('/home/aset/hapus/{id}','SarprasController@deleteaset'); // hapus aset
     Route::get('/home/aset/tambah','SarprasController@asetform')->name('sarpras-aset-form'); //form tambah aset
     Route::post('/home/aset/tambah','SarprasController@asettambah'); //tambah aset
-    Route::get('/home/aset/print', 'SarprasController@printaset')->name('print-aset'); //daftar aset
+    Route::get('/home/aset/print', 'SarprasController@printaset')->name('print-aset'); //print aset
 
     Route::get('/home/ruang', 'SarprasController@ruang')->name('sarpras-ruang');
     Route::get('/home/ruang/edit/{id}','SarprasController@formupdateruang'); //passing id edit ruang
@@ -56,11 +56,13 @@ Route::group(['prefix'=>'sarpras','middleware'=>'akses.sarpras'], function() { /
     Route::get('/home/perbaikan/aset/tambah/{id}','SarprasController@perbaikanform'); //passing id tambah perbaikan
     Route::get('/home/perbaikan/aset/tambah','SarprasController@perbaikanform')->name('sarpras-perbaikan-form'); //form tambah perbaikan
     Route::post('/home/perbaikan/aset/tambah','SarprasController@perbaikantambah'); //tambah perbaikan
+    Route::get('/home/perbaikan/print', 'SarprasController@printperbaikan')->name('print-perbaikan'); //print perbaikan
     
     Route::get('/home/kebutuhan', 'SarprasController@kebutuhan')->name('sarpras-kebutuhan'); //daftar kebutuhan
     Route::get('/home/kebutuhan/detail/{id}', 'SarprasController@detailkebutuhan'); //detail kebutuhan
     Route::get('/home/kebutuhan/tambah','SarprasController@kebutuhanform')->name('sarpras-kebutuhan-form'); //form tambah kebutuhan
     Route::post('/home/kebutuhan/tambah','SarprasController@kebutuhantambah'); //tambah kebutuhan
+    Route::get('/home/kebutuhan/print', 'SarprasController@printkebutuhan')->name('print-kebutuhan'); //print kebutuhan
 
 });
 
@@ -81,6 +83,7 @@ Route::group(['prefix'=>'keuangan','middleware'=>'akses.keuangan'], function() {
 
     Route::get('/home/kebutuhan', 'KeuanganController@kebutuhan')->name('keuangan-kebutuhan'); //daftar kebutuhan
     Route::get('/home/kebutuhan/detail/{id}', 'KeuanganController@detailkebutuhan'); //detail kebutuhan
+    Route::get('/home/kebutuhan/print', 'KeuanganController@printkebutuhan')->name('keuangan-print-kebutuhan'); //print kebutuhan
 
 });
 
@@ -94,6 +97,7 @@ Route::group(['prefix'=>'unitkerja','middleware'=>'akses.unitkerja'], function()
     Route::get('/home/perbaikan/aset/tambah/{id}','UnitkerjaController@perbaikanform'); //passing id tambah perbaikan
     Route::get('/home/perbaikan/aset/tambah','UnitkerjaController@perbaikanform')->name('unitkerja-perbaikan-form'); //form tambah perbaikan
     Route::post('/home/perbaikan/aset/tambah','UnitkerjaController@perbaikantambah'); //tambah perbaikan
+    Route::get('/home/perbaikan/print', 'UnitkerjaController@printperbaikan')->name('unitkerja-print-perbaikan'); //print perbaikan
 
 });
 

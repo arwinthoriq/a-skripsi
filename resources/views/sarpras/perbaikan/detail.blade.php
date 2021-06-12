@@ -57,7 +57,7 @@
                     <td>{{ $data->aset->jenis->nama}}</td>
                     <tr>
                     <td><b class="d-block">Tanggal</b></td>
-                    <td>{{ date("d F Y", strtotime($data->created_at)) }}</td>
+                    <td>{{ date("d-m-Y", strtotime($data->created_at)) }}</td>
                     <tr>
                     <td><b class="d-block">Keterangan</b></td>
                     <td>{{ $data->keterangan}}</td>

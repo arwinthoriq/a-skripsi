@@ -55,25 +55,25 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                           <label for="text-input" class=" form-control-label">Jumlah</label>
-                          <input type="text"  name="jumlah" value="{{ $data->jumlah}}" class="form-control" required>
+                          <input type="numeric"  name="jumlah" value="{{ $data->jumlah}}" class="form-control" required>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
                           <label for="text-input" class=" form-control-label">Tahun</label>
-                          <input type="text"  name="tahun_pengadaan" value="{{ $data->tahun_pengadaan}}" class="form-control" required>
+                          <input type="numeric"  name="tahun_pengadaan" value="{{ $data->tahun_pengadaan}}" class="form-control" required>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
-                          <label for="text-input" class=" form-control-label">Harga</label>
-                          <input type="text"  name="harga" value="{{ $data->harga}}"  class="form-control" required>
+                          <label for="text-input" class=" form-control-label">Harga </label>
+                          <input type="numeric"  name="harga" value="{{ $data->harga }}"  class="form-control" required>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
                           <label for="text-input" class=" form-control-label">Total Harga</label>
-                          <input type="text"  name="total_harga" value="{{ $data->total_harga}}"  class="form-control" required>
+                          <input type="numeric"  name="total_harga" value="{{ $data->total_harga}}"  class="form-control" required>
                       </div>
                     </div>
                     <div class="col-sm-6">
