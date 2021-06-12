@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+
 
 class LoginController extends Controller
 {
@@ -25,7 +27,17 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+  //  protected $redirectTo = '/';
+
+    protected function authenticated(Request $request, $user) {
+        if ($user->akses == 'sarpras') {
+            return redirect()->route('sarpras-home');
+        } elseif ($user->akses == 'keuangan') {
+            return redirect()->route('keuangan-home');
+        } elseif ($user->akses == 'unitkerja') {
+            return redirect()->route('unitkerja-home');
+        }
+    }
 
     
    

@@ -58,8 +58,9 @@ class KeuanganController extends Controller
     // menampilkan aset
     public function Aset(Request $req)
     {
+        $das = Aset::distinct()->get('tahun_pengadaan'); //solved
         $data = Aset::get();
-        return view('keuangan.aset.aset',['data'=>$data]);
+        return view('keuangan.aset.aset',compact('data','das'));
     }
     public function detailaset($id){ 
         try{
@@ -69,6 +70,21 @@ class KeuanganController extends Controller
         }catch (DecryptException $e) {
             return abort(404);
         }
+    }
+    public function printaset(Request $req)
+    {
+        $this->validate($req, [
+            'Tahun'=>'required|regex:/^[0-9]{4}$/',
+        ]);
+        $data = Aset::where('tahun_pengadaan','=', $req->Tahun)->get();
+       if( $data){
+            $dth = $req->Tahun;
+            $pdf = PDF::loadview('keuangan.aset.print',compact( 'data', 'dth'));
+            return $pdf->download('laporan-aset.pdf');
+            // return $pdf->stream();
+       } else{
+           return back();
+       }
     }
 
 

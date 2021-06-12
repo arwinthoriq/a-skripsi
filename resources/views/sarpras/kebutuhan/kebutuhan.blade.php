@@ -25,7 +25,7 @@
                 <form role="form" action="{{ route('print-kebutuhan') }}" method="GET" enctype="multipart/form-data">
                   {{csrf_field()}}
                         <div class="input-group-prepend">
-                        <button type="submit" class="btn btn-default"><i class="fas fa-download"></i></button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-download"></i></button>
                           <select class="form-control" name="Tahun">
                           @foreach($das as $dtj)
                                 <option > {{  $dtj->tahun  }}</option>

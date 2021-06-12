@@ -17,7 +17,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::group(['prefix'=>'sarpras','middleware'=>'akses.sarpras'], function() { //admin
     //Route::get('/', 'HomeController@index')->name('home');
-    Route::get('/home/dashboard', 'SarprasController@dashboard')->name('sarpras-home'); //dashboard
+    Route::get('/home', 'SarprasController@dashboard')->name('sarpras-home'); //dashboard
 
     Route::get('/home/user', 'SarprasController@user')->name('sarpras-user');
     Route::get('/home/user/tambah','SarprasController@userform')->name('sarpras-user-form'); //form tambah user
@@ -72,6 +72,7 @@ Route::group(['prefix'=>'keuangan','middleware'=>'akses.keuangan'], function() {
 
     Route::get('/home/aset', 'KeuanganController@aset')->name('keuangan-aset'); //daftar aset
     Route::get('/home/aset/detail/{id}', 'KeuanganController@detailaset'); //detail aset
+    Route::get('/home/aset/print', 'KeuanganController@printaset')->name('keuangan-print-aset'); //print aset
     
     Route::get('/home/kebutuhan/status/{id}', 'KeuanganController@kebutuhanformstatusupdate'); //passing id status kebutuhan
     Route::get('/home/kebutuhan/status', 'KeuanganController@kebutuhanformstatusupdate')->name('keuangan-kebutuhan-status'); //form edit status kebutuhan

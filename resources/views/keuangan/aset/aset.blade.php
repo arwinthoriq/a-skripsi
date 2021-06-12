@@ -7,8 +7,32 @@
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
+
+
           <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-left">
+            <li >
+              <div >
+                <form role="form" action="{{ route('keuangan-print-aset') }}" method="GET" enctype="multipart/form-data">
+                  {{csrf_field()}}
+                        <div class="input-group-prepend">
+                        <button type="submit" class="btn btn-success">  <i class="fas fa-download"></i>  </button>
+                          <select class="form-control" name="Tahun">
+                          @foreach($das as $dtj)
+                                <option > {{  $dtj->tahun_pengadaan  }}</option>
+                            @endforeach
+                            </select>
+                        </div>
+                        <!-- /btn-group -->
+                </form>
+              </div>
+            </li>
+          </ol>
+          <!--  <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('print-aset') }}" target="_blank">Print </a> </h3>  -->
           </div><!-- /.col -->
+
+
+
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('keuangan-home') }}">Home</a></li>
