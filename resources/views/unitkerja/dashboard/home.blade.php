@@ -11,8 +11,8 @@
             <!-- small box -->
             <div class="small-box bg-primary">
               <div class="inner">
-                <h3>{{ $aset->count() }}</h3>
-                <p>Aset</p>
+                <h3>{{ $disetujui->count() }}</h3>
+                <p>Disetujui</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
@@ -23,11 +23,11 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-success">
+            <div class="small-box bg-secondary">
               <div class="inner">
-                <h3>{{ $ruang->count() }}</h3>
+                <h3>{{ $menunggu->count() }}</h3>
 
-                <p>Ruang</p>
+                <p>Menunggu</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -40,9 +40,9 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>{{ $jenis->count() }}</h3>
+                <h3>{{ $proses->count() }}</h3>
 
-                <p>Jenis</p>
+                <p>Proses</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
@@ -55,9 +55,9 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>{{ $perbaikan->count() }}</h3>
+                <h3>{{ $ditolak->count() }}</h3>
 
-                <p>Kebutuhan</p>
+                <p>Ditolak</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
@@ -98,61 +98,6 @@
           </div>
         </div>
 
-        <div class="row"> <!-- row -->
-          
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-header bg-info">
-                <h3 class="card-title">Perbaikan</h3>
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body p-0">
-                <table class="table">
-                  <thead>                  
-                    <tr>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Status</td>
-                      <td><h6 class="badge bg-secondary">Menunggu</h6></td>
-                      <td><span >{{ $menunggu->count() }}</span></td>
-                    </tr>
-                    <tr>
-                      <td>Status</td>
-                      <td><h6 class="badge bg-primary">Disetujui</h6></td>
-                      <td><span >{{ $disetujui->count() }}</span></td>
-                    </tr>
-                    <tr>
-                      <td>Status</td>
-                      <td><h6 class="badge bg-danger">Ditolak</h6></td>
-                      <td><span >{{ $ditolak->count() }}</span></td>
-                    </tr>
-                    <tr>
-                      <td>Status</td>
-                      <td><h6 class="badge bg-warning">Proses</h6></td>
-                      <td><span >{{ $proses->count() }}</span></td>
-                    </tr>
-                    <tr>
-                      <td>Status</td>
-                      <td><h6 class="badge bg-success">Selesai</h6></td>
-                      <td><span >{{ $selesai->count() }}</span></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer clearfix">
-              </div>
-            </div>
-            <!-- /.card -->
-          </div>
-        </div>  <!-- /.row -->
 
 
       </div>  <!-- /.container-fluid -->

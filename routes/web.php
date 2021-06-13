@@ -22,6 +22,7 @@ Route::group(['prefix'=>'sarpras','middleware'=>'akses.sarpras'], function() { /
     Route::get('/home/user', 'SarprasController@user')->name('sarpras-user');
     Route::get('/home/user/tambah','SarprasController@userform')->name('sarpras-user-form'); //form tambah user
     Route::post('/home/user/tambah','SarprasController@usertambah'); //tambah user
+    Route::get('/home/user/hapus/{id}','SarprasController@deleteuser'); // hapus aset
 
     Route::get('/home/aset', 'SarprasController@aset')->name('sarpras-aset'); //daftar aset
     Route::get('/home/aset/detail/{id}', 'SarprasController@detailaset'); //detail aset
@@ -99,6 +100,7 @@ Route::group(['prefix'=>'unitkerja','middleware'=>'akses.unitkerja'], function()
     Route::get('/home/perbaikan/aset/tambah','UnitkerjaController@perbaikanform')->name('unitkerja-perbaikan-form'); //form tambah perbaikan
     Route::post('/home/perbaikan/aset/tambah','UnitkerjaController@perbaikantambah'); //tambah perbaikan
     Route::get('/home/perbaikan/print', 'UnitkerjaController@printperbaikan')->name('unitkerja-print-perbaikan'); //print perbaikan
+    Route::get('/home/perbaikan/hapus/{id}','UnitkerjaController@deleteperbaikan'); // hapus perbaikan
 
 });
 

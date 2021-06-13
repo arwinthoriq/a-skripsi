@@ -14,7 +14,7 @@
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('unitkerja-home') }}">Home</a></li>
               <li class="breadcrumb-item"><a href="{{ route('unitkerja-perbaikan') }}">Perbaikan</a></li>
-              <li class="breadcrumb-item">Unit Kerja</li>
+              <li class="breadcrumb-item">Aset</li>
             </ol>
           </div>
         </div><!-- /.row -->

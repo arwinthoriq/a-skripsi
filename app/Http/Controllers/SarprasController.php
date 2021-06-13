@@ -93,6 +93,16 @@ class SarprasController extends Controller
         ]);
         return redirect()->route('sarpras-user');
     }
+    public function deleteuser($id)
+    {
+       try{
+          $idi = Crypt::decrypt($id);
+          User::find($idi)->delete();
+          return redirect()->route('sarpras-user');
+       }catch (DecryptException $e) {
+          return abort(404);
+       }
+    }
     
 
 

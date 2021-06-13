@@ -28,13 +28,16 @@ class UnitkerjaController extends Controller
         $ruang = Ruang::select('id');
         $jenis = Jenis::select('id');
         $user = User::select('id');
-        $perbaikan = Perbaikan::select('id');
-        $menunggu = Perbaikan::select('id')->where('status', '=', 'menunggu');
-        $disetujui = Perbaikan::select('id')->where('status', '=', 'disetujui');
-        $ditolak = Perbaikan::select('id')->where('status', '=', 'ditolak');
-        $proses = Perbaikan::select('id')->where('status', '=', 'proses');
-        $selesai = Perbaikan::select('id')->where('status', '=', 'selesai');
-        $belumselesai = Perbaikan::select('id')->where('status', '!=', 'selesai')->where('status', '!=', 'ditolak');
+
+        $perbaikan = Perbaikan::select('id')->where(['user_id' => auth()->user()->id])->get();
+        
+        $menunggu = Perbaikan::select('id')->where('status', '=', 'menunggu')->where(['user_id' => auth()->user()->id])->get();
+        $disetujui = Perbaikan::select('id')->where('status', '=', 'disetujui')->where(['user_id' => auth()->user()->id])->get();
+        $ditolak = Perbaikan::select('id')->where('status', '=', 'ditolak')->where(['user_id' => auth()->user()->id])->get();
+        $proses = Perbaikan::select('id')->where('status', '=', 'proses')->where(['user_id' => auth()->user()->id])->get();
+        $selesai = Perbaikan::select('id')->where('status', '=', 'selesai')->where(['user_id' => auth()->user()->id])->get();
+
+        $belumselesai = Perbaikan::select('id')->where('status', '!=', 'selesai')->where('status', '!=', 'ditolak')->where(['user_id' => auth()->user()->id])->get();
         return view('unitkerja.dashboard.home', compact('aset', 'ruang', 'jenis', 'user', 
         'perbaikan', 'menunggu', 'disetujui', 'ditolak', 'proses', 'selesai', 'belumselesai'));
     }
