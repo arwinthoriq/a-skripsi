@@ -98,6 +98,7 @@ class SarprasController extends Controller
        try{
           $idi = Crypt::decrypt($id);
           User::find($idi)->delete();
+         // Aset::find($idi)->where('user_id', $idi)->delete();
           return redirect()->route('sarpras-user');
        }catch (DecryptException $e) {
           return abort(404);
@@ -179,7 +180,8 @@ class SarprasController extends Controller
        try{
           $idi = Crypt::decrypt($id);
           Aset::find($idi)->delete();
-          return redirect()->route('sarpras-aset');
+          return back();
+         // return redirect()->route('sarpras-aset');
        }catch (DecryptException $e) {
           return abort(404);
        }
@@ -489,40 +491,40 @@ class SarprasController extends Controller
            return abort(404);
         }
      }
-     public function kebutuhanform()
-     { 
-        $datar = Ruang::get(); // untuk menampilkan data ruang
-        $dataj = Jenis::get(); // untuk menampilkan data jenis
-        return view('sarpras.kebutuhan.tambah',compact( 'datar','dataj'));
-     }
-     public function kebutuhantambah(Request $request){ 
-         $this->validate($request, [
-            'ruang_id' => '',
-            'jenis_id' => '',
-            'nama'=>'required|regex:/^[a-zA-Z ]{2,50}$/',
-            'tahun'=>'required|regex:/^[0-9]{1,4}$/',
-            'keterangan'=>'required|regex:/^[a-zA-Z0-9., ]{3,100}$/',
-            'merek'=>'required|regex:/^[a-zA-Z0-9 ]{1,50}$/',
-            'jumlah'=>'required|regex:/^[0-9]{1,10}$/',
-            'harga'=>'required|regex:/^[0-9,]{1,20}$/',
-            'total_harga'=>'required|regex:/^[0-9,]{1,20}$/',
-         ]);
-         $idr = Crypt::decrypt($request->ruang_id);
-         $idj = Crypt::decrypt($request->jenis_id);
-         Kebutuhan::create([
-             'user_id' => Auth()->id(),
-             'ruang_id' => $idr,
-             'jenis_id' => $idj,
-             'nama' => $request->nama,
-             'tahun' => $request->tahun,
-             'keterangan' => $request->keterangan,
-             'merek' => $request->merek,
-             'jumlah' => $request->jumlah,
-             'harga' => $request->harga,
-             'total_harga' => $request->total_harga,
-         ]);
-         return redirect()->route('sarpras-kebutuhan');
-     }
+     //public function kebutuhanform()
+     //{ 
+       // $datar = Ruang::get(); // untuk menampilkan data ruang
+        //$dataj = Jenis::get(); // untuk menampilkan data jenis
+        //return view('sarpras.kebutuhan.tambah',compact( 'datar','dataj'));
+     //}
+     //public function kebutuhantambah(Request $request){ 
+       //  $this->validate($request, [
+         //   'ruang_id' => '',
+           // 'jenis_id' => '',
+            //'nama'=>'required|regex:/^[a-zA-Z ]{2,50}$/',
+            //'tahun'=>'required|regex:/^[0-9]{1,4}$/',
+            //'keterangan'=>'required|regex:/^[a-zA-Z0-9., ]{3,100}$/',
+            //'merek'=>'required|regex:/^[a-zA-Z0-9 ]{1,50}$/',
+            //'jumlah'=>'required|regex:/^[0-9]{1,10}$/',
+            //'harga'=>'required|regex:/^[0-9,]{1,20}$/',
+            //'total_harga'=>'required|regex:/^[0-9,]{1,20}$/',
+         //]);
+         //$idr = Crypt::decrypt($request->ruang_id);
+         //$idj = Crypt::decrypt($request->jenis_id);
+         //Kebutuhan::create([
+             //'user_id' => Auth()->id(),
+             //'ruang_id' => $idr,
+             //'jenis_id' => $idj,
+             //'nama' => $request->nama,
+             //'tahun' => $request->tahun,
+             //'keterangan' => $request->keterangan,
+             //'merek' => $request->merek,
+             //'jumlah' => $request->jumlah,
+             //'harga' => $request->harga,
+             //'total_harga' => $request->total_harga,
+         //]);
+         //return redirect()->route('sarpras-kebutuhan');
+    // }
      public function printkebutuhan(Request $req)
      {
          $this->validate($req, [

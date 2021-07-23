@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Perbaikan extends Model
 {
-    protected $table = 'perbaikan';
+    protected $table = 'perawatan'; //perbaikan
     protected $guarded = [];
    // public function getDates() {
      // return array('created_at', 'updated_at', 'date_time_field');

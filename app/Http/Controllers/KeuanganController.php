@@ -267,6 +267,121 @@ class KeuanganController extends Controller
            return back();
        }
     }
+
+
+
+
+
+
+
+
+
+
+
+    // menampilkan perbaikan
+    public function perbaikan(Request $req)
+    {
+        $dp = Perbaikan::selectRaw('YEAR(created_at) as year')->distinct()->get();
+        $g = $dp->pluck('year');
+        $data = Perbaikan::get();
+        return view('keuangan.perbaikan.perbaikan',compact( 'data', 'g'));
+    }
+    public function perbaikanaset(Request $req)
+    {
+        $da = Perbaikan::select('aset_id')->where('status', '!=', 'selesai',)->where('status', '!=', 'ditolak',)->get();
+        $data = Aset::whereNotIn('id', $da)->get(); //pilih data aset dimana id tidak sama dengan aset_id(dimana status nya bukan selesai dan bukan ditolak)
+        return view('keuangan.perbaikan.aset',compact( 'data'));
+    }
+    public function detailperbaikan($id){ 
+        try{
+            $id = Crypt::decrypt($id);
+            $data= Perbaikan::findOrFail($id);
+            return view('keuangan.perbaikan.detail',compact('data'));
+        }catch (DecryptException $e) {
+            return abort(404);
+        }
+    }
+    public function deleteperbaikan($id) // BELUM  SAYA  GANTI
+    {
+        try{
+            $idi = Crypt::decrypt($id);
+            Perbaikan::find($idi)->delete();
+            return redirect()->route('keuangan-perbaikan');
+        }catch (DecryptException $e) {
+            return abort(404);
+        }
+    }
+    //public function perbaikanform($id){ 
+        //try{
+           // $id = Crypt::decrypt($id);
+           // $data= Aset::findOrFail($id);
+           // $id_plaintext = $data->id;
+           // Session::put('id_session', $id_plaintext);
+         //   return view('keuangan.perbaikan.tambah',compact('data'));
+       // }catch (DecryptException $e) {
+         //   return abort(404);
+       // }
+    ///}
+    //public function perbaikantambah(Request $request){ 
+       // $this->validate($request, [
+            //'user_id' =>'',
+           // 'aset_id' =>'',
+          //  'keterangan'=>'required|regex:/^[a-zA-Z0-9., ]{3,100}$/',
+        //]);
+        //Perbaikan::create([
+            //'user_id' => Auth()->id(),
+           // 'aset_id' => Session::get('id_session'),
+         //   'keterangan' => $request->keterangan,
+       // ]);
+       // return redirect()->route('keuangan-perbaikan');
+    //}
+    public function perbaikanformstatusupdate($id){ 
+        try{
+            $id = Crypt::decrypt($id);
+            $data= Perbaikan::findOrFail($id);
+            $status_perbaikan = $data->id;
+            Session::put('status_perbaikan', $status_perbaikan);
+            return view('keuangan.perbaikan.status',compact('data'));
+        }catch (DecryptException $e) {
+            return abort(404);
+        }
+    }
+    public function perbaikanstatusupdate(Request $req) // ERROR 
+    {
+            $ids = Session::get('status_perbaikan');
+            \Validator::make($req->all(), 
+            [
+                'status'=>'',
+            ])->validate();
+                $field = [
+                    'status'=>$req->status,
+                ];
+            $result = Perbaikan::where('id', $ids)->update($field);
+            if($result){
+            // Session::flash('sukses', 'Data Berhasil Disimpan');
+                return back();
+            } else{
+            // Session::flash('gagal', 'Data Gagal Disimpan');
+                return back();
+            }
+    }
+    public function printperbaikan(Request $req)  // mengambil Y pada kolom created_at untuk di ambil data nya dan di print
+    {
+        $this->validate($req, [
+            'Tahun'=>'required|regex:/^[0-9]{4}$/',
+        ]);
+        $data = Perbaikan::whereYear('created_at','=', $req->Tahun)->get();
+        if( $data){
+                $j = Perbaikan::select('id')->whereYear('created_at','=', $req->Tahun)->get();
+                $dth = $req->Tahun;
+                $pdf = PDF::loadview('keuangan.perbaikan.print',compact( 'data', 'dth', 'j'));
+                return $pdf->download('laporan-perbaikan.pdf');
+                // return $pdf->stream();
+        } else{
+            return back();
+        }
+    }
+
      
  
 

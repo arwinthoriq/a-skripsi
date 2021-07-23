@@ -46,7 +46,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('unitkerja-home') }}">Home</a></li>
-              <li class="breadcrumb-item">Perbaikan</li>
+              <li class="breadcrumb-item">Perawatan</li>
             </ol>
           </div>
         </div><!-- /.row -->
@@ -84,12 +84,12 @@
                                             <td>{{ date("d-m-Y", strtotime($dt->created_at)) }}</td>
                                             <td>{{ $dt->status}}</td>
                                             <td>
-                                                <a href= "{{ url('/unitkerja/home/perbaikan/detail',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-success">Detail</a>
+                                                <a href= "{{ url('/unitkerja/home/perawatan/detail',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-success">Detail</a>
                                             </td>
                                             @if($dt->status == 'menunggu')
                                             <td>
                                                 
-                                                <a href= "{{ url('/unitkerja/home/perbaikan/hapus',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">Hapus</a>
+                                                <a href= "{{ url('/unitkerja/home/perawatan/hapus',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">Hapus</a>
                                                           <div class="modal fade" id="modal-default">
                                                             <div class="modal-dialog">
                                                               <div class="modal-content">
@@ -104,7 +104,7 @@
                                                                 </div>
                                                                 <div class="modal-footer justify-content-between">
                                                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                                  <a href="{{ url('/unitkerja/home/perbaikan/hapus',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-danger">Hapus</a>
+                                                                  <a href="{{ url('/unitkerja/home/perawatan/hapus',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-danger">Hapus</a>
                                                                 </div>
                                                               </div>
                                                               <!-- /.modal-content -->

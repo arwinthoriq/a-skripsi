@@ -30,7 +30,7 @@
     <div class="row">
       <div class="col-12">
         <h2 class="page-header">  
-          <center>Data Perbaikan Dinas Pendidikan Kabupaten Blora <br> Tahun {{ $dth }}</center>
+          <center>Data Pengadaan Dinas Pendidikan Kabupaten Blora <br> Tahun {{ $dth }}</center>
         </h2>
       </div>
       <!-- /.col -->
@@ -56,11 +56,14 @@
                                     <tr>
                                     <th>No</th>
                                         <th>Nama</th>
+                                        <th>Tahun</th>
                                         <th>Merek</th>
                                         <th>Jenis</th>
                                         <th>Ruang</th>
+                                        <th>Jumlah</th>
+                                        <th>Harga</th>
+                                        <th>Total Harga</th>
                                         <th>Status</th>
-                                        <th>Tanggal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,12 +71,15 @@
                                         @foreach($data as $dt)
                                         <tr>
                                         <td>{{ $no }}</td>
-                                            <td>{{ $dt->aset->nama}}</td>
-                                            <td>{{ $dt->aset->merek}}</td>
-                                            <td>{{ $dt->aset->jenis->nama}}</td>
-                                            <td>{{ $dt->aset->ruang->nama}}</td>
+                                            <td>{{ $dt->nama}}</td>
+                                            <td>{{ $dt->tahun}}</td>
+                                            <td>{{ $dt->merek}}</td>
+                                            <td>{{ $dt->jenis->nama}}</td>
+                                            <td>{{ $dt->ruang->nama}}</td>
+                                            <td>{{ $dt->jumlah}}</td>
+                                            <td>{{ number_format($dt->harga, 0, "," , ".")  }}</td>
+                                            <td>{{ number_format($dt->total_harga, 0, "," , ".")  }}</td>
                                             <td>{{ $dt->status}}</td>
-                                            <td>{{  date("d-m-Y", strtotime($dt->created_at))   }}</td>
                                         </tr>
                                         <?php $no++; ?>    
                                         @endforeach
@@ -86,7 +92,9 @@
 
     <div class="row">
     <p ><b>Sub Total</b><br>
-    Data Perbaikan : {{ $j->count()}}
+        Jumlah : {{ $data->sum('jumlah')  }} <br>
+        <?php $total_harga = $data->sum('total_harga')  ; ?>
+       Total Harga : Rp {{  number_format($total_harga, 0, "," , "." )  }}</p>
     </div>
     <!-- /.row -->
   </section>

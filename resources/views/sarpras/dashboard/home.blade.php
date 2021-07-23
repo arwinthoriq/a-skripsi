@@ -76,8 +76,8 @@
                     <div class="col-sm-3 col-6">
                       <div class="description-block border-right">
                         <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> {{ $perbaikan->count() }}</span>
-                        <h5 class="description-header">PERBAIKAN</h5>
-                        <span class="description-text">DATA PERBAIKAN</span>
+                        <h5 class="description-header">PERAWATAN</h5>
+                        <span class="description-text">DATA PERAWATAN</span>
                       </div>
                       <!-- /.description-block -->
                     </div>
@@ -85,7 +85,7 @@
                     <div class="col-sm-3 col-6">
                       <div class="description-block border-right">
                         <span class="description-percentage text-secondary"><i class="fas fa-caret-left"></i> {{ $belumselesai->count() }}</span>
-                        <h5 class="description-header">PERBAIKAN</h5>
+                        <h5 class="description-header">PERAWATAN</h5>
                         <span class="description-text">BELUM SELESAI</span>
                       </div>
                       <!-- /.description-block -->
@@ -119,7 +119,7 @@
           <div class="col-md-6">
             <div class="card">
               <div class="card-header bg-secondary">
-                <h3 class="card-title">Perbaikan</h3>
+                <h3 class="card-title">Perawatan</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>

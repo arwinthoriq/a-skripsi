@@ -8,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-          <h5 class="m-0 "> Tambah Perbaikan </h5>
+          <h5 class="m-0 "> Tambah Perawatan </h5>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('sarpras-home') }}">Home</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('sarpras-perbaikan') }}">Perbaikan</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('sarpras-perbaikan') }}">Perawatan</a></li>
               <li class="breadcrumb-item"><a href="{{ route('sarpras-perbaikan-aset') }}">Aset</a></li>
               <li class="breadcrumb-item">Tambah</li>
             </ol>

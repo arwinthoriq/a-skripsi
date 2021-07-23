@@ -8,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-          <h5 class="m-0 "> Detail Perbaikan </h5>
+          <h5 class="m-0 "> Detail Perawatan </h5>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('sarpras-home') }}">Home</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('sarpras-perbaikan') }}">Perbaikan</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('sarpras-perbaikan') }}">Perawatan</a></li>
               <li class="breadcrumb-item">Detail</li>
             </ol>
           </div>
@@ -30,7 +30,7 @@
           <div class="col-12">
             <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">Detail Perbaikan</h3>
+                <h3 class="card-title">Detail Perawatan</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">

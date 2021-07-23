@@ -77,8 +77,8 @@
                     <div class="col-6">
                       <div class="description-block border-right">
                         <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> {{ $perbaikan->count() }}</span>
-                        <h5 class="description-header">PERBAIKAN</h5>
-                        <span class="description-text">DATA PERBAIKAN</span>
+                        <h5 class="description-header">KEBUTUHAN</h5>
+                        <span class="description-text">DATA PERAWATAN</span>
                       </div>
                       <!-- /.description-block -->
                     </div>
@@ -86,7 +86,7 @@
                     <div class=" col-6">
                       <div class="description-block">
                         <span class="description-percentage text-secondary"><i class="fas fa-caret-left"></i> {{ $belumselesai->count() }}</span>
-                        <h5 class="description-header">PERBAIKAN</h5>
+                        <h5 class="description-header">KEBUTUHAN</h5>
                         <span class="description-text">BELUM SELESAI</span>
                       </div>
                       <!-- /.description-block -->

@@ -11,11 +11,7 @@
 
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-left">
-            <li >
-              <div class="col-sm-6">
-                <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('sarpras-kebutuhan-form') }}">Tambah </a> </h3>
-              </div>
-            </li>
+            
             <li >
               <div class="col-sm-6">
               </div>

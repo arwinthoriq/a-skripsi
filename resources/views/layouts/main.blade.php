@@ -111,7 +111,7 @@
           KEUANGAN
           @endif
           @if(Auth::user()->akses == 'unitkerja')
-          UNIT KERJA
+          UMPEG
           @endif
       </span>
       </center>
@@ -153,7 +153,7 @@
           <li class="nav-item">
             <a href="{{route('sarpras-perbaikan')}}" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
-              <p> Perbaikan </p>
+              <p> Perawatan </p>
             </a>
           </li>
           <li class="nav-item">
@@ -183,6 +183,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{route('keuangan-perbaikan')}}" class="nav-link">
+              <i class="nav-icon fas fa-cog"></i>
+              <p> Perawatan </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{route('keuangan-kebutuhan')}}" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p> Kebutuhan </p>
@@ -196,10 +202,18 @@
               <p> Dashboard </p>
             </a>
           </li>
+          <!--
           <li class="nav-item">
             <a href="{{route('unitkerja-perbaikan')}}" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
-              <p> Perbaikan </p>
+              <p> Perawatan </p>
+            </a>
+          </li>
+          -->
+          <li class="nav-item">
+            <a href="{{route('unitkerja-kebutuhan')}}" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p> Kebutuhan </p>
             </a>
           </li>
           @endif
