@@ -94,31 +94,6 @@
                                             <td>
                                                 <a href= "{{ url('/sarpras/home/aset/edit',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-warning">Edit</a>
                                             </td>
-                                            <td>
-                                                  <a href="{{ url('/sarpras/home/aset/hapus',['id'=>Crypt::encrypt($dt->id)]) }}"  class="btn btn-danger" data-toggle="modal" data-target="#modal-default">Hapus</a>
-                                                          <div class="modal fade" id="modal-default">
-                                                            <div class="modal-dialog">
-                                                              <div class="modal-content">
-                                                                <div class="modal-header bg-danger">
-                                                                  <h5 class="modal-title">Hapus</h5>
-                                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                  </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                  <center><h6>Data "{{ $dt->nama}}" Akan Dihapus </h6> Apakah Anda Yakin ?</center>
-                                                                </div>
-                                                                <div class="modal-footer justify-content-between">
-                                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                                  <a href="{{ url('/sarpras/home/aset/hapus',['id'=>Crypt::encrypt($dt->id)]) }}"  class="btn btn-danger" data-toggle="modal" data-target="#modal-default">Hapus</a>
-                                                                </div>
-                                                              </div>
-                                                              <!-- /.modal-content -->
-                                                            </div>
-                                                            <!-- /.modal-dialog -->
-                                                          </div>
-                                                          <!-- /.modal -->
-                                            </td> 
                                         </tr>
                                         <?php $no++; ?>    
                                         @endforeach

@@ -45,9 +45,6 @@
                                             <td>
                                                 <a href= "{{ url('/sarpras/home/ruang/edit',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-warning">Edit</a>
                                             </td>
-                                            <td>
-                                                <a href= "{{ url('/sarpras/home/Admin/Managemen/User/Hapus',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-danger">Hapus</a>
-                                            </td>
                                         </tr>
                                         <?php $no++; ?>    
                                         @endforeach

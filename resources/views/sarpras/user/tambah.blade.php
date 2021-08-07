@@ -63,7 +63,7 @@
                           <select class="form-control" name="akses">
                               <option  name="akses" value="sarpras" >Sarana Prasarana</option> 
                               <option  name="akses" value="keuangan" >Keuangan</option> 
-                              <option  name="akses" value="unitkerja" >Unit Kerja</option> 
+                              <option  name="akses" value="unitkerja" >Umum Kepegawaian</option> 
                           </select>
                       </div>
                     </div>

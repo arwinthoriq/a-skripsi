@@ -12,9 +12,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-left">
             <li >
-              <div class="col-sm-6">
-                <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('sarpras-kebutuhan-form') }}">Tambah </a> </h3>
-              </div>
+             
             </li>
             <li >
               <div class="col-sm-6">
@@ -91,7 +89,6 @@
                                             </td>
                                             @if($dt->status == 'ditolak')
                                             <td>
-                                                <a href= "{{ url('/sarpras/home/kebutuhan/hapus',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-danger">Hapus</a>
                                             </td>
                                             @else
                                             <td></td>

@@ -87,7 +87,6 @@
                                             </td>
                                             @if(($dt->status == 'selesai') && ($dt->status == 'ditolak') )
                                             <td>
-                                                <a href= "{{ url('/sarpras/home/aset/hapus',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-danger">Hapus</a>
                                             </td>
                                             @endif
                                         </tr>

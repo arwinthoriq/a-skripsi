@@ -65,11 +65,11 @@
                                 <div class="top-right links">
                                     @auth
                                         @if(Auth::user()->akses == 'sarpras')
-                                            <a href="{{ url('/sarpras/home/dashboard') }}" class="main-btn">Home</a>
+                                            <a href="{{ url('/sarpras/home') }}" class="main-btn">Home</a>
                                         @elseif(Auth::user()->akses == 'keuangan')
-                                            <a href="{{ url('/keuangan/home/dashboard') }}" class="main-btn">Home</a>
+                                            <a href="{{ url('/keuangan/home') }}" class="main-btn">Home</a>
                                         @elseif(Auth::user()->akses == 'unitkerja')
-                                            <a href="{{ url('/unitkerja/home') }}" class="main-btn">Home</a>
+                                            <a href="{{ url('/umpeg/home') }}" class="main-btn">Home</a>
                                         @endif
                                 @else
                                         <a href="{{ route('login') }}" class="main-btn">LOGIN</a>

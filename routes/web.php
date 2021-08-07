@@ -40,6 +40,7 @@ Route::group(['prefix'=>'sarpras','middleware'=>'akses.sarpras'], function() { /
     Route::post('/home/ruang/edit','SarprasController@editupdateruang'); //edit ruang
     Route::get('/home/ruang/tambah','SarprasController@ruangform')->name('sarpras-ruang-form'); //form tambah ruang
     Route::post('/home/ruang/tambah','SarprasController@ruangtambah'); //tambah ruang
+    Route::get('/home/ruang/hapus/{id}','SarprasController@deleteruang');  // hapus ruang
 
     Route::get('/home/jenis', 'SarprasController@jenis')->name('sarpras-jenis');
     Route::get('/home/jenis/edit/{id}','SarprasController@formupdatejenis'); //passing id edit jenis
@@ -47,6 +48,7 @@ Route::group(['prefix'=>'sarpras','middleware'=>'akses.sarpras'], function() { /
     Route::post('/home/jenis/edit','SarprasController@editupdatejenis'); //edit jenis
     Route::get('/home/jenis/tambah','SarprasController@jenisform')->name('sarpras-jenis-form'); //form tambah jenis
     Route::post('/home/jenis/tambah','SarprasController@jenistambah'); //tambah jenis
+    Route::get('/home/jenis/hapus/{id}','SarprasController@deletejenis');  // hapus ruang
 
     Route::get('/home/perawatan', 'SarprasController@perbaikan')->name('sarpras-perbaikan'); //daftar perbaikan
     Route::get('/home/perawatan/detail/{id}', 'SarprasController@detailperbaikan'); //detail perbaikan
@@ -101,7 +103,7 @@ Route::group(['prefix'=>'keuangan','middleware'=>'akses.keuangan'], function() {
 });
 
 
-Route::group(['prefix'=>'unitkerja','middleware'=>'akses.unitkerja'], function() { //admin
+Route::group(['prefix'=>'umpeg','middleware'=>'akses.unitkerja'], function() { //admin
     Route::get('/home', 'UnitkerjaController@dashboard')->name('unitkerja-home'); //dashboard
     
     Route::get('/home/perawatan', 'UnitkerjaController@perbaikan')->name('unitkerja-perbaikan'); //daftar perbaikan

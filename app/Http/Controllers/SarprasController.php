@@ -295,6 +295,17 @@ class SarprasController extends Controller
                 return back();
             }
     }
+    public function deleteruang($id)
+    {
+       try{
+          $idi = Crypt::decrypt($id);
+          Ruang::find($idi)->delete();
+          return back();
+         // return redirect()->route('sarpras-aset');
+       }catch (DecryptException $e) {
+          return abort(404);
+       }
+    }
 
 
 
@@ -348,6 +359,17 @@ class SarprasController extends Controller
             } else{
                 return back();
             }
+    }
+    public function deletejenis($id)
+    {
+       try{
+          $idi = Crypt::decrypt($id);
+          Jenis::find($idi)->delete();
+          return back();
+         // return redirect()->route('sarpras-aset');
+       }catch (DecryptException $e) {
+          return abort(404);
+       }
     }
         
 
