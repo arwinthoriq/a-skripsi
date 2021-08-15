@@ -8,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-          <h5 class="m-0 "> Edit Status Kebutuhan </h5>
+          <h5 class="m-0 "> Edit Status Pengadaan </h5>
 @if($m = session::get('sukses'))
 <div class="alert alert-success alert-block">
     <strong>{{$m}}</strong> 
@@ -20,7 +20,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('keuangan-home') }}">Home</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('keuangan-kebutuhan') }}">kebutuhan</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('keuangan-kebutuhan') }}">Pengadaan</a></li>
               <li class="breadcrumb-item">Status</li>
             </ol>
           </div>
@@ -210,7 +210,7 @@
               @if($data->status == 'proses')
               <div class="col-sm-6">
                       <div class="form-group">
-                        <a href= "{{ url('/keuangan/home/kebutuhan/status/selesai',['id'=>Crypt::encrypt($data->id)]) }} " class="btn btn-success">Ke Halaman Helesai</a>
+                        <a href= "{{ url('/keuangan/home/pengadaan/status/selesai',['id'=>Crypt::encrypt($data->id)]) }} " class="btn btn-success">Ke Halaman Helesai</a>
                       </div>
                     </div>
               @endif

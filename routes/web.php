@@ -61,11 +61,11 @@ Route::group(['prefix'=>'sarpras','middleware'=>'akses.sarpras'], function() { /
     Route::post('/home/perawatan/aset/tambah','SarprasController@perbaikantambah'); //tambah perbaikan
     Route::get('/home/perawatan/print', 'SarprasController@printperbaikan')->name('print-perbaikan'); //print perbaikan
     
-    Route::get('/home/kebutuhan', 'SarprasController@kebutuhan')->name('sarpras-kebutuhan'); //daftar kebutuhan
-    Route::get('/home/kebutuhan/detail/{id}', 'SarprasController@detailkebutuhan'); //detail kebutuhan
+    Route::get('/home/pengadaan', 'SarprasController@kebutuhan')->name('sarpras-kebutuhan'); //daftar kebutuhan
+    Route::get('/home/pengadaan/detail/{id}', 'SarprasController@detailkebutuhan'); //detail kebutuhan
     //Route::get('/home/kebutuhan/tambah','SarprasController@kebutuhanform')->name('sarpras-kebutuhan-form'); //form tambah kebutuhan
     //Route::post('/home/kebutuhan/tambah','SarprasController@kebutuhantambah'); //tambah kebutuhan
-    Route::get('/home/kebutuhan/print', 'SarprasController@printkebutuhan')->name('print-kebutuhan'); //print kebutuhan
+    Route::get('/home/pengadaan/print', 'SarprasController@printkebutuhan')->name('print-kebutuhan'); //print kebutuhan
 
 });
 
@@ -77,17 +77,17 @@ Route::group(['prefix'=>'keuangan','middleware'=>'akses.keuangan'], function() {
     Route::get('/home/aset/detail/{id}', 'KeuanganController@detailaset'); //detail aset
     Route::get('/home/aset/print', 'KeuanganController@printaset')->name('keuangan-print-aset'); //print aset
     
-    Route::get('/home/kebutuhan/status/{id}', 'KeuanganController@kebutuhanformstatusupdate'); //passing id status kebutuhan
-    Route::get('/home/kebutuhan/status', 'KeuanganController@kebutuhanformstatusupdate')->name('keuangan-kebutuhan-status'); //form edit status kebutuhan
-    Route::post('/home/kebutuhan/status', 'KeuanganController@kebutuhanstatusupdate'); //edit status perbaikan
+    Route::get('/home/pengadaan/status/{id}', 'KeuanganController@kebutuhanformstatusupdate'); //passing id status kebutuhan
+    Route::get('/home/pengadaan/status', 'KeuanganController@kebutuhanformstatusupdate')->name('keuangan-kebutuhan-status'); //form edit status kebutuhan
+    Route::post('/home/pengadaan/status', 'KeuanganController@kebutuhanstatusupdate'); //edit status perbaikan
     
-    Route::get('/home/kebutuhan/status/selesai/{id}', 'KeuanganController@kebutuhanformstatusupdateselesai'); //passing id status kebutuhan selesai
-    Route::get('/home/kebutuhan/status/selesai', 'KeuanganController@kebutuhanformstatusupdateselesai')->name('keuangan-kebutuhan-status-selesai'); //form edit status kebutuhan selesai
-    Route::post('/home/kebutuhan/status/selesai', 'KeuanganController@kebutuhanstatusupdateselesai'); //edit status perbaikan selesai
+    Route::get('/home/pengadaan/status/selesai/{id}', 'KeuanganController@kebutuhanformstatusupdateselesai'); //passing id status kebutuhan selesai
+    Route::get('/home/pengadaan/status/selesai', 'KeuanganController@kebutuhanformstatusupdateselesai')->name('keuangan-kebutuhan-status-selesai'); //form edit status kebutuhan selesai
+    Route::post('/home/pengadaan/status/selesai', 'KeuanganController@kebutuhanstatusupdateselesai'); //edit status perbaikan selesai
 
-    Route::get('/home/kebutuhan', 'KeuanganController@kebutuhan')->name('keuangan-kebutuhan'); //daftar kebutuhan
-    Route::get('/home/kebutuhan/detail/{id}', 'KeuanganController@detailkebutuhan'); //detail kebutuhan
-    Route::get('/home/kebutuhan/print', 'KeuanganController@printkebutuhan')->name('keuangan-print-kebutuhan'); //print kebutuhan
+    Route::get('/home/pengadaan', 'KeuanganController@kebutuhan')->name('keuangan-kebutuhan'); //daftar kebutuhan
+    Route::get('/home/pengadaan/detail/{id}', 'KeuanganController@detailkebutuhan'); //detail kebutuhan
+    Route::get('/home/pengadaan/print', 'KeuanganController@printkebutuhan')->name('keuangan-print-kebutuhan'); //print kebutuhan
 
     Route::get('/home/perawatan', 'KeuanganController@perbaikan')->name('keuangan-perbaikan'); //daftar perbaikan
     Route::get('/home/perawatan/detail/{id}', 'KeuanganController@detailperbaikan'); //detail perbaikan
@@ -115,11 +115,11 @@ Route::group(['prefix'=>'umpeg','middleware'=>'akses.unitkerja'], function() { /
     Route::get('/home/perawatan/print', 'UnitkerjaController@printperbaikan')->name('unitkerja-print-perbaikan'); //print perbaikan
     Route::get('/home/perawatan/hapus/{id}','UnitkerjaController@deleteperbaikan'); // hapus perbaikan
 
-    Route::get('/home/kebutuhan', 'UnitkerjaController@kebutuhan')->name('unitkerja-kebutuhan'); //daftar kebutuhan
-    Route::get('/home/kebutuhan/detail/{id}', 'UnitkerjaController@detailkebutuhan'); //detail kebutuhan
-    Route::get('/home/kebutuhan/tambah','UnitkerjaController@kebutuhanform')->name('unitkerja-kebutuhan-form'); //form tambah kebutuhan
-    Route::post('/home/kebutuhan/tambah','UnitkerjaController@kebutuhantambah'); //tambah kebutuhan
-    Route::get('/home/kebutuhan/print', 'UnitkerjaController@printkebutuhan')->name('unitkerja-print-kebutuhan'); //print kebutuhan
+    Route::get('/home/pengadaan', 'UnitkerjaController@kebutuhan')->name('unitkerja-kebutuhan'); //daftar kebutuhan
+    Route::get('/home/pengadaan/detail/{id}', 'UnitkerjaController@detailkebutuhan'); //detail kebutuhan
+    Route::get('/home/pengadaan/tambah','UnitkerjaController@kebutuhanform')->name('unitkerja-kebutuhan-form'); //form tambah kebutuhan
+    Route::post('/home/pengadaan/tambah','UnitkerjaController@kebutuhantambah'); //tambah kebutuhan
+    Route::get('/home/pengadaan/print', 'UnitkerjaController@printkebutuhan')->name('unitkerja-print-kebutuhan'); //print kebutuhan
 
 });
 

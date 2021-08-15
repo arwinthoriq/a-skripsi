@@ -41,7 +41,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('keuangan-home') }}">Home</a></li>
-              <li class="breadcrumb-item">Kebutuhan</li>
+              <li class="breadcrumb-item">Pengadaan</li>
             </ol>
           </div>
         </div><!-- /.row -->
@@ -81,11 +81,11 @@
                                             <td>{{ $dt->jenis->nama}}</td>
                                             <td>{{ $dt->status}}</td>
                                             <td>
-                                                <a href= "{{ url('/keuangan/home/kebutuhan/detail',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-success">Detail</a>
+                                                <a href= "{{ url('/keuangan/home/pengadaan/detail',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-success">Detail</a>
                                             </td>
                                             @if(($dt->status != 'selesai') && ($dt->status != 'ditolak') )
                                             <td>
-                                                <a href= "{{ url('/keuangan/home/kebutuhan/status',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-block bg-gradient-warning">Edit Status</a>
+                                                <a href= "{{ url('/keuangan/home/pengadaan/status',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-block bg-gradient-warning">Edit Status</a>
                                             </td>
                                             @else
                                             <td>

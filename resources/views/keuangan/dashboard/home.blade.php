@@ -43,7 +43,7 @@
               <div class="inner">
                 <h3>{{ $kebutuhan->count() }}</h3>
 
-                <p>Kebutuhan</p>
+                <p>Pengadaan</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
@@ -82,7 +82,7 @@
                     <div class="col-sm-3 col-6">
                       <div class="description-block border-right">
                         <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> {{ $kebutuhan->count() }}</span>
-                        <h5 class="description-header">KEBUTUHAN</h5>
+                        <h5 class="description-header">PENGADAAN</h5>
                         <span class="description-text">DATA KEBUTUHAN</span>
                       </div>
                       <!-- /.description-block -->
@@ -91,7 +91,7 @@
                     <div class="col-sm-3 col-6">
                       <div class="description-block">
                         <span class="description-percentage text-secondary"><i class="fas fa-caret-left"></i> {{ $kebutuhan_belumselesai->count() }}</span>
-                        <h5 class="description-header">KEBUTUHAN</h5>
+                        <h5 class="description-header">PENGADAAN</h5>
                         <span class="description-text">BELUM SELESAI</span>
                       </div>
                       <!-- /.description-block -->
@@ -165,7 +165,7 @@
           <div class="col-md-6">
             <div class="card">
               <div class="card-header bg-warning">
-                <h3 class="card-title">Kebutuhan</h3>
+                <h3 class="card-title">Pengadaan</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>

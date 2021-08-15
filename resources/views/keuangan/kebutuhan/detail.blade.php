@@ -8,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-          <h5 class="m-0 "> Detail Kebutuhan </h5>
+          <h5 class="m-0 "> Detail Pengadaan </h5>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('keuangan-home') }}">Home</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('keuangan-kebutuhan') }}">Kebutuhan</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('keuangan-kebutuhan') }}">Pengadaan</a></li>
               <li class="breadcrumb-item">Detail</li>
             </ol>
           </div>
@@ -30,7 +30,7 @@
           <div class="col-12">
             <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">Detail Kebutuhan</h3>
+                <h3 class="card-title">Detail Pengadaan</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">

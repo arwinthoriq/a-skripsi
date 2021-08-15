@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('unitkerja-home') }}">Home</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('unitkerja-kebutuhan') }}">Kebutuhan</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('unitkerja-kebutuhan') }}">Pengadaan</a></li>
               <li class="breadcrumb-item">Tambah</li>
             </ol>
           </div>
@@ -30,7 +30,7 @@
             <!-- general form elements -->
             <div class="card card-dark">
               <div class="card-header">
-                <h3 class="card-title">Tambah kebutuhan</h3>
+                <h3 class="card-title">Tambah Pengadaan</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->

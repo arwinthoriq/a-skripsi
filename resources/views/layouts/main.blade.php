@@ -159,7 +159,7 @@
           <li class="nav-item">
             <a href="{{route('sarpras-kebutuhan')}}" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
-              <p> Kebutuhan </p>
+              <p> Pengadaan </p>
             </a>
           </li>
           <li class="nav-item">
@@ -191,7 +191,7 @@
           <li class="nav-item">
             <a href="{{route('keuangan-kebutuhan')}}" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
-              <p> Kebutuhan </p>
+              <p> Pengadaan </p>
             </a>
           </li>
           @endif
@@ -213,7 +213,7 @@
           <li class="nav-item">
             <a href="{{route('unitkerja-kebutuhan')}}" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
-              <p> Kebutuhan </p>
+              <p> Pengadaan </p>
             </a>
           </li>
           @endif

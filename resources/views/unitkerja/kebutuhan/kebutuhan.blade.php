@@ -45,7 +45,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('unitkerja-home') }}">Home</a></li>
-              <li class="breadcrumb-item">Kebutuhan</li>
+              <li class="breadcrumb-item">Pengadaan</li>
             </ol>
           </div>
         </div><!-- /.row -->
@@ -87,11 +87,10 @@
                                             <td>{{ $dt->status}}</td>
                                             <td>{{ date("d-m-Y", strtotime($dt->created_at)) }}</td>
                                             <td>
-                                                <a href= "{{ url('/umpeg/home/kebutuhan/detail',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-success">Detail</a>
+                                                <a href= "{{ url('/umpeg/home/pengadaan/detail',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-success">Detail</a>
                                             </td>
                                             @if($dt->status == 'ditolak')
                                             <td>
-                                                <a href= "{{ url('/umpeg/home/kebutuhan/hapus',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-danger">Hapus</a>
                                             </td>
                                             @else
                                             <td></td>

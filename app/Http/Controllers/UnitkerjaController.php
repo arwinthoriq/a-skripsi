@@ -201,7 +201,7 @@ class UnitkerjaController extends Controller
            if( $data){
                 $dth = $req->Tahun;
                 $pdf = PDF::loadview('unitkerja.kebutuhan.print',compact( 'data', 'dth'));
-                return $pdf->download('laporan-kebutuhan.pdf');
+                return $pdf->download('laporan-pengadaan.pdf');
                 // return $pdf->stream();
            } else{
                return back();
