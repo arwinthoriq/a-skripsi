@@ -47,7 +47,7 @@
     </div>
     <!-- /.row -->
     <br>
-
+<i>Penambahan</i>
     <!-- Table row -->
     <div class="row">
       <div class="col-12 table-responsive">
@@ -55,14 +55,11 @@
                                 <thead>
                                     <tr>
                                     <th>No</th>
+                                        <th>Tanggal</th>
                                         <th>Nama</th>
                                         <th>Tahun</th>
-                                        <th>Merek</th>
-                                        <th>Jenis</th>
-                                        <th>kategori</th>
-                                        <th>Ruang</th>
                                         <th>Jumlah</th>
-                                        <th>Harga</th>
+                                        <th>Keterangan</th>
                                         <th>Total Harga</th>
                                     </tr>
                                 </thead>
@@ -71,14 +68,11 @@
                                         @foreach($data as $dt)
                                         <tr>
                                         <td>{{ $no }}</td>
+                                            <td>{{ date("d-m-Y", strtotime($dt->created_at)) }}}</td>
                                             <td>{{ $dt->nama}}</td>
                                             <td>{{ $dt->tahun_pengadaan}}</td>
-                                            <td>{{ $dt->merek}}</td>
-                                            <td>{{ $dt->jenis->nama}}</td>
-                                            <td>{{ $dt->kategori->nama}}</td>
-                                            <td>{{ $dt->ruang->nama}}</td>
                                             <td>{{ $dt->jumlah}}</td>
-                                            <td>{{ number_format($dt->harga, 0, "," , ".")  }}</td>
+                                            <td>{{ $dt->keterangan}}</td>
                                             <td>{{ number_format($dt->jumlah * $dt->harga, 0, "," , ".")  }}</td>
                                         </tr>
                                         <?php $no++; ?>  
@@ -90,6 +84,42 @@
       <!-- /.col -->
     </div>
     <!-- /.row -->
+    <br>
+<i>Pengurangan</i>
+    <!-- Table row -->
+    <div class="row">
+      <div class="col-12 table-responsive">
+        <table>
+                                <thead>
+                                    <tr>
+                                    <th>No</th>
+                                        <th>Tanggal</th>
+                                        <th>Nama</th>
+                                        <th>Tahun</th>
+                                        <th>Jumlah</th>
+                                        <th>Keterangan</th>
+                                        <th>Total Harga</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                     <tr>
+                                       <td></td>
+                                       <td></td>
+                                       <td></td>
+                                       <td></td>
+                                       <td></td>
+                                       <td></td>
+                                       <td></td>
+                                     </tr>
+                                </tbody>
+        </table>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+<br>
+<br><br>
  <!-- info row -->
  <div class="row invoice-info">
  <div class="row">
