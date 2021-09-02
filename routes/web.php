@@ -33,6 +33,8 @@ Route::group(['prefix'=>'sarpras','middleware'=>'akses.sarpras'], function() { /
     Route::post('/home/aset/tambah','SarprasController@asettambah'); //tambah aset
     Route::get('/home/aset/print', 'SarprasController@printaset')->name('print-aset'); //print aset
     Route::get('/home/aset/hapus/{id}','SarprasController@deleteaset');  // hapus aset
+    Route::get('/home/aset/manajemen/print', 'SarprasController@printmanajemen')->name('print-manajemen'); //print aset
+    Route::get('/home/aset/audit/print', 'SarprasController@printaudit')->name('print-audit'); //print aset
 
     Route::get('/home/ruang', 'SarprasController@ruang')->name('sarpras-ruang');
     Route::get('/home/ruang/edit/{id}','SarprasController@formupdateruang'); //passing id edit ruang
@@ -49,6 +51,23 @@ Route::group(['prefix'=>'sarpras','middleware'=>'akses.sarpras'], function() { /
     Route::get('/home/jenis/tambah','SarprasController@jenisform')->name('sarpras-jenis-form'); //form tambah jenis
     Route::post('/home/jenis/tambah','SarprasController@jenistambah'); //tambah jenis
     Route::get('/home/jenis/hapus/{id}','SarprasController@deletejenis');  // hapus ruang
+    
+    Route::get('/home/kategori', 'SarprasController@kategori')->name('sarpras-kategori');
+    Route::get('/home/kategori/edit/{id}','SarprasController@formupdatekategori'); //passing id edit jenis
+    Route::get('/home/kategori/edit','SarprasController@formupdatekategori')->name('sarpras-kategori-form-edit'); //form edit jenis
+    Route::post('/home/kategori/edit','SarprasController@editupdatekategori'); //edit jenis
+    Route::get('/home/kategori/tambah','SarprasController@kategoriform')->name('sarpras-kategori-form'); //form tambah jenis
+    Route::post('/home/kategori/tambah','SarprasController@kategoritambah'); //tambah kategori
+    Route::get('/home/kategori/hapus/{id}','SarprasController@deletekategori');  // hapus kategori
+    
+    Route::get('/home/pegawai', 'SarprasController@pegawai')->name('sarpras-pegawai');
+    Route::get('/home/pegawai/edit/{id}','SarprasController@formupdatepegawai'); //passing id edit jenis
+    Route::get('/home/pegawai/edit','SarprasController@formupdatepegawai')->name('sarpras-pegawai-form-edit'); //form edit jenis
+    Route::post('/home/pegawai/edit','SarprasController@editupdatepegawai'); //edit pegawai
+    Route::get('/home/pegawai/tambah','SarprasController@pegawaiform')->name('sarpras-pegawai-form'); //form tambah jenis
+    Route::post('/home/pegawai/tambah','SarprasController@pegawaitambah'); //tambah pegawai
+    Route::get('/home/pegawai/detail/{id}', 'SarprasController@detailpegawai'); //detail perbaikan
+    Route::get('/home/pegawai/hapus/{id}','SarprasController@deletepegawai');  // hapus pegawai
 
     Route::get('/home/perawatan', 'SarprasController@perbaikan')->name('sarpras-perbaikan'); //daftar perbaikan
     Route::get('/home/perawatan/detail/{id}', 'SarprasController@detailperbaikan'); //detail perbaikan
@@ -66,6 +85,17 @@ Route::group(['prefix'=>'sarpras','middleware'=>'akses.sarpras'], function() { /
     //Route::get('/home/kebutuhan/tambah','SarprasController@kebutuhanform')->name('sarpras-kebutuhan-form'); //form tambah kebutuhan
     //Route::post('/home/kebutuhan/tambah','SarprasController@kebutuhantambah'); //tambah kebutuhan
     Route::get('/home/pengadaan/print', 'SarprasController@printkebutuhan')->name('print-kebutuhan'); //print kebutuhan
+
+    Route::get('/home/stock-opname', 'SarprasController@stockopname')->name('sarpras-stockopname');
+    Route::get('/home/stock-opname/edit/{id}','SarprasController@formupdatestockopname'); //passing id edit stockopname
+    Route::get('/home/stock-opname/edit','SarprasController@formupdatestockopname')->name('sarpras-stockopname-form-edit'); //form edit stockopname
+    Route::post('/home/stock-opname/edit','SarprasController@editupdatestockopname'); //edit stockopname
+    Route::get('/home/stock-opname/aset', 'SarprasController@stockopnameaset')->name('sarpras-stockopname-aset'); //daftar aset(khusus stockopname)
+    Route::get('/home/stock-opname/aset/tambah/{id}','SarprasController@stockopnameform'); //passing id tambah stockopname
+    Route::get('/home/stock-opname/aset/tambah','SarprasController@stockopnameform')->name('sarpras-stockopname-form'); //form tambah stockopname
+    Route::post('/home/stock-opname/aset/tambah','SarprasController@stockopnametambah'); //tambah stockopname
+    Route::get('/home/stock-opname/detail/{id}', 'SarprasController@detailstockopname'); //detail stockopname
+    Route::get('/home/stock-opname/print', 'SarprasController@printstockopname')->name('print-stockopname'); //print stockopname
 
 });
 

@@ -168,6 +168,24 @@
               <p> Pengguna </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{route('sarpras-stockopname')}}" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p> Stock Opname </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('sarpras-kategori')}}" class="nav-link">
+              <i class="nav-icon fas fa-tag"></i>
+              <p> Kategori </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('sarpras-pegawai')}}" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p> Pegawai </p>
+            </a>
+          </li>
           @endif
           @if(Auth::user()->akses == 'keuangan')
           <li class="nav-item">

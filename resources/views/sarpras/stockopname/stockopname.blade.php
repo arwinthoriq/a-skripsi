@@ -8,20 +8,23 @@
       <div class="container-fluid">
         <div class="row mb-2">
 
-
           <div class="col-sm-6">
           <ol class="breadcrumb float-sm-left">
             <li >
+              <div class="col-sm-6">
+                <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('sarpras-stockopname-aset') }}">Tambah </a> </h3>
+              </div>
+            </li>
+            <li >
+              <div class="col-sm-6">
+              </div>
+            </li>
+            <li >
               <div >
-                <form role="form" action="{{ route('keuangan-print-aset') }}" method="GET" enctype="multipart/form-data">
+                <form role="form" action="{{ route('print-stockopname') }}" method="GET" enctype="multipart/form-data">
                   {{csrf_field()}}
                         <div class="input-group-prepend">
-                        <button type="submit" class="btn btn-success">  <i class="fas fa-download"></i>  </button>
-                          <select class="form-control" name="Tahun">
-                          @foreach($das as $dtj)
-                                <option > {{  $dtj->tahun_pengadaan  }}</option>
-                            @endforeach
-                            </select>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-download"></i> PDF</button>
                         </div>
                         <!-- /btn-group -->
                 </form>
@@ -32,18 +35,22 @@
           </div><!-- /.col -->
 
 
-
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('keuangan-home') }}">Home</a></li>
-              <li class="breadcrumb-item">Aset</li>
+              <li class="breadcrumb-item"><a href="{{ route('sarpras-home') }}">Home</a></li>
+              <li class="breadcrumb-item">Stock Opname</li>
             </ol>
           </div>
+
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+    
+        
 
+                
+            
     <!-- Main content -->
     <section class="content">
     <div class="card">
@@ -53,14 +60,14 @@
                                     <tr>
                                     <th>No</th>
                                         <th>Nama</th>
-                                        <th>Tahun</th>
-                                        <th>Merek</th>
-                                        <th>Jumlah</th>
                                         <th>Ruang</th>
-                                        <th>Jenis</th>
-                                        <th>Kategori</th>
-                                        <th>Tanggal</th>
+                                        <th>Jumlah</th>
+                                        <th>Total Harga</th>
+                                        <th>Jumlah Fisik</th>
+                                        <th>Total Harga Fisik</th>
                                         <th></th>
+                                        <th></th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,16 +75,17 @@
                                         @foreach($data as $dt)
                                         <tr>
                                         <td>{{ $no }}</td>
-                                            <td>{{ $dt->nama}}</td>
-                                            <td>{{ $dt->tahun_pengadaan}}</td>
-                                            <td>{{ $dt->merek}}</td>
-                                            <td>{{ $dt->jumlah}}</td>
-                                            <td>{{ $dt->ruang->nama}}</td>
-                                            <td>{{ $dt->jenis->nama}}</td>
-                                            <td>{{ $dt->kategori->nama}}</td>
-                                            <td>{{ date("d-m-Y", strtotime($dt->created_at)) }}</td>
+                                            <td>{{ $dt->aset->nama}}</td>
+                                            <td>{{ $dt->aset->ruang->nama}}</td>
+                                            <td>{{ $dt->aset->jumlah}}</td>
+                                            <td>{{ $dt->aset->jumlah * $dt->aset->harga}}</td>
+                                            <td>{{ $dt->jumlah_fisik}}</td>
+                                            <td>{{ $dt->jumlah_fisik * $dt->harga_fisik}}</td>
                                             <td>
-                                                <a href= "{{ url('/keuangan/home/aset/detail',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-success">Detail</a>
+                                                <a href= "{{ url('/sarpras/home/stock-opname/detail',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-success">Detail</a>
+                                            </td>
+                                            <td>
+                                                <a href= "{{ url('/sarpras/home/stock-opname/edit',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-warning">Edit</a>
                                             </td>
                                         </tr>
                                         <?php $no++; ?>    

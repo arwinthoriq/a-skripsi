@@ -82,6 +82,7 @@
                                             <td>{{ $dt->jumlah}}</td>
                                             <td>{{ $dt->ruang->nama}}</td>
                                             <td>{{ $dt->jenis->nama}}</td>
+                                            <td>{{ $dt->kategori->nama}}</td>
                                             <td>{{ $dt->status}}</td>
                                             <td>{{ date("d-m-Y", strtotime($dt->created_at)) }}</td>
                                             <td>

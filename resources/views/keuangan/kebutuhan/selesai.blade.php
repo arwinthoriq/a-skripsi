@@ -66,7 +66,7 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label for="text-input" class=" form-control-label">Total Harga</label>
-                        <input type="text"  name="" placeholder="{{ $data->total_harga}}" class="form-control" disabled>
+                        <input type="text"  name="" placeholder="{{ $data->jumlah * $data->harga}}" class="form-control" disabled>
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -85,6 +85,12 @@
                       <div class="form-group">
                           <label for="text-input" class=" form-control-label">Jenis</label>
                           <input type="text"   name="" placeholder="{{ $data->jenis->nama}}" class="form-control" disabled>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                          <label for="text-input" class=" form-control-label">Kategori</label>
+                          <input type="text"   name="" placeholder="{{ $data->kategori->nama}}" class="form-control" disabled>
                       </div>
                     </div>
                     <div class="col-sm-6">

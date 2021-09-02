@@ -72,12 +72,6 @@
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
-                          <label for="text-input" class=" form-control-label">Total Harga</label>
-                          <input type="text"  name="total_harga" placeholder="Total Harga" class="form-control" required>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group">
                           <label for="text-input" class=" form-control-label">Jenis</label>
                           <select class="form-control" name="jenis_id">
                           @foreach($dataj as $dtj)
@@ -88,10 +82,10 @@
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
-                          <label for="text-input" class=" form-control-label">Ruang</label>
-                          <select class="form-control" name="ruang_id">
-                          @foreach($datar as $dtr)
-                              <option value="{{ Crypt::encrypt($dtr->id) }}">{{ $dtr->nama}}</option>
+                          <label for="text-input" class=" form-control-label">Kategori</label>
+                          <select class="form-control" name="kategori_id">
+                          @foreach($datak as $dtk)
+                              <option value="{{ Crypt::encrypt($dtk->id) }}">{{ $dtk->nama}}</option>
                           @endforeach
                           </select>
                       </div>
@@ -100,6 +94,16 @@
                       <div class="form-group">
                           <label for="text-input" class=" form-control-label">Keterangan</label>
                           <textarea type="text"  name="keterangan" placeholder="Keterangan" class="form-control" required> </textarea>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                          <label for="text-input" class=" form-control-label">Ruang</label>
+                          <select class="form-control" name="ruang_id">
+                          @foreach($datar as $dtr)
+                              <option value="{{ Crypt::encrypt($dtr->id) }}">{{ $dtr->nama}}</option>
+                          @endforeach
+                          </select>
                       </div>
                     </div>
                      <!-- text input -->

@@ -30,7 +30,7 @@
     <div class="row">
       <div class="col-12">
         <h2 class="page-header">  
-          <center>Data Pengadaan Dinas Pendidikan Kabupaten Blora <br> Tahun {{ $dth }}</center>
+          <center>Data Audit <br> </center>
         </h2>
       </div>
       <!-- /.col -->
@@ -59,11 +59,11 @@
                                         <th>Tahun</th>
                                         <th>Merek</th>
                                         <th>Jenis</th>
+                                        <th>kategori</th>
                                         <th>Ruang</th>
                                         <th>Jumlah</th>
                                         <th>Harga</th>
                                         <th>Total Harga</th>
-                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -72,7 +72,7 @@
                                         <tr>
                                         <td>{{ $no }}</td>
                                             <td>{{ $dt->nama}}</td>
-                                            <td>{{ $dt->tahun}}</td>
+                                            <td>{{ $dt->tahun_pengadaan}}</td>
                                             <td>{{ $dt->merek}}</td>
                                             <td>{{ $dt->jenis->nama}}</td>
                                             <td>{{ $dt->kategori->nama}}</td>
@@ -80,9 +80,9 @@
                                             <td>{{ $dt->jumlah}}</td>
                                             <td>{{ number_format($dt->harga, 0, "," , ".")  }}</td>
                                             <td>{{ number_format($dt->jumlah * $dt->harga, 0, "," , ".")  }}</td>
-                                            <td>{{ $dt->status}}</td>
                                         </tr>
-                                        <?php $no++; ?>    
+                                        <?php $no++; ?>  
+                                        
                                         @endforeach
                                 </tbody>
         </table>
@@ -90,12 +90,29 @@
       <!-- /.col -->
     </div>
     <!-- /.row -->
-
-    <div class="row">
-    <p ><b>Sub Total</b><br>
-        Jumlah : {{ $data->sum('jumlah')  }} <br>
-        Harga : Rp {{ number_format($data->sum('harga'), 0, "," , ".")  }} <br>
+ <!-- info row -->
+ <div class="row invoice-info">
+ <div class="row">
+      <div class="col-12 table-responsive">
+        <table>
+                                <tbody>
+                                        <tr>
+                                        <td>Dibuat Oleh</td>
+                                        <td>Direview</td>
+                                        <td>periode</td>
+                                        <td>indeks</td>
+                                        </tr>
+                                </tbody>
+        </table>
+      </div>
+      <!-- /.col -->
     </div>
+ </div>
+              <!-- /.row -->
+
+
+
+
     <!-- /.row -->
   </section>
   <!-- /.content -->

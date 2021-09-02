@@ -9,6 +9,9 @@ use App\Ruang;
 use App\Jenis;
 use App\Perbaikan;
 use App\Kebutuhan;
+use App\Stockopname;
+use App\Kategori;
+use App\Pegawai;
 use Illuminate\Support\Facades\Crypt;
 use Session;
 use Auth;
@@ -135,7 +138,9 @@ class SarprasController extends Controller
             Session::put('edit_aset', $edit_aset);
             $datar = Ruang::get(); // untuk menampilkan data ruang
             $dataj = Jenis::get(); // untuk menampilkan data jenis
-            return view('sarpras.aset.edit',compact('data', 'datar', 'dataj'));
+            $datak = Kategori::get(); // untuk menampilkan data kategori
+            $datap = Pegawai::get(); // untuk menampilkan data pegawai
+            return view('sarpras.aset.edit',compact('data', 'datar', 'dataj', 'datak', 'datap'));
         }catch (DecryptException $e) {
             return abort(404);
         }
@@ -147,26 +152,37 @@ class SarprasController extends Controller
             [
                 'ruang_id'=>'',
                 'jenis_id'=>'',
+                'kategori_id'=>'',
+                'pegawai_id'=>'',
                 'nama'=>'required|regex:/^[a-zA-Z ]{2,50}$/',
                 'keterangan'=>'required|regex:/^[a-zA-Z0-9., ]{3,100}$/',
                 'tahun_pengadaan'=>'required|regex:/^[0-9]{1,4}$/',
                 'merek'=>'required|regex:/^[a-zA-Z0-9 ]{1,50}$/',
                 'jumlah'=>'required|regex:/^[0-9]{1,10}$/',
                 'harga'=>'required|regex:/^[0-9,]{1,20}$/',
-                'total_harga'=>'required|regex:/^[0-9,]{1,20}$/',
+              //  'total_harga'=>'required|regex:/^[0-9,]{1,20}$/',
             ])->validate();
             $idruang = Crypt::decrypt($request->ruang_id);
             $idjenis = Crypt::decrypt($request->jenis_id);
+            $idkategori = Crypt::decrypt($request->kategori_id);
+           // if($request->pegawai_id = NULL){
+             //   $idpegawai = Crypt::decrypt($request->pegawai_id);
+            //} else{
+                $idpegawai = $request->pegawai_id;
+             //   $idpegawai = Crypt::decrypt($request->pegawai_id);
+           // }
                 $field = [
                     'ruang_id' => $idruang,
                     'jenis_id' => $idjenis,
+                    'kategori_id' => $idkategori,
+                    'pegawai_id' => $idpegawai,
                     'nama' => $request->nama,
                     'keterangan' => $request->keterangan,
                     'tahun_pengadaan' => $request->tahun_pengadaan,
                     'merek' => $request->merek,
                     'jumlah' => $request->jumlah,
                     'harga' => $request->harga,
-                    'total_harga' => $request->total_harga,
+                //    'total_harga' => $request->total_harga,
                 ];
             $result = Aset::where('id', $idedit_aset)->update($field);
             if($result){
@@ -189,7 +205,9 @@ class SarprasController extends Controller
     public function asetform(){
         $datar = Ruang::get(); // untuk menampilkan data ruang
         $dataj = Jenis::get(); // untuk menampilkan data jenis
-        return view('sarpras.aset.tambah',compact( 'datar','dataj'));
+        $datak = Kategori::get(); // untuk menampilkan data ruang
+        $datap = Pegawai::get(); // untuk menampilkan data jenis
+        return view('sarpras.aset.tambah',compact( 'datar','dataj','datak','datap'));
     }
     public function asettambah(Request $request){
         // logika encrypt decrypt pada variabel datar & dataj
@@ -201,27 +219,38 @@ class SarprasController extends Controller
         $this->validate($request, [
             'ruang_id'=>'',
             'jenis_id'=>'',
+            'kategori_id'=>'',
+            'pegawai_id'=>'',
             'nama'=>'required|regex:/^[a-zA-Z ]{2,50}$/',
             'keterangan'=>'required|regex:/^[a-zA-Z0-9., ]{3,100}$/',
             'tahun_pengadaan'=>'required|regex:/^[0-9]{1,4}$/',
             'merek'=>'required|regex:/^[a-zA-Z0-9 ]{1,50}$/',
             'jumlah'=>'required|regex:/^[0-9]{1,10}$/',
             'harga'=>'required|regex:/^[0-9,]{1,20}$/',
-            'total_harga'=>'required|regex:/^[0-9,]{1,20}$/',
+            //'total_harga'=>'required|regex:/^[0-9,]{1,20}$/',
         ]);
         $idr = Crypt::decrypt($request->ruang_id);
         $idj = Crypt::decrypt($request->jenis_id);
+        $idk = Crypt::decrypt($request->kategori_id);
+       // if($request->pegawai_id = NULL){
+         //   $idp = Crypt::decrypt($request->pegawai_id);
+        //} else{
+            $idp = $request->pegawai_id;
+           // $idp = Crypt::decrypt($request->pegawai_id);
+        //}
         Aset::create([
             'user_id' => Auth()->id(),
             'ruang_id' => $idr,
             'jenis_id' => $idj,
+            'kategori_id' => $idk,
+            'pegawai_id' => $idp,
             'nama' => $request->nama,
             'keterangan' => $request->keterangan,
             'tahun_pengadaan' => $request->tahun_pengadaan,
             'merek' => $request->merek,
             'jumlah' => $request->jumlah,
             'harga' => $request->harga,
-            'total_harga' => $request->total_harga,
+          //  'total_harga' => $request->total_harga,
         ]);
         return redirect()->route('sarpras-aset');
     }
@@ -235,6 +264,30 @@ class SarprasController extends Controller
             $dth = $req->Tahun;
             $pdf = PDF::loadview('sarpras.aset.print',compact( 'data', 'dth'));
             return $pdf->download('laporan-aset.pdf');
+            // return $pdf->stream();
+       } else{
+           return back();
+       }
+    }
+    public function printmanajemen(Request $req)
+    {
+        $data = Aset::get();
+        $datapd = Kebutuhan::get();
+        $datapr = Perbaikan::get();
+       if( $data){
+            $pdf = PDF::loadview('sarpras.aset.print_manajemen',compact( 'data', 'datapd', 'datapr'));
+            return $pdf->download('laporan-manajemen.pdf');
+            // return $pdf->stream();
+       } else{
+           return back();
+       }
+    }
+    public function printaudit(Request $req)
+    {
+        $data = Aset::get();
+       if( $data){
+            $pdf = PDF::loadview('sarpras.aset.print_audit',compact( 'data'));
+            return $pdf->download('laporan-audit.pdf');
             // return $pdf->stream();
        } else{
            return back();
@@ -371,6 +424,182 @@ class SarprasController extends Controller
           return abort(404);
        }
     }
+
+
+
+
+
+
+
+
+
+      // menampilkan kategori
+      public function kategori(Request $req)
+      {
+          $data = Kategori::get();
+          return view('sarpras.kategori.kategori',['data'=>$data]);
+      }
+      public function kategoriform(){
+          return view('sarpras.kategori.tambah');
+      }
+      public function kategoritambah(Request $request){
+          $this->validate($request, [
+              'nama'=>'required|regex:/^[a-zA-Z ]{3,50}$/',
+          ]);
+          Kategori::create([
+          'user_id' => Auth()->id(),
+          'nama' => $request->nama,
+          ]);
+          return redirect()->route('sarpras-kategori');
+      }
+      public function formupdatekategori($id){ 
+          try{
+              $id = Crypt::decrypt($id);
+              $data= Kategori::findOrFail($id);
+              $edit_kategori = $data->id;
+              Session::put('edit_kategori', $edit_kategori);
+              return view('sarpras.kategori.edit',compact('data'));
+          }catch (DecryptException $e) {
+              return abort(404);
+          }
+      }
+      public function editupdatekategori(Request $request)
+      {
+              $idedit_kategori = Session::get('edit_kategori');
+              \Validator::make($request->all(), 
+              [
+                  'nama'=>'required|regex:/^[a-zA-Z ]{3,50}$/',
+              ])->validate();
+                  $field = [
+                      'nama' => $request->nama,
+                  ];
+              $result = Kategori::where('id', $idedit_kategori)->update($field);
+              if($result){
+                  return redirect()->route('sarpras-kategori');
+              } else{
+                  return back();
+              }
+      }
+      public function deletekategori($id)
+      {
+         try{
+            $idi = Crypt::decrypt($id);
+            Kategori::find($idi)->delete();
+            return back();
+           // return redirect()->route('sarpras-aset');
+         }catch (DecryptException $e) {
+            return abort(404);
+         }
+      }
+
+
+
+
+
+
+
+
+
+      // menampilkan pegawai
+    public function pegawai(Request $req)
+    {
+       // $das = Pegawai::distinct()->get('tahun_pengadaan'); //solved
+        $data = Pegawai::get();
+        return view('sarpras.pegawai.pegawai',compact('data'));
+    }
+    public function detailpegawai($id){ 
+        try{
+            $id = Crypt::decrypt($id);
+            $data= Pegawai::findOrFail($id);
+            return view('sarpras.pegawai.detail',compact('data'));
+        }catch (DecryptException $e) {
+            return abort(404);
+        }
+    }
+    public function formupdatepegawai($id){ 
+        try{
+            $id = Crypt::decrypt($id);
+            $data= pegawai::findOrFail($id);
+            $edit_pegawai = $data->id;
+            Session::put('edit_pegawai', $edit_pegawai);
+            return view('sarpras.pegawai.edit',compact('data'));
+        }catch (DecryptException $e) {
+            return abort(404);
+        }
+    }
+    public function editupdatepegawai(Request $request)
+    {
+            $idedit_pegawai = Session::get('edit_pegawai');
+            \Validator::make($request->all(), 
+            [
+                'nama'=>'required|regex:/^[a-zA-Z ]{2,50}$/',
+                'alamat'=>'required|regex:/^[a-zA-Z0-9., ]{3,100}$/',
+                'ttl'=>'required|regex:/^[a-zA-Z0-9., ]{3,100}$/',
+                'nip'=>'required|regex:/^[0-9]{1,100}$/',
+                'jabatan'=>'required|regex:/^[a-zA-Z0-9 ]{1,100}$/',
+                'kelamin'=>'required|regex:/^[a-zA-Z ]{2,50}$/',
+              //  'total_harga'=>'required|regex:/^[0-9,]{1,20}$/',
+            ])->validate();
+                $field = [
+                    'nama' => $request->nama,
+                    'alamat' => $request->alamat,
+                    'ttl' => $request->ttl,
+                    'nip' => $request->nip,
+                    'jabatan' => $request->jabatan,
+                    'kelamin' => $request->kelamin,
+                //    'total_harga' => $request->total_harga,
+                ];
+            $result = Pegawai::where('id', $idedit_pegawai)->update($field);
+            if($result){
+                return redirect()->route('sarpras-pegawai');
+            } else{
+                return back();
+            }
+    }
+    public function deletepegawai($id)
+    {
+       try{
+          $idi = Crypt::decrypt($id);
+          Pegawai::find($idi)->delete();
+          return back();
+         // return redirect()->route('sarpras-aset');
+       }catch (DecryptException $e) {
+          return abort(404);
+       }
+    }
+    public function pegawaiform(){
+        return view('sarpras.pegawai.tambah');
+    }
+    public function pegawaitambah(Request $request){
+        // logika encrypt decrypt pada variabel datar & dataj
+        // diambil data jenis & data ruang dari controller
+        // lalu id jenis & id ruang diencrypt dihalaman blade
+        // kemudian hasil dari encrypt di validasi dihalaman controller
+        // setelah itu didecrypt dihalaman controller
+        // baru di create / post ke tabel aset melalui halaman controller
+        $this->validate($request, [
+                  // required|regex:/^[a-zA-Z ]{2,50}$/',
+            'nama'=>'required|regex:/^[a-zA-Z ]{2,50}$/',
+            'alamat'=>'required|regex:/^[a-zA-Z0-9., ]{3,100}$/',
+            'ttl'=>'required|regex:/^[a-zA-Z0-9., ]{3,100}$/',
+            'nip'=>'required|regex:/^[0-9]{1,100}$/',
+            'jabatan'=>'required|regex:/^[a-zA-Z0-9 ]{1,100}$/',
+            'kelamin'=>'required|regex:/^[a-zA-Z ]{2,50}$/',
+            //'total_harga'=>'required|regex:/^[0-9,]{1,20}$/',
+        ]);
+        Pegawai::create([
+            'user_id' => Auth()->id(),
+            'nama' => $request->nama,
+            'alamat' => $request->alamat,
+            'ttl' => $request->ttl,
+            'nip' => $request->nip,
+            'jabatan' => $request->jabatan,
+            'kelamin' => $request->kelamin,
+          //  'total_harga' => $request->total_harga,
+        ]);
+        return redirect()->route('sarpras-pegawai');
+    }
+
         
 
 
@@ -563,6 +792,107 @@ class SarprasController extends Controller
         }
      }
  
+
+
+
+
+
+    // menampilkan stock opname
+    public function stockopname(Request $req)
+    {
+        $data = Stockopname::get();
+        return view('sarpras.stockopname.stockopname',compact( 'data'));
+    }
+    public function stockopnameaset(Request $req)
+    {
+        $da = Stockopname::select('aset_id')->where('keterangan', '!=', '1',)->get();
+        $data = Aset::whereNotIn('id', $da)->get(); //pilih data aset dimana id tidak sama dengan aset_id(dimana ket. nya bukan 1)
+        return view('sarpras.stockopname.aset',compact( 'data'));
+    }
+    public function detailstockopname($id){ 
+        try{
+            $id = Crypt::decrypt($id);
+            $data= Stockopname::findOrFail($id);
+            return view('sarpras.stockopname.detail',compact('data'));
+        }catch (DecryptException $e) {
+            return abort(404);
+        }
+    }
+    public function stockopnameform($id){ 
+        try{
+            $id = Crypt::decrypt($id);
+            $data= Aset::findOrFail($id);
+            $id_plaintext = $data->id;
+            Session::put('id_session_so', $id_plaintext);
+            return view('sarpras.stockopname.tambah',compact('data'));
+        }catch (DecryptException $e) {
+            return abort(404);
+        }
+    }
+    public function stockopnametambah(Request $request){ 
+        $this->validate($request, [
+            'aset_id' =>'',
+            'keterangan'=>'required|regex:/^[a-zA-Z., ]{0,100}$/',
+            'jumlah_fisik'=>'required|regex:/^[0-9]{1,10}$/',
+            'harga_fisik'=>'required|regex:/^[0-9,]{1,20}$/',
+        ]);
+        Stockopname::create([
+            'aset_id' => Session::get('id_session_so'),
+            'keterangan' => $request->keterangan,
+            'jumlah_fisik' => $request->jumlah_fisik,
+            'harga_fisik' => $request->harga_fisik,
+        ]);
+        return redirect()->route('sarpras-stockopname');
+    }
+     public function formupdatestockopname($id){ 
+        try{
+            $id = Crypt::decrypt($id);
+            $data= Stockopname::findOrFail($id);
+            $edit_stockopname = $data->id;
+            Session::put('edit_stockopname', $edit_stockopname);
+            return view('sarpras.stockopname.edit',compact('data'));
+        }catch (DecryptException $e) {
+            return abort(404);
+        }
+    }
+    public function editupdatestockopname(Request $request)
+    {
+            $idedit_stockopname = Session::get('edit_stockopname');
+            \Validator::make($request->all(), 
+            [
+                'keterangan'=>'required|regex:/^[a-zA-Z., ]{0,100}$/',
+                'jumlah_fisik'=>'required|regex:/^[0-9]{1,10}$/',
+                'harga_fisik'=>'required|regex:/^[0-9,]{1,20}$/',
+            ])->validate();
+                $field = [
+                    'keterangan' => $request->keterangan,
+                    'jumlah_fisik' => $request->jumlah_fisik,
+                    'harga_fisik' => $request->harga_fisik,
+                ];
+            $result = Stockopname::where('id', $idedit_stockopname)->update($field);
+            if($result){
+                return redirect()->route('sarpras-stockopname');
+            } else{
+                return back();
+            }
+    }
+    public function printstockopname(Request $req)
+     {
+         $data = stockopname::all();
+        // $d = aset::get();
+        if( $data){
+             $pdf = PDF::loadview('sarpras.stockopname.print',compact('data'))->setPaper('a4', 'landscape');;
+             return $pdf->download('laporan-stockopname.pdf');
+             // return $pdf->stream();
+        } else{
+            return back();
+        }
+     }
+
+
+
+
+
 
 
 

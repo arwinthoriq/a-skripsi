@@ -30,7 +30,7 @@
     <div class="row">
       <div class="col-12">
         <h2 class="page-header">  
-          <center>Data Aset Dinas Pendidikan Kabupaten Blora <br> Tahun {{ $dth }}</center>
+          <center>Data Stock Opname Aset <br> </center>
         </h2>
       </div>
       <!-- /.col -->
@@ -54,16 +54,20 @@
         <table>
                                 <thead>
                                     <tr>
-                                    <th>No</th>
+                                        <th>No</th>
                                         <th>Nama</th>
                                         <th>Tahun</th>
                                         <th>Merek</th>
-                                        <th>Jenis</th>
-                                        <th>kategori</th>
                                         <th>Ruang</th>
                                         <th>Jumlah</th>
                                         <th>Harga</th>
                                         <th>Total Harga</th>
+                                        <th>Jumlah Fisik</th>
+                                        <th>Harga Fisik</th>
+                                        <th>Total Harga Fisik</th>
+                                        <th>Selisih Jumlah</th>
+                                        <th>Selisih Total Harga</th>
+                                        <th>Keterangan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -71,15 +75,27 @@
                                         @foreach($data as $dt)
                                         <tr>
                                         <td>{{ $no }}</td>
-                                            <td>{{ $dt->nama}}</td>
-                                            <td>{{ $dt->tahun_pengadaan}}</td>
-                                            <td>{{ $dt->merek}}</td>
-                                            <td>{{ $dt->jenis->nama}}</td>
-                                            <td>{{ $dt->kategori->nama}}</td>
-                                            <td>{{ $dt->ruang->nama}}</td>
-                                            <td>{{ $dt->jumlah}}</td>
-                                            <td>{{ number_format($dt->harga, 0, "," , ".")  }}</td>
-                                            <td>{{ number_format($dt->jumlah * $dt->harga, 0, "," , ".")  }}</td>
+                                            <td>{{ $dt->aset->nama}}</td>
+                                            <td>{{ $dt->aset->tahun_pengadaan}}</td>
+                                            <td>{{ $dt->aset->merek}}</td>
+                                            <td>{{ $dt->aset->ruang->nama}}</td>
+                                            <td>{{ $dt->aset->jumlah}}</td>
+                                            <td>{{ number_format($dt->aset->harga, 0, "," , ".")  }}</td>
+                                            <td>{{ number_format($dt->aset->jumlah * $dt->aset->harga, 0, "," , ".")  }}</td>
+                                            <td>{{ $dt->jumlah_fisik}}</td>
+                                            <td>{{ number_format($dt->harga_fisik, 0, "," , ".")  }}</td>
+                                            <td>{{ number_format($dt->jumlah_fisik * $dt->harga_fisik, 0, "," , ".")  }}</td>
+                                            @if($dt->aset->jumlah > $dt->jumlah_fisik)
+                                                <td>{{ $dt->aset->jumlah - $dt->jumlah_fisik}}</td>
+                                            @else        
+                                                <td >{{ $dt->jumlah_fisik - $dt->aset->jumlah}}</td>
+                                            @endif
+                                            @if($dt->aset->jumlah * $dt->aset->harga > $dt->jumlah_fisik * $dt->harga_fisik)
+                                                <td>Rp {{ number_format($dt->aset->jumlah * $dt->aset->harga - $dt->jumlah_fisik * $dt->harga_fisik, 0, "," , ".") }}</td>
+                                            @else        
+                                                <td>Rp {{ number_format($dt->jumlah_fisik * $dt->harga_fisik - $dt->aset->jumlah * $dt->aset->harga, 0, "," , ".") }}</td>
+                                            @endif
+                                            <td>{{ $dt->keterangan}}</td>
                                         </tr>
                                         <?php $no++; ?>  
                                         
@@ -92,9 +108,6 @@
     <!-- /.row -->
 
     <div class="row">
-    <p ><b>Sub Total</b><br>
-        Jumlah : {{ $data->sum('jumlah')  }} <br>
-        Harga : Rp {{ number_format($data->sum('harga'), 0, "," , ".")  }} <br>
     </div>
     <!-- /.row -->
   </section>

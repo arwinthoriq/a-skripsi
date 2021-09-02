@@ -59,6 +59,7 @@
                                         <th>Tahun</th>
                                         <th>Merek</th>
                                         <th>Jenis</th>
+                                        <th>Kategori</th>
                                         <th>Ruang</th>
                                         <th>Jumlah</th>
                                         <th>Harga</th>
@@ -75,10 +76,11 @@
                                             <td>{{ $dt->tahun}}</td>
                                             <td>{{ $dt->merek}}</td>
                                             <td>{{ $dt->jenis->nama}}</td>
+                                            <td>{{ $dt->kategori->nama}}</td>
                                             <td>{{ $dt->ruang->nama}}</td>
                                             <td>{{ $dt->jumlah}}</td>
                                             <td>{{ number_format($dt->harga, 0, "," , ".")  }}</td>
-                                            <td>{{ number_format($dt->total_harga, 0, "," , ".")  }}</td>
+                                            <td>{{ number_format($dt->jumlah * $dt->harga, 0, "," , ".")  }}</td>
                                             <td>{{ $dt->status}}</td>
                                         </tr>
                                         <?php $no++; ?>    
@@ -93,8 +95,7 @@
     <div class="row">
     <p ><b>Sub Total</b><br>
         Jumlah : {{ $data->sum('jumlah')  }} <br>
-        <?php $total_harga = $data->sum('total_harga')  ; ?>
-       Total Harga : Rp {{  number_format($total_harga, 0, "," , "." )  }}</p>
+        Harga : Rp {{ number_format($data->sum('harga'), 0, "," , ".")  }} <br>
     </div>
     <!-- /.row -->
   </section>

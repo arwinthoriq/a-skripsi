@@ -62,7 +62,8 @@
                                         <th>Merek</th>
                                         <th>Jumlah</th>
                                         <th>Ruang</th>
-                                        <th>jenis</th>
+                                        <th>Jenis</th>
+                                        <th>Kategori</th>
                                         <th>Status</th>
                                         <th></th>
                                         <th></th>
@@ -79,6 +80,7 @@
                                             <td>{{ $dt->jumlah}}</td>
                                             <td>{{ $dt->ruang->nama}}</td>
                                             <td>{{ $dt->jenis->nama}}</td>
+                                            <td>{{ $dt->kategori->nama}}</td>
                                             <td>{{ $dt->status}}</td>
                                             <td>
                                                 <a href= "{{ url('/keuangan/home/pengadaan/detail',['id'=>Crypt::encrypt($dt->id)]) }}" class="btn btn-success">Detail</a>

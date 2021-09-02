@@ -8,12 +8,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-          <h5 class="m-0 "> Detail Aset </h5>
+          <h5 class="m-0 "> Detail Pegawai </h5>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('sarpras-home') }}">Home</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('sarpras-aset') }}">Aset</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('sarpras-pegawai') }}">Pegawai</a></li>
               <li class="breadcrumb-item">Detail</li>
             </ol>
           </div>
@@ -30,7 +30,7 @@
           <div class="col-12">
             <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">Detail Aset</h3>
+                <h3 class="card-title">Detail Pegawai</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
@@ -44,49 +44,30 @@
                     <td><b class="d-block">Nama</b></td>
                     <td>{{ $data->nama}}</td>
                     <tr>
-                    <td><b class="d-block">Tahun</b></td>
-                    <td>{{ $data->tahun_pengadaan}}</td>
+                    <td><b class="d-block">Jabatan</b></td>
+                    <td>{{ $data->jabatan}}</td>
                     <tr>
-                    <td><b class="d-block">Merek</b></td>
-                    <td>{{ $data->merek}}</td>
+                    <td><b class="d-block">Tempat Tanggal Lahir</b></td>
+                    <td>{{ $data->ttl}}</td>
                     <tr>
-                    <td><b class="d-block">Ruang</b></td>
-                    <td>{{ $data->ruang->nama}}</td>
+                    <td><b class="d-block">NIP</b></td>
+                    <td>{{ $data->nip}}</td>
                     <tr>
-                    <td><b class="d-block">Jenis</b></td>
-                    <td>{{ $data->jenis->nama}}</td>
+                    <td><b class="d-block">Jenis Kelamin</b></td>
+                    <td>{{ $data->kelamin}}</td>
                     <tr>
-                    <td><b class="d-block">Kategori</b></td>
-                    <td>{{ $data->kategori->nama}}</td>
-                    <tr>
-                    <td><b class="d-block">Pegawai</b></td>
-                    @if($data->pegawai_id == NULL)
-                      <td>-</td>
-                    @else
-                      <td>{{ $data->pegawai->nama}}</td>
-                    @endif
+                    <td><b class="d-block">Alamat</b></td>
+                    <td>{{ $data->alamat}}</td>
                     <tr>
                     <td><b class="d-block">Tanggal</b></td>
                     <td>{{ date("d-m-Y", strtotime($data->created_at)) }}</td>
-                    <tr>
-                    <td><b class="d-block">Keterangan</b></td>
-                    <td>{{ $data->keterangan}}</td>
-                    <tr>
-                    <td><b class="d-block">Jumlah</b></td>
-                    <td>{{ $data->jumlah}}</td>
-                    <tr>
-                    <td><b class="d-block">Harga</b></td>
-                    <td>{{ number_format($data->harga, 0, "," , ".")  }}</td>
-                    <tr>
-                    <td><b class="d-block">Total Harga</b></td>
-                    <td>{{  number_format($data->jumlah * $data->harga, 0, "," , ".")  }}</td>
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body.. -->
             </div>
             <!-- /.card -->
-                    <div><a href="{{ route('sarpras-aset') }}" class="btn btn-success">Kembali</a></div><br>
+                    <div><a href="{{ route('sarpras-pegawai') }}" class="btn btn-success">Kembali</a></div><br>
           </div>
         </div>
         <!-- /.row -->

@@ -64,6 +64,12 @@
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
+                          <label for="text-input" class=" form-control-label">Kategori</label>
+                          <input type="text"  name="" placeholder="{{ $data->aset->kategori->nama}}" class="form-control" disabled>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
                           <label for="text-input" class=" form-control-label">Status</label>
                           <input type="text"  name="" placeholder="{{ $data->status}}" class="form-control" disabled>
                       </div>

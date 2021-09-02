@@ -16,6 +16,12 @@ class Aset extends Model
     public function jenis(){
         return $this->belongsTo('App\Jenis', 'jenis_id');
     }
+    public function kategori(){
+        return $this->belongsTo('App\Kategori', 'kategori_id');
+    }
+    public function pegawai(){
+        return $this->belongsTo('App\Pegawai', 'pegawai_id');
+    }
     public function user(){
         return $this->belongsTo('App\User', 'user_id');
     }

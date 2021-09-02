@@ -35,6 +35,36 @@
                 </form>
               </div>
             </li>
+            <li >
+              <div class="col-sm-6">
+              </div>
+            </li>
+            <li >
+              <div >
+                <form role="form" action="{{ route('print-manajemen') }}" method="GET" enctype="multipart/form-data">
+                  {{csrf_field()}}
+                        <div class="input-group-prepend">
+                        <button type="submit" class="btn btn-success"><i class="fas fa-download"></i> Manajemen</button>
+                        </div>
+                        <!-- /btn-group -->
+                </form>
+              </div>
+            </li>
+            <li >
+              <div class="col-sm-6">
+              </div>
+            </li>
+            <li >
+              <div >
+                <form role="form" action="{{ route('print-audit') }}" method="GET" enctype="multipart/form-data">
+                  {{csrf_field()}}
+                        <div class="input-group-prepend">
+                        <button type="submit" class="btn btn-success"><i class="fas fa-download"></i> Audit</button>
+                        </div>
+                        <!-- /btn-group -->
+                </form>
+              </div>
+            </li>
           </ol>
           <!--  <h3 class="m-0 "> <a class="btn btn-primary" href="{{ route('print-aset') }}" target="_blank">Print </a> </h3>  -->
           </div><!-- /.col -->
@@ -71,7 +101,6 @@
                                         <th>Ruang</th>
                                         <th>jenis</th>
                                         <th>Tanggal</th>
-                                        <th></th>
                                         <th></th>
                                         <th></th>
                                     </tr>

@@ -9,6 +9,7 @@ use App\Ruang;
 use App\Jenis;
 use App\Perbaikan;
 use App\Kebutuhan;
+use App\Kategori;
 use Illuminate\Support\Facades\Crypt;
 use Session;
 use Auth;
@@ -162,12 +163,14 @@ class UnitkerjaController extends Controller
         { 
            $datar = Ruang::get(); // untuk menampilkan data ruang
            $dataj = Jenis::get(); // untuk menampilkan data jenis
-           return view('unitkerja.kebutuhan.tambah',compact( 'datar','dataj'));
+           $datak = Kategori::get(); // untuk menampilkan data kategori
+           return view('unitkerja.kebutuhan.tambah',compact( 'datar','dataj','datak'));
         }
         public function kebutuhantambah(Request $request){ 
             $this->validate($request, [
                'ruang_id' => '',
                'jenis_id' => '',
+               'kategori_id' => '',
                'nama'=>'required|regex:/^[a-zA-Z ]{2,50}$/',
                'tahun'=>'required|regex:/^[0-9]{1,4}$/',
                'keterangan'=>'required|regex:/^[a-zA-Z0-9., ]{3,100}$/',
@@ -178,10 +181,12 @@ class UnitkerjaController extends Controller
             ]);
             $idr = Crypt::decrypt($request->ruang_id);
             $idj = Crypt::decrypt($request->jenis_id);
+            $idk = Crypt::decrypt($request->kategori_id);
             Kebutuhan::create([
                 'user_id' => Auth()->id(),
                 'ruang_id' => $idr,
                 'jenis_id' => $idj,
+                'kategori_id' => $idk,
                 'nama' => $request->nama,
                 'tahun' => $request->tahun,
                 'keterangan' => $request->keterangan,

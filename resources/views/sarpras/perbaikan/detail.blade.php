@@ -56,6 +56,9 @@
                     <td><b class="d-block">Jenis</b></td>
                     <td>{{ $data->aset->jenis->nama}}</td>
                     <tr>
+                    <td><b class="d-block">Kategori</b></td>
+                    <td>{{ $data->aset->kategori->nama}}</td>
+                    <tr>
                     <td><b class="d-block">Tanggal</b></td>
                     <td>{{ date("d-m-Y", strtotime($data->created_at)) }}</td>
                     <tr>

@@ -66,7 +66,8 @@
                                         <th>Merek</th>
                                         <th>Jumlah</th>
                                         <th>Ruang</th>
-                                        <th>jenis</th>
+                                        <th>Jenis</th>
+                                        <th>Kategori</th>
                                         <th>Status</th>
                                         <th>Tanggal</th>
                                         <th></th>
@@ -84,6 +85,7 @@
                                             <td>{{ $dt->jumlah}}</td>
                                             <td>{{ $dt->ruang->nama}}</td>
                                             <td>{{ $dt->jenis->nama}}</td>
+                                            <td>{{ $dt->kategori->nama}}</td>
                                             <td>{{ $dt->status}}</td>
                                             <td>{{ date("d-m-Y", strtotime($dt->created_at)) }}</td>
                                             <td>

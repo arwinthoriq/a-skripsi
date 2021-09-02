@@ -9,6 +9,7 @@ use App\Ruang;
 use App\Jenis;
 use App\Perbaikan;
 use App\Kebutuhan;
+use App\Kategori;
 use Illuminate\Support\Facades\Crypt;
 use Session;
 use Auth;
@@ -183,23 +184,25 @@ class KeuanganController extends Controller
             $user_id_kebutuhan = $data->user_id;
             $ruang_id_kebutuhan = $data->ruang_id;
             $jenis_id_kebutuhan = $data->jenis_id;
+            $kategori_id_kebutuhan = $data->kategori_id;
             $nama_kebutuhan = $data->nama;
             $keterangan_kebutuhan = $data->keterangan;
             $tahun_pengadaan_kebutuhan = $data->tahun;
             $merek_kebutuhan = $data->merek;
             $jumlah_kebutuhan = $data->jumlah;
             $harga_kebutuhan = $data->harga;
-            $total_harga_kebutuhan = $data->total_harga;
+           // $total_harga_kebutuhan = $data->total_harga;
             Session::put('user_id_kebutuhan', $user_id_kebutuhan);
             Session::put('ruang_id_kebutuhan', $ruang_id_kebutuhan);
             Session::put('jenis_id_kebutuhan', $jenis_id_kebutuhan);
+            Session::put('kategori_id_kebutuhan', $kategori_id_kebutuhan);
             Session::put('nama_kebutuhan', $nama_kebutuhan);
             Session::put('keterangan_kebutuhan', $keterangan_kebutuhan);
             Session::put('tahun_pengadaan_kebutuhan', $tahun_pengadaan_kebutuhan);
             Session::put('merek_kebutuhan', $merek_kebutuhan);
             Session::put('jumlah_kebutuhan', $jumlah_kebutuhan);
             Session::put('harga_kebutuhan', $harga_kebutuhan);
-            Session::put('total_harga_kebutuhan', $total_harga_kebutuhan);
+            //Session::put('total_harga_kebutuhan', $total_harga_kebutuhan);
                 return view('keuangan.kebutuhan.selesai',compact('data'));
         }catch (DecryptException $e) {
             return abort(404);
@@ -212,13 +215,14 @@ class KeuanganController extends Controller
             $user_id_kebutuhan = Session::get('user_id_kebutuhan');
             $ruang_id_kebutuhan = Session::get('ruang_id_kebutuhan');
             $jenis_id_kebutuhan = Session::get('jenis_id_kebutuhan');
+            $kategori_id_kebutuhan = Session::get('kategori_id_kebutuhan');
             $nama_kebutuhan = Session::get('nama_kebutuhan');
             $keterangan_kebutuhan = Session::get('keterangan_kebutuhan');
             $tahun_pengadaan_kebutuhan = Session::get('tahun_pengadaan_kebutuhan');
             $merek_kebutuhan = Session::get('merek_kebutuhan');
             $jumlah_kebutuhan = Session::get('jumlah_kebutuhan');
             $harga_kebutuhan = Session::get('harga_kebutuhan');
-            $total_harga_kebutuhan = Session::get('total_harga_kebutuhan');
+           // $total_harga_kebutuhan = Session::get('total_harga_kebutuhan');
             \Validator::make($req->all(), 
             [
                 'status'=>'',
@@ -228,13 +232,14 @@ class KeuanganController extends Controller
                   'user_id' => $user_id_kebutuhan,
                   'ruang_id' => $ruang_id_kebutuhan,
                   'jenis_id' => $jenis_id_kebutuhan,
+                  'kategori_id' => $kategori_id_kebutuhan,
                   'nama' => $nama_kebutuhan,
                   'keterangan' => $keterangan_kebutuhan,
                   'tahun_pengadaan' => $tahun_pengadaan_kebutuhan,
                   'merek' => $merek_kebutuhan,
                   'jumlah' => $jumlah_kebutuhan,
                   'harga' => $harga_kebutuhan,
-                  'total_harga' => $total_harga_kebutuhan,
+                  //'total_harga' => $total_harga_kebutuhan,
                ];
                Aset::create($field_aset);
                 $field_selesai = [
