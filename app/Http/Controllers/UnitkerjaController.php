@@ -177,7 +177,6 @@ class UnitkerjaController extends Controller
                'merek'=>'required|regex:/^[a-zA-Z0-9 ]{1,50}$/',
                'jumlah'=>'required|regex:/^[0-9]{1,10}$/',
                'harga'=>'required|regex:/^[0-9,]{1,20}$/',
-               'total_harga'=>'required|regex:/^[0-9,]{1,20}$/',
             ]);
             $idr = Crypt::decrypt($request->ruang_id);
             $idj = Crypt::decrypt($request->jenis_id);
@@ -193,7 +192,6 @@ class UnitkerjaController extends Controller
                 'merek' => $request->merek,
                 'jumlah' => $request->jumlah,
                 'harga' => $request->harga,
-                'total_harga' => $request->total_harga,
             ]);
             return redirect()->route('unitkerja-kebutuhan');
         }
